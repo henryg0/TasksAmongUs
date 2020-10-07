@@ -5,8 +5,9 @@
 }
 
 .navbar-brand {
-  font-size: 24px;
+  font-size: 20px;
   font-family: "Futura";
+  font-weight: bold;
 }
 
 .nav-item, #nav-groups, #nav-profile {

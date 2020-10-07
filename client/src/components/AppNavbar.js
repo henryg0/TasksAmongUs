@@ -7,6 +7,9 @@ import Image from "react-bootstrap/Image";
 
 export default function AppNavbar(props) {
   const user = props.user;
+  if (!user) {
+    return <div></div>
+  }
   return (
     <Navbar expand="lg">
       <Container className="pt-0 pb-0">
@@ -25,7 +28,6 @@ export default function AppNavbar(props) {
               </NavDropdown>
             </Nav>
           }
-          { user && user.name &&
             <Nav>
               <NavDropdown title={
                 <>
@@ -43,7 +45,6 @@ export default function AppNavbar(props) {
                 <NavDropdown.Item href="/" onClick={user.signOut}>Sign out</NavDropdown.Item>
               </NavDropdown>
             </Nav>
-          }
           { !user && window.location.href !== "http://localhost:3000/" &&
             <Nav className="ml-auto">
               <Nav.Link href="/" className="nav-item"><div className="nav-item">HOME</div></Nav.Link>
