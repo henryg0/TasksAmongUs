@@ -1,0 +1,76 @@
+/* --- --- Global --- --- */
+
+body {
+  margin: 0;
+  font-size: 14px;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-weight: 600;
+  font-style: bold;
+}
+
+h1 {
+  font-size: 55px;
+}
+
+h2 {
+  font-size: 40px;
+}
+
+h3 {
+  font-size: 30px;
+}
+
+h4 {
+  font-size: 24px;
+}
+
+h5 {
+  font-size: 20px;
+}
+
+h6 {
+  font-size: 16px;
+}
+
+.black-text {
+  color: black;
+}
+
+#page-container {
+  position: relative;
+  min-height: 100vh;
+}
+
+#content-wrap {
+  padding-bottom: 110px;
+}
+
+.black-bg {
+  background-color: black;
+}
+
+.button {
+  user-select: none;
+}
+
+.container {
+  padding-top: 16px;
+  padding-bottom: 16px;
+}
+
+img {
+  -webkit-user-drag: none;
+  -khtml-user-drag: none;
+  -moz-user-drag: none;
+  -o-user-drag: none;
+  user-select: none;
+}
+
+.small-profile-picture {
+  height: 30px;
+  width: 30px;
+}
+
+/* --- --- Global --- --- */

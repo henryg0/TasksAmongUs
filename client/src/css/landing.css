@@ -1,0 +1,60 @@
+/* --- --- Landing --- --- */
+
+/* #landing-page {
+  background-image: 
+    linear-gradient(
+      rgba(0, 0, 0, 0.15),
+      rgba(0, 0, 0, 0.0)
+    ),
+    url(../images/landing-art.jpg);
+  background-attachment: fixed;
+  background-position: center;
+  height: 450px;
+  z-index: -1;
+} */
+
+#landing-page .landing-brand {
+  font-size: 164px;
+  font-family: "Futura";
+  color: black;
+  user-select: none;
+  font-weight: bold;
+  padding-top: 60px;
+}
+
+#login-button {
+  display: flex;
+  justify-content: center;
+}
+
+@media (max-width: 1000px) {
+  #landing-page {
+    height: 380px;
+  }
+
+  #landing-page .landing-brand {
+    font-size: 100px;
+  }
+}
+
+@media (max-width: 600px) {
+  #landing-page {
+    height: 340px;
+  }
+
+  #landing-page .landing-brand {
+    font-size: 81px;
+  }
+}
+
+@media (max-width: 600px) {
+  #landing-page {
+    height: 280px;
+  }
+
+  #landing-page .landing-brand {
+    font-size: 64px;
+  }
+}
+
+/* --- --- End Landing --- --- */

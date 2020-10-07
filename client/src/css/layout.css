@@ -1,0 +1,29 @@
+/* --- --- Layout --- --- */
+
+.navbar {
+  background-color: rgb(219, 219, 219);
+}
+
+.navbar-brand {
+  font-size: 24px;
+  font-family: "Futura";
+}
+
+.nav-item, #nav-groups, #nav-profile {
+  color: black;
+}
+
+.nav-item:hover, #nav-groups:hover, #nav-profile:hover {
+  color:#7F7F7F;
+  text-decoration: none;
+}
+
+#footer {
+  background-color: rgb(219, 219, 219);
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  height: 90px;
+}
+
+/* --- --- End Layout ---- ---- */
