@@ -38,6 +38,10 @@ h6 {
   color: black;
 }
 
+.black-bg {
+  background-color: black;
+}
+
 #page-container {
   position: relative;
   min-height: 100vh;
@@ -47,17 +51,9 @@ h6 {
   padding-bottom: 110px;
 }
 
-.black-bg {
-  background-color: black;
-}
-
-.button {
-  user-select: none;
-}
-
 .container {
-  padding-top: 16px;
-  padding-bottom: 16px;
+  padding-top: 8px;
+  padding-bottom: 8px;
 }
 
 img {

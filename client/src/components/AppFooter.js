@@ -9,7 +9,7 @@ export default function AppFooter() {
         {" "}•{" "}
         <a href="/#contact" className="nav-item">CONTACT</a>
         {" "}•{" "}
-        <a href="/#github" className="nav-item">GITHUB</a>
+        <a href="https://github.com/vincentktieu-ucsb/MakeTodo" className="nav-item">GITHUB</a>
       </p>
       @ MakeTodo 2020
     </Container>

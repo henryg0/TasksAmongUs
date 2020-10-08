@@ -10,7 +10,8 @@ export default function Profile() {
   return (
     <Layout user={user}>
       <Container>
-        <div>this is my profile xD</div>
+        <h1>Social</h1>
+        <p>This is the social page where you can chat and meet others!</p>
       </Container>
     </Layout>
   )

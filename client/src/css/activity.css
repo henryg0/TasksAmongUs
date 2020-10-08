@@ -1,0 +1,17 @@
+/* --- --- Home --- --- */
+
+#home {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+
+#home #activity-column {
+  flex-basis: 65%;
+}
+
+#home #friends-column {
+  flex-basis: 30%;
+}
+
+/* --- --- Home --- --- */

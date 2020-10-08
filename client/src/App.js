@@ -5,7 +5,9 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import init_auth from './utils/init.auth';
 
 import PrivateRoute from './components/PrivateRoute';
-import Profile from './pages/Profile';
+import Home from './pages/Activity/index';
+import Todos from './pages/Todos';
+import Social from './pages/Social';
 import Template from './pages/Template';
 import ErrorPage from './pages/ErrorPage';
 
@@ -26,7 +28,9 @@ export default class App extends React.Component {
     return (
       <BrowserRouter>
         <Switch>
-          <PrivateRoute path="/" exact component={Profile} />
+          <PrivateRoute path="/" exact component={Home} />
+          <PrivateRoute path="/todos" exact component={Todos} />
+          <PrivateRoute path="/social" exact component={Social} />
           <PrivateRoute path="/template" exact component={Template} />
           <Route path="/" component={ErrorPage} />
         </Switch>

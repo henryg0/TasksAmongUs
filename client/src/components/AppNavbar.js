@@ -7,27 +7,29 @@ import Image from "react-bootstrap/Image";
 
 export default function AppNavbar(props) {
   const user = props.user;
-  if (!user) {
-    return <div></div>
-  }
   return (
     <Navbar expand="lg">
       <Container className="pt-0 pb-0">
         <Navbar.Brand href="/">
           MakeTodo
-          </Navbar.Brand>
-        <Navbar.Toggle aria-controls="basic-navbar-nav" />
+        </Navbar.Brand>
+        { user &&
+          <Navbar.Toggle aria-controls="basic-navbar-nav" />
+        }
         <Navbar.Collapse id="basic-navbar-nav">
           { user &&
             <Nav className="mr-auto">
-              <Nav.Link href="/" className="nav-item"><div className="nav-item">PROFILE</div></Nav.Link>
-              <NavDropdown title="DROPDOWN" id="nav-groups">
+              <Nav.Link href="/" className="nav-item"><div className="nav-item">ACTIVITY</div></Nav.Link>
+              <Nav.Link href="/todos" className="nav-item"><div className="nav-item">TODOS</div></Nav.Link>
+              <Nav.Link href="/social" className="nav-item"><div className="nav-item">SOCIAL</div></Nav.Link>
+              {/* <NavDropdown title="DROPDOWN" id="nav-groups">
                 <NavDropdown.Item href="#action/3.1">Filler1</NavDropdown.Item>
                 <NavDropdown.Item href="#action/3.2">Filler2</NavDropdown.Item>
                 <NavDropdown.Item href="#action/3.3">Filler3</NavDropdown.Item>
-              </NavDropdown>
+              </NavDropdown> */}
             </Nav>
           }
+          { user &&
             <Nav>
               <NavDropdown title={
                 <>
@@ -44,10 +46,6 @@ export default function AppNavbar(props) {
                 <NavDropdown.Item href="#action/3.1">Settings</NavDropdown.Item>
                 <NavDropdown.Item href="/" onClick={user.signOut}>Sign out</NavDropdown.Item>
               </NavDropdown>
-            </Nav>
-          { !user && window.location.href !== "http://localhost:3000/" &&
-            <Nav className="ml-auto">
-              <Nav.Link href="/" className="nav-item"><div className="nav-item">HOME</div></Nav.Link>
             </Nav>
           }
         </Navbar.Collapse>
