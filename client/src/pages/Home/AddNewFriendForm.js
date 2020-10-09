@@ -27,7 +27,7 @@ export default function AddNewFriendForm() {
             color="primary"
             variant="contained"
           >
-            Send
+            Send Friend Request
           </Button>
         </Grid>
       </Grid>

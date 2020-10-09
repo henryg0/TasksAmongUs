@@ -42,10 +42,10 @@ export default function Activity() {
         <Divider variant="inset" component="li" />
         <ListItem alignItems="flex-start">
           <ListItemAvatar>
-            <Avatar alt="William Jones" src="/static/images/avatar/2.jpg" />
+            <Avatar alt="Ali Connors" src="/static/images/avatar/2.jpg" />
           </ListItemAvatar>
           <ListItemText
-            primary="William Jones"
+            primary="Ali Connors"
             secondary={
               <React.Fragment>
                 <Typography
@@ -63,10 +63,10 @@ export default function Activity() {
         <Divider variant="inset" component="li" />
         <ListItem alignItems="flex-start">
           <ListItemAvatar>
-            <Avatar alt="Sandra Adams" src="/static/images/avatar/3.jpg" />
+            <Avatar alt="Ali Connors" src="/static/images/avatar/3.jpg" />
           </ListItemAvatar>
           <ListItemText
-            primary="Sandra Adams"
+            primary="Ali Connors"
             secondary={
               <React.Fragment>
                 <Typography

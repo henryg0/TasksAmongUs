@@ -8,7 +8,7 @@ import ListItemAvatar from '@material-ui/core/ListItemAvatar';
 import Avatar from '@material-ui/core/Avatar';
 import Typography from '@material-ui/core/Typography';
 
-export default function Activity() {
+export default function Highlights() {
   return (
     <Card 
       variant="outlined"
@@ -32,9 +32,9 @@ export default function Activity() {
                   variant="body2"
                   color="textPrimary"
                 >
-                  Brunch this weekend • 10/4/20 
+                  Successfully PASSED Drivers Test!!! • 10/1/20 
                 </Typography>
-                {" — I'll be in your neighborhood doing errands this…"}
+                {/* {" — I'll be in your neighborhood doing errands this…"} */}
               </React.Fragment>
             }
           />
@@ -53,9 +53,9 @@ export default function Activity() {
                   variant="body2"
                   color="textPrimary"
                 >
-                  Summer BBQ • 10/11/20
+                  FAILED to wash the dishes • 10/1/20 
                 </Typography>
-                {" — Wish I could come, but I'm out of town this…"}
+                {/* {" — Wish I could come, but I'm out of town this…"} */}
               </React.Fragment>
             }
           />
@@ -63,10 +63,10 @@ export default function Activity() {
         <Divider variant="inset" component="li" />
         <ListItem alignItems="flex-start">
           <ListItemAvatar>
-            <Avatar alt="Sandra Adams" src="/static/images/avatar/3.jpg" />
+            <Avatar alt="Reynolds" src="/static/images/avatar/3.jpg" />
           </ListItemAvatar>
           <ListItemText
-            primary="Sandra Adams"
+            primary="Reynolds"
             secondary={
               <React.Fragment>
                 <Typography
@@ -74,9 +74,30 @@ export default function Activity() {
                   variant="body2"
                   color="textPrimary"
                 >
-                  Oui Oui • 10/13/20
+                  FINISHED college application!! • 10/1/20 
                 </Typography>
-                {' — Do you have Paris recommendations? Have you ever…'}
+                {/* {' — Do you have Paris recommendations? Have you ever…'} */}
+              </React.Fragment>
+            }
+          />
+        </ListItem>
+        <Divider variant="inset" component="li" />
+        <ListItem alignItems="flex-start">
+          <ListItemAvatar>
+            <Avatar alt="Squirtle" src="/static/images/avatar/3.jpg" />
+          </ListItemAvatar>
+          <ListItemText
+            primary="Squirtle"
+            secondary={
+              <React.Fragment>
+                <Typography
+                  component="span"
+                  variant="body2"
+                  color="textPrimary"
+                >
+                  USED hyperbeam!! • 10/1/20 
+                </Typography>
+                {/* {' — Do you have Paris recommendations? Have you ever…'} */}
               </React.Fragment>
             }
           />
