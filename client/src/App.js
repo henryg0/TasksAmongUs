@@ -5,7 +5,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import init_auth from './utils/init.auth';
 
 import PrivateRoute from './components/PrivateRoute';
-import Home from './pages/Activity/index';
+import Home from './pages/Home/Home';
 import Todos from './pages/Todos';
 import Social from './pages/Social';
 import Template from './pages/Template';

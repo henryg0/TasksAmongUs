@@ -5,7 +5,7 @@ import App from './App';
 import './css/index.css';
 import './css/layout.css';
 import './css/landing.css';
-import './css/activity.css';
+import './css/home.css';
 import './css/todos.css';
 import './css/social.css';
 

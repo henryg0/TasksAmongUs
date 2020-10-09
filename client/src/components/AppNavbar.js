@@ -19,7 +19,7 @@ export default function AppNavbar(props) {
         <Navbar.Collapse id="basic-navbar-nav">
           { user &&
             <Nav className="mr-auto">
-              <Nav.Link href="/" className="nav-item"><div className="nav-item">ACTIVITY</div></Nav.Link>
+              <Nav.Link href="/" className="nav-item"><div className="nav-item">HOME</div></Nav.Link>
               <Nav.Link href="/todos" className="nav-item"><div className="nav-item">TODOS</div></Nav.Link>
               <Nav.Link href="/social" className="nav-item"><div className="nav-item">SOCIAL</div></Nav.Link>
               {/* <NavDropdown title="DROPDOWN" id="nav-groups">
