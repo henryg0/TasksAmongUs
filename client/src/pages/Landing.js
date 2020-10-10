@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
-import AmongUs from '../images/amongus.mp4'; 
-import Layout from '../components/Layout';
+import AmongUs from '../images/splash.mp4'; 
+import AppFooter from '../components/AppFooter';
 
 export default function Landing() {
   useEffect(() => {
@@ -17,19 +17,26 @@ export default function Landing() {
   })
   
   return (
-    <Layout>
-      <div id="landing-page" className="text-center">
-        <h1 className="landing-brand">MakeTodo</h1>
+    <div>
+      <div className="section">
+        <h1 className="landing-brand text-center">
+          {/* <div>Tasks</div>
+          <div>Among</div>
+          <div>Us</div> */}
+          TasksAmongUs
+        </h1>
         <div id="login-button">sign in</div>
+        
+        <div class="video-container">
+            <div class="color-overlay"></div>
+            <video autoPlay loop muted>
+                <source src={AmongUs} type="video/mp4" />
+            </video>
+        </div>
       </div>
-      {/* <div class="video-container">
-        <h1 className="landing-brand">MakeTodo</h1>
-        <div id="login-button">sign in</div>
-          <div class="color-overlay"></div>
-          <video autoPlay loop muted>
-              <source src={AmongUs} type="video/mp4" />
-          </video>
-      </div> */}
-    </Layout>
+      <div id="footer">
+        <AppFooter />
+      </div>
+    </div>
   )
 }

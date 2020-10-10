@@ -1,59 +1,67 @@
 /* --- --- Landing --- --- */
 
-#landing-page {
-  background-image: 
-    linear-gradient(
-      rgba(0, 0, 0, 0.15),
-      rgba(0, 0, 0, 0.0)
-    ),
-    url(../images/splash.jpg);
-  background-attachment: fixed;
-  background-position: center;
-  height: 600px;
-  z-index: -1;
+.section {
+  position: relative;
+  width: 100%;
+  height: 90vh;  
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  background-color: black;
 }
 
-#landing-page .landing-brand {
-  font-size: 164px;
+.video-container {
+  position: absolute;
+  width: 100%;
+	opacity: 1;
+	animation-name: fadeInOpacity;
+	animation-iteration-count: 1;
+	animation-timing-function: ease-in;
+	animation-duration: 2s;
+}
+
+@keyframes fadeInOpacity {
+	0% {
+		opacity: 0;
+	}
+	100% {
+		opacity: 1;
+	}
+}
+
+.landing-brand {
+  font-size: 100px;
   font-family: "Futura";
   color: white;
   user-select: none;
   font-weight: bold;
-  padding-top: 60px;
+  padding-top: 80px;
+  z-index: 1;
 }
 
 #login-button {
-  display: flex;
   justify-content: center;
+  z-index: 1;
+  margin-bottom: 180px;
 }
 
 @media (max-width: 1000px) {
-  #landing-page {
-    height: 380px;
-  }
-
-  #landing-page .landing-brand {
-    font-size: 100px;
+  .landing-brand {
+    font-size: 60px;
   }
 }
 
 @media (max-width: 600px) {
-  #landing-page {
-    height: 340px;
-  }
-
-  #landing-page .landing-brand {
-    font-size: 81px;
+  .landing-brand {
+    font-size: 50px;
   }
 }
 
 @media (max-width: 600px) {
-  #landing-page {
-    height: 280px;
-  }
-
-  #landing-page .landing-brand {
-    font-size: 64px;
+  .landing-brand {
+    font-size: 45;
   }
 }
 

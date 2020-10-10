@@ -11,7 +11,7 @@ export default function AppFooter() {
         {" "}•{" "}
         <a href="https://github.com/vincentktieu-ucsb/MakeTodo" className="nav-item">GITHUB</a>
       </p>
-      @ MakeTodo 2020
+      @TasksAmongUs 2020
     </Container>
   )
 }

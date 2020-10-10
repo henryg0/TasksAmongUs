@@ -5,13 +5,19 @@ import NavDropdown from "react-bootstrap/NavDropdown";
 import Nav from "react-bootstrap/Nav";
 import Image from "react-bootstrap/Image";
 
+import icon from "../images/icon.png";
+
 export default function AppNavbar(props) {
   const user = props.user;
   return (
     <Navbar expand="lg">
       <Container className="pt-0 pb-0">
         <Navbar.Brand href="/">
-          MakeTodo
+          <Image src={icon}
+            height={32}
+            width={32}
+          />
+          TasksAmongUs
         </Navbar.Brand>
         { user &&
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
