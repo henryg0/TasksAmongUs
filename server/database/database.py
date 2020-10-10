@@ -11,7 +11,7 @@ load_dotenv("../.env")
 
 auth_provider = PlainTextAuthProvider(os.environ.get("database_username"), os.environ.get("database_password"))
 cluster = Cluster(cloud=cloud_config, auth_provider=auth_provider)
-session = cluster.connect()
+session = cluster.connect("todo")
 
 if __name__ == "__main__":
   row = session.execute("select release_version from system.local").one()
