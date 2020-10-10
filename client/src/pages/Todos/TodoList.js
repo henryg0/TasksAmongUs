@@ -17,6 +17,7 @@ export default function Activity() {
         maxHeight: "450px",
         height: "450px",
       }}
+      className="mb-2"
     >
       <List>
         <ListItem alignItems="flex-start">

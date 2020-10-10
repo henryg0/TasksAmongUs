@@ -42,6 +42,10 @@ h6 {
   background-color: black;
 }
 
+.white-text {
+  color: white
+}
+
 #page-container {
   position: relative;
   min-height: 100vh;

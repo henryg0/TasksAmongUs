@@ -20,9 +20,6 @@ export default function Landing() {
     <div>
       <div className="section">
         <h1 className="landing-brand text-center">
-          {/* <div>Tasks</div>
-          <div>Among</div>
-          <div>Us</div> */}
           TasksAmongUs
         </h1>
         <div id="login-button">sign in</div>

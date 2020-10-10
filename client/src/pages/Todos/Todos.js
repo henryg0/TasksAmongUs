@@ -1,8 +1,7 @@
 import React, { useState } from 'react';
 import Layout from '../../components/Layout';
 import authenticate from '../../utils/authenticate';
-import CreateTodo from './CreateTodo';
-import Stats from './Stats';
+import Productivity from './Productivity';
 import TodoList from './TodoList';
 
 import Container from 'react-bootstrap/Container';
@@ -11,35 +10,24 @@ import Grid from '@material-ui/core/Grid';
 
 export default function Todos() {
   let user = authenticate();
-  const [todosToggle, setTodosToggle] = useState(1);
+
   return (
     <Layout user={user}>
       <Container>
         <Grid container spacing={3}>
           <Grid item xs="10" md="8">
-            {todosToggle ?
-              <div>
-                <Button className="mb-2 mr-2 lg-btn" variant="contained" color="primary" size="large">
-                  Create Todo
-                </Button>
-                <Button className="mb-2 lg-btn" variant="outlined" color="primary" size="large" onClick={() => setTodosToggle(0)}>
-                  Stats
-                </Button>
-                <CreateTodo />
-              </div> :
-              <div>
-                <Button className="mb-2 mr-2 lg-btn" variant="outlined" color="primary" size="large" onClick={() => setTodosToggle(1)}>
-                  Create Todo
-                </Button>
-                <Button className="mb-2 lg-btn" variant="contained" color="primary" size="large">
-                  Stats
-                </Button>
-                <Stats />
-              </div>
-            }
+            <h2>Productivity</h2>
+            <Productivity />
           </Grid>
-          <Grid item xs="10" md="4">
-            <h2>TodoList</h2>
+          <Grid container item xs="10" md="4" direction="row" alignItems="center" justify="flex-end">
+              <Grid item xs>
+                <h2>TodoList</h2>
+              </Grid>
+              <Grid item xs="3">
+                <Button className="mb-1" variant="contained" color="primary" fullWidth href="/create">
+                  <div className="white-text">Create</div>
+                </Button>
+              </Grid>
             <TodoList />
           </Grid>
         </Grid>
