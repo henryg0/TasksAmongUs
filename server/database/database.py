@@ -7,16 +7,17 @@ cloud_config= {
   'secure_connect_bundle': './secure-connect-tasks-among-us.zip'
 }
 
-load_dotenv(".env")
-# print(database_username)
-# print(database_password)
+load_dotenv("../.env")
 
 auth_provider = PlainTextAuthProvider(os.environ.get("database_username"), os.environ.get("database_password"))
 cluster = Cluster(cloud=cloud_config, auth_provider=auth_provider)
 session = cluster.connect()
 
-row = session.execute("select release_version from system.local").one()
-if row:
+if __name__ == "__main__":
+  row = session.execute("select release_version from system.local").one()
+  if row:
     print(row[0])
-else:
+  else:
     print("An error occurred.")
+
+  print ("hi")
