@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-
+import AmongUs from '../images/amongus.mp4'; 
 import Layout from '../components/Layout';
 
 export default function Landing() {
@@ -22,6 +22,14 @@ export default function Landing() {
         <h1 className="landing-brand">MakeTodo</h1>
         <div id="login-button">sign in</div>
       </div>
+      {/* <div class="video-container">
+        <h1 className="landing-brand">MakeTodo</h1>
+        <div id="login-button">sign in</div>
+          <div class="color-overlay"></div>
+          <video autoPlay loop muted>
+              <source src={AmongUs} type="video/mp4" />
+          </video>
+      </div> */}
     </Layout>
   )
 }

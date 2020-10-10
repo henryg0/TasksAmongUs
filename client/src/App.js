@@ -7,6 +7,7 @@ import init_auth from './utils/init.auth';
 import PrivateRoute from './components/PrivateRoute';
 import Home from './pages/Home/Home';
 import Todos from './pages/Todos/Todos';
+import Create from './pages/Create/Create';
 import Social from './pages/Social';
 import Template from './pages/Template';
 import ErrorPage from './pages/ErrorPage';
@@ -30,6 +31,7 @@ export default class App extends React.Component {
         <Switch>
           <PrivateRoute path="/" exact component={Home} />
           <PrivateRoute path="/todos" exact component={Todos} />
+          <PrivateRoute path="/create" exact component={Create} />
           <PrivateRoute path="/social" exact component={Social} />
           <PrivateRoute path="/template" exact component={Template} />
           <Route path="/" component={ErrorPage} />

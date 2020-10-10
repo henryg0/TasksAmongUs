@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import authenticate from '../../utils/authenticate';
 import Layout from '../../components/Layout';
-import Activity from './Activity';
-import Highlights from './Highlights';
+import Upcoming from './Upcoming';
+import Finished from './Finished';
 import AddNewFriendForm from './AddNewFriendForm';
 import FriendRequests from './FriendRequests';
 import PendingRequests from './PendingRequests';
@@ -24,21 +24,21 @@ export default function Home() {
             {homeToggle ?
               <div>
                 <Button className="mb-2 mr-2 lg-btn" variant="contained" color="primary" size="large">
-                  Activity
+                  Upcoming
                 </Button>
                 <Button className="mb-2 lg-btn" variant="outlined" color="primary" size="large" onClick={() => setHomeToggle(0)}>
-                  Highlights
+                  Finished
                 </Button>
-                <Activity />
+                <Upcoming />
               </div> :
               <div>
                 <Button className="mb-2 mr-2 lg-btn" variant="outlined" color="primary" size="large" onClick={() => setHomeToggle(1)}>
-                  Activity
+                  Upcoming
                 </Button>
                 <Button className="mb-2 lg-btn" variant="contained" color="primary" size="large">
-                  Highlights
+                  Finished
                 </Button>
-                <Highlights />
+                <Finished />
               </div>
             }
           </Grid>

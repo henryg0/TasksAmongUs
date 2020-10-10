@@ -13,7 +13,7 @@ export default function Activity() {
     <Card 
       variant="outlined"
       style={{
-        overflow: "auto",
+        overflowY: "auto",
         maxHeight: "450px",
         height: "450px",
       }}

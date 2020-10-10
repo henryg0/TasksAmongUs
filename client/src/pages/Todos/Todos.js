@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import Layout from '../../components/Layout';
 import authenticate from '../../utils/authenticate';
 import CreateTodo from './CreateTodo';
-import Progress from './Progress';
+import Stats from './Stats';
 import TodoList from './TodoList';
 
 import Container from 'react-bootstrap/Container';
@@ -23,7 +23,7 @@ export default function Todos() {
                   Create Todo
                 </Button>
                 <Button className="mb-2 lg-btn" variant="outlined" color="primary" size="large" onClick={() => setTodosToggle(0)}>
-                  Progress
+                  Stats
                 </Button>
                 <CreateTodo />
               </div> :
@@ -32,9 +32,9 @@ export default function Todos() {
                   Create Todo
                 </Button>
                 <Button className="mb-2 lg-btn" variant="contained" color="primary" size="large">
-                  Progress
+                  Stats
                 </Button>
-                <Progress />
+                <Stats />
               </div>
             }
           </Grid>
