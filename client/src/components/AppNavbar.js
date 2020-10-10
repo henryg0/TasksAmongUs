@@ -4,7 +4,6 @@ import Navbar from 'react-bootstrap/Navbar';
 import NavDropdown from "react-bootstrap/NavDropdown";
 import Nav from "react-bootstrap/Nav";
 import Image from "react-bootstrap/Image";
-
 import icon from "../images/icon.png";
 
 export default function AppNavbar(props) {
