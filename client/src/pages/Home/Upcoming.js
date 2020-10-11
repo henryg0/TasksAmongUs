@@ -34,6 +34,7 @@ export default function Activity() {
                 >
                   Brunch this weekend • 10/4/20 
                 </Typography>
+                <br />
                 {" — I'll be in your neighborhood doing errands this…"}
               </React.Fragment>
             }
@@ -55,6 +56,7 @@ export default function Activity() {
                 >
                   Summer BBQ • 10/11/20
                 </Typography>
+                <br />
                 {" — Wish I could come, but I'm out of town this…"}
               </React.Fragment>
             }
@@ -76,6 +78,7 @@ export default function Activity() {
                 >
                   Oui Oui • 10/13/20
                 </Typography>
+                <br />
                 {' — Do you have Paris recommendations? Have you ever…'}
               </React.Fragment>
             }

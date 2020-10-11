@@ -5,7 +5,7 @@ export default function AppFooter() {
   return (
     <Container className="text-center pt-0 pb-0 mt-3">
       <p>
-        <a href="/#about" className="nav-item">ABOUT</a>
+        <a href="/about" className="nav-item">ABOUT</a>
         {" "}•{" "}
         <a href="/#contact" className="nav-item">CONTACT</a>
         {" "}•{" "}

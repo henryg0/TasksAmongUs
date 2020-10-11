@@ -8,7 +8,7 @@ import Container from 'react-bootstrap/Container';
 import Button from '@material-ui/core/Button';
 import Grid from '@material-ui/core/Grid';
 
-export default function Todos() {
+export default function Profile() {
   let user = authenticate();
 
   return (
@@ -23,9 +23,9 @@ export default function Todos() {
               <Grid item xs>
                 <h2>TodoList</h2>
               </Grid>
-              <Grid item xs="3">
+              <Grid item xs="6">
                 <Button className="mb-1" variant="contained" color="primary" fullWidth href="/create">
-                  <div className="white-text">Create</div>
+                  <div className="white-text">Create Todo</div>
                 </Button>
               </Grid>
             <TodoList />

@@ -28,9 +28,9 @@ export default function AppNavbar(props) {
                 <Nav.Link href="/" className="nav-item"><div className="nav-item"><u>HOME</u></div></Nav.Link> :
                 <Nav.Link href="/" className="nav-item"><div className="nav-item">HOME</div></Nav.Link>
               }
-              { window.location.href === "http://localhost:3000/todos" ?
-                <Nav.Link href="/todos" className="nav-item"><div className="nav-item"><u>TODOS</u></div></Nav.Link> :
-                <Nav.Link href="/todos" className="nav-item"><div className="nav-item">TODOS</div></Nav.Link>
+              { window.location.href === "http://localhost:3000/profile" ?
+                <Nav.Link href="/profile" className="nav-item"><div className="nav-item"><u>PROFILE</u></div></Nav.Link> :
+                <Nav.Link href="/profile" className="nav-item"><div className="nav-item">PROFILE</div></Nav.Link>
               }
               { window.location.href === "http://localhost:3000/social" ?
                 <Nav.Link href="/social" className="nav-item"><div className="nav-item"><u>SOCIAL</u></div></Nav.Link> :
@@ -49,7 +49,7 @@ export default function AppNavbar(props) {
                     width={24}
                     height={24}
                   />
-                  {user.name.toUpperCase()}
+                  {user.fullname.toUpperCase()}
                 </>
               } id="nav-profile">
                 <NavDropdown.Item href="#action/3.1">Settings</NavDropdown.Item>

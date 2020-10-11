@@ -1,4 +1,4 @@
-// import axios from "axios";
+import axios from "axios";
 
 export default function authenticate() {
   if (window.gapi) {
@@ -13,23 +13,25 @@ export default function authenticate() {
     const profile = user.getBasicProfile();
 
     const data = {
-      user_id : profile.getId(),
+      id : profile.getId(),
+      fullname: profile.getName(),
+      givenName: profile.getGivenName(),
+      familyName: profile.getFamilyName(),
+      imageUrl: profile.getImageUrl(),
       email: profile.getEmail(),
-      image_url: profile.getImageUrl(),
-      full_name: profile.getName(),
     }
     
-    // axios.post("/api/user/create", data)
-    //   .then((res) => {
-    //     console.log(res);
-    //   })
-    //   .catch((err) => {
-    //     console.log(err);
-    //   })
+    axios.post("/api/user/create", data)
+      .then((res) => {
+        console.log(res);
+      })
+      .catch((err) => {
+        console.log(err);
+      })
 
     return ({
       id: profile.getId(),
-      name : profile.getName(),
+      fullname : profile.getName(),
       givenName: profile.getGivenName(),
       familyName: profile.getFamilyName(),
       imageUrl: profile.getImageUrl(),
