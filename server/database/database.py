@@ -4,7 +4,7 @@ import os
 from dotenv import load_dotenv
 
 cloud_config= {
-  'secure_connect_bundle': './secure-connect-tasks-among-us.zip'
+  'secure_connect_bundle': './database/secure-connect-tasks-among-us.zip'
 }
 
 load_dotenv("../.env")
