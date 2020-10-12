@@ -48,9 +48,11 @@ export default function RecipeReviewCard() {
       <CardHeader
         avatar={
           <div>
-            <Avatar aria-label="recipe" className={classes.avatar}>
-              A
-            </Avatar>
+            <Border>
+              <Avatar aria-label="recipe" className={classes.avatar}>
+                V
+              </Avatar>
+            </Border>
           </div>
         }
         action={
@@ -72,10 +74,10 @@ export default function RecipeReviewCard() {
         }
         title={
           <div>
-            Ali Conners{" "}
-            <Badge variant="info">NORMIE</Badge>
+            Vincent Tieu{" "}
+            <Badge variant="dark">MOD</Badge>
             <br/>
-            Brunch this weekend
+            Coming for da memes
           </div>
         }
         subheader="Sep 14, 2016, 5 PM"
