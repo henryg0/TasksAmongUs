@@ -7,7 +7,6 @@ import AddNewFriendForm from './AddNewFriendForm';
 import FriendRequests from './FriendRequests';
 import PendingRequests from './PendingRequests';
 import ConfirmedRequests from './ConfirmedRequests';
-
 import Container from 'react-bootstrap/Container';
 import Grid from '@material-ui/core/Grid';
 import Button from '@material-ui/core/Button';

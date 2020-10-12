@@ -3,7 +3,7 @@ import Layout from '../../components/Layout';
 import getBackgrounds from '../../utils/get.backgrounds';
 import authenticate from '../../utils/authenticate';
 import Form from 'react-bootstrap/Form';
-import Container from '@material-ui/core/Container';
+import Container from 'react-bootstrap/Container';
 import Image from 'react-bootstrap/Image';
 import Button from '@material-ui/core/Button';
 import Grid from '@material-ui/core/Grid';
@@ -22,7 +22,7 @@ import {
 import axios from "axios";
 
 export default function Create() {
-  const user = authenticate();
+  let user = authenticate();
   const backgrounds = getBackgrounds();
   const [createTitle, setcreateTitle] = useState();
   const [createDueDateTime, setCreateDueDateTime] = useState(new Date());
@@ -42,7 +42,7 @@ export default function Create() {
     setcreateTitle("");
     setCreateDueDateTime(new Date());
     setCreateDescription("");
-    setCreateBackground("ItsFine");
+    setCreateBackground(backgrounds[0]);
 
     let data = {
       userId: user.id,
@@ -120,12 +120,13 @@ export default function Create() {
                   </Grid>
                   <Grid container item>
                     <TextField
-                      size="small"
+                      size="large"
                       fullWidth
                       label="Event Desciption" 
                       variant="outlined"
                       multiline
                       rows={4}
+                      rowsMax={10}
                       value={createDescription}
                       onChange={(e) => setCreateDescription(e.target.value)}
                     />
