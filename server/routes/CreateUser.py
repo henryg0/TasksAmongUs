@@ -26,8 +26,14 @@ def createUserRoute():
   for key in error_log:
     if not error_log.get(key):
       return (jsonify({"msg": "Missing {}".format(key)}), 400)
-      
-  query = "INSERT INTO todo.UserProfile (userId, firstName, lastName, email) VALUES ({}, {}, {}, {}) IF NOT EXISTS".format(userId, firstName, lastName, email)
-  results = session.execute(query)
+    
+  print (userId)
+  print (firstName)
+  print (lastName)
+  print (email)
+  query = "INSERT INTO todo.UserProfile (userId, firstName, lastName, email) VALUES ({}, '{}', '{}', '{}') IF NOT EXISTS".format(userId, firstName, lastName, email)
+  # print (query)
+  results = session.execute(query).one()
   print (results)
+  print (results[1])
   return {"msg": "User Created"}

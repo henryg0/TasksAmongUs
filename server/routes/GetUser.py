@@ -9,10 +9,8 @@ def getUserRoute(userId):
   if not userId:
     return (jsonify({"error": "Missing userId"}), 400)
 
-  print(userId)
-  """userId = uuid.UUID(userId).hex
-  print(userId)"""
-  query = (f"SELECT * FROM todo.UserProfile WHERE id = {userId}")
+
+  query = (f"SELECT * FROM todo.UserProfile WHERE userId = {userId}")
 
   results = session.execute(query).one()
 
