@@ -8,7 +8,7 @@ import ListItemAvatar from '@material-ui/core/ListItemAvatar';
 import Avatar from '@material-ui/core/Avatar';
 import Typography from '@material-ui/core/Typography';
 
-export default function Activity() {
+export default function Upcoming() {
   return (
     <Card 
       variant="outlined"
