@@ -21,13 +21,13 @@ export default function authenticate() {
       email: profile.getEmail(),
     }
     
-    axios.post("/api/user/create", data)
-      .then((res) => {
-        console.log(res);
-      })
-      .catch((err) => {
-        console.log(err);
-      })
+    // axios.post("/api/user/create", data)
+    //   .then((res) => {
+    //     console.log(res);
+    //   })
+    //   .catch((err) => {
+    //     console.log(err);
+    //   })
 
     return ({
       id: profile.getId(),
