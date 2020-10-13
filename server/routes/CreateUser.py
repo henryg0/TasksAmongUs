@@ -8,7 +8,7 @@ def createUserRoute():
   data = request.get_json()
 
   if not data:
-    return jsonify({"msg": "Missing data"}), 400
+    return (jsonify({"msg": "Missing data"}), 400)
 
   userId = data.get("userId")
   firstName = data.get("firstName")
@@ -16,7 +16,6 @@ def createUserRoute():
   email = data.get("email")
 
   error_log = {
-    "data":data,
     "userId":userId,
     "firstName":firstName,
     "lastName":lastName,

@@ -7,8 +7,8 @@ cloud_config= {
   'secure_connect_bundle': './database/secure-connect-tasks-among-us.zip'
 }
 
-load_dotenv("../.env")
-# load_dotenv(".env")
+# load_dotenv("../.env")
+load_dotenv(".env")
 
 auth_provider = PlainTextAuthProvider(os.environ.get("database_username"), os.environ.get("database_password"))
 cluster = Cluster(cloud=cloud_config, auth_provider=auth_provider)

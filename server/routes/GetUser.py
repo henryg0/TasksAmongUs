@@ -8,8 +8,7 @@ getUser = Blueprint("getUser", __name__)
 def getUserRoute(userId):
   if not userId:
     return (jsonify({"error": "Missing userId"}), 400)
-
-
+    
   query = (f"SELECT * FROM todo.UserProfile WHERE userId = {userId}")
 
   results = session.execute(query).one()
