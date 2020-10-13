@@ -1,6 +1,6 @@
 from flask import Flask, Blueprint
 from .routes.HelloWorld import helloWorld
-from .routes.GetTodoByUser import getTodoByUser
+from .routes.GetAllTodoByUser import getAllTodoByUser
 from .routes.GetTodoByFriend import getTodoByFriend
 from .routes.CreateTodo import createTodo
 from .routes.UpdateTodo import updateTodo
@@ -14,7 +14,7 @@ from .routes.GetUser import getUser
 app = Flask(__name__)
 
 app.register_blueprint(helloWorld)
-app.register_blueprint(getTodoByUser)
+app.register_blueprint(getAllTodoByUser)
 app.register_blueprint(getTodoByFriend)
 app.register_blueprint(createTodo)
 app.register_blueprint(updateTodo)
