@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
-import axios from "axios";
 import Layout from '../../components/Layout';
+import getBackgrounds from '../../utils/get.backgrounds';
 import authenticate from '../../utils/authenticate';
 import Form from 'react-bootstrap/Form';
-import Container from '@material-ui/core/Container';
+import Container from 'react-bootstrap/Container';
 import Image from 'react-bootstrap/Image';
 import Button from '@material-ui/core/Button';
 import Grid from '@material-ui/core/Grid';
@@ -19,44 +19,22 @@ import {
   TimePicker,
   MuiPickersUtilsProvider,
 } from '@material-ui/pickers';
-
-import ItsFine from '../../images/bg/ItsFine.jpg';
-import DeadAmongUs from '../../images/bg/DeadAmongUs.jpg';
-import KillAmongUs from '../../images/bg/KillAmongUs.jpg';
-import CryingCat from '../../images/bg/CryingCat.jpg';
-import Anakin from '../../images/bg/Anakin.jpg';
-import FallingFallGuys from '../../images/bg/FallingFallGuys.jpg';
-import FallingAmongUs from '../../images/bg/FallingAmongUs.png';
-import SabotageAmongUs from '../../images/bg/SabotageAmongUs.jpg';
-import Spongebob from '../../images/bg/Spongebob.jpg';
-import ImposterAmongUs from '../../images/bg/ImposterAmongUs.jpg';
-import EmergencyAmongUs from '../../images/bg/EmergencyAmongUs.jpg';
-import CryingMJMeme from '../../images/bg/CryingMJMeme.jpg';
-import ManCryingMeme from '../../images/bg/ManCryingMeme.jpeg';
-import Zuckerberg from '../../images/bg/Zuckerberg.jpg';
+import axios from "axios";
 
 export default function Create() {
   let user = authenticate();
+  const backgrounds = getBackgrounds();
   const [createTitle, setcreateTitle] = useState();
   const [createDueDateTime, setCreateDueDateTime] = useState(new Date());
   const [createDescription, setCreateDescription] = useState();
-  const [createBackground, setCreateBackground] = useState("ItsFine");
+  const [createBackground, setCreateBackground] = useState(backgrounds[0]);
 
-  let d = {
-    "ItsFine": ItsFine,
-    "DeadAmongUs": DeadAmongUs,
-    "KillAmongUs": KillAmongUs,
-    "CryingCat": CryingCat,
-    "Anakin": Anakin,
-    "FallingFallGuys": FallingFallGuys,
-    "FallingAmongUs": FallingAmongUs,
-    "SabotageAmongUs": SabotageAmongUs,
-    "Spongebob": Spongebob,
-    "ImposterAmongUs": ImposterAmongUs,
-    "EmergencyAmongUs": EmergencyAmongUs,
-    "CryingMJMeme": CryingMJMeme,
-    "ManCryingMeme": ManCryingMeme,
-    "Zuckerberg": Zuckerberg,
+  function getBackground() {
+    let result = []
+    for (let i=0; i < backgrounds.length; i++) {
+      result.push(<FormControlLabel value={backgrounds[i]} control={<Radio />} label={<Image style={{width: "100%"}} src={backgrounds[i]} rounded></Image>} />)
+    }
+    return result
   }
 
   function createTodo(e) {
@@ -64,7 +42,7 @@ export default function Create() {
     setcreateTitle("");
     setCreateDueDateTime(new Date());
     setCreateDescription("");
-    setCreateBackground("ItsFine");
+    setCreateBackground(backgrounds[0]);
 
     let data = {
       userId: user.id,
@@ -142,18 +120,19 @@ export default function Create() {
                   </Grid>
                   <Grid container item>
                     <TextField
-                      size="small"
+                      size="large"
                       fullWidth
                       label="Event Desciption" 
                       variant="outlined"
                       multiline
                       rows={4}
+                      rowsMax={10}
                       value={createDescription}
                       onChange={(e) => setCreateDescription(e.target.value)}
                     />
                   </Grid>
                   <Grid container item>
-                    <Image style={{width: "100%"}} src={d[createBackground]} rounded></Image>
+                    <Image style={{width: "100%"}} src={createBackground} rounded></Image>
                   </Grid>
                   {/* <Grid container item>
                     <a href={d["Background" + background]} download="da-meme.jpg" style={{width:"100%"}}>
@@ -175,25 +154,12 @@ export default function Create() {
               variant="outlined"
               style={{
                 overflowY: "auto",
-                maxHeight: "450px",
-                height: "450px",
+                maxHeight: "600px",
+                height: "600px",
               }}
             >
               <RadioGroup value={createBackground} onChange={(e) => setCreateBackground(e.target.value)}>
-                <FormControlLabel value="ItsFine" control={<Radio />} label={<Image style={{width: "100%"}} src={ItsFine} rounded></Image>} />
-                <FormControlLabel value="DeadAmongUs" control={<Radio />} label={<Image style={{width: "100%"}} src={DeadAmongUs} rounded></Image>} />
-                <FormControlLabel value="KillAmongUs" control={<Radio />} label={<Image style={{width: "100%"}} src={KillAmongUs} rounded></Image>} />
-                <FormControlLabel value="Anakin" control={<Radio />} label={<Image style={{width: "100%"}} src={Anakin} rounded></Image>} />
-                <FormControlLabel value="CryingCat" control={<Radio />} label={<Image style={{width: "100%"}} src={CryingCat} rounded></Image>} />
-                <FormControlLabel value="FallingFallGuys" control={<Radio />} label={<Image style={{width: "100%"}} src={FallingFallGuys} rounded></Image>} />
-                <FormControlLabel value="FallingAmongUs" control={<Radio />} label={<Image style={{width: "100%"}} src={FallingAmongUs} rounded></Image>} />
-                <FormControlLabel value="SabotageAmongUs" control={<Radio />} label={<Image style={{width: "100%"}} src={SabotageAmongUs} rounded></Image>} />
-                <FormControlLabel value="Spongebob" control={<Radio />} label={<Image style={{width: "100%"}} src={Spongebob} rounded></Image>} />
-                <FormControlLabel value="ImposterAmongUs" control={<Radio />} label={<Image style={{width: "100%"}} src={ImposterAmongUs} rounded></Image>} />
-                <FormControlLabel value="EmergencyAmongUs" control={<Radio />} label={<Image style={{width: "100%"}} src={EmergencyAmongUs} rounded></Image>} />
-                <FormControlLabel value="CryingMJMeme" control={<Radio />} label={<Image style={{width: "100%"}} src={CryingMJMeme} rounded></Image>} />
-                <FormControlLabel value="ManCryingMeme" control={<Radio />} label={<Image style={{width: "100%"}} src={ManCryingMeme} rounded></Image>} />
-                <FormControlLabel value="Zuckerberg" control={<Radio />} label={<Image style={{width: "100%"}} src={Zuckerberg} rounded></Image>} />
+                {getBackground()}
               </RadioGroup>
             </Card>
           </Grid>

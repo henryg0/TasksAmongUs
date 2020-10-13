@@ -1,5 +1,6 @@
 import React from 'react';
 import Card from '@material-ui/core/Card';
+import Chart from '../../components/Chart';
 
 export default function Productivity() {
   return (
@@ -12,42 +13,7 @@ export default function Productivity() {
         height: "450px",
       }}
     >
-      productivity productivity productivity productivity productivity productivity productivity productivity productivity productivity productivity productivity productivity productivity productivity
-      productivity productivity productivity productivity productivity productivity productivity productivity productivity productivity productivity productivity productivity productivity productivity
-      productivity productivity productivity productivity productivity productivity productivity productivity productivity productivity productivity productivity productivity productivity productivity
-      productivity productivity productivity productivity productivity productivity productivity productivity productivity productivity productivity productivity productivity productivity productivity
-      productivity productivity productivity productivity productivity productivity productivity productivity productivity productivity productivity productivity productivity productivity productivity
-      productivity productivity productivity productivity productivity productivity productivity productivity productivity productivity productivity productivity productivity productivity productivity
-      productivity productivity productivity productivity productivity productivity productivity productivity productivity productivity productivity productivity productivity productivity productivity
-      productivity productivity productivity productivity productivity productivity productivity productivity productivity productivity productivity productivity productivity productivity productivity
-      productivity productivity productivity productivity productivity productivity productivity productivity productivity productivity productivity productivity productivity productivity productivity
-      productivity productivity productivity productivity productivity productivity productivity productivity productivity productivity productivity productivity productivity productivity productivity
-      productivity productivity productivity productivity productivity productivity productivity productivity productivity productivity productivity productivity productivity productivity productivity
-      productivity productivity productivity productivity productivity productivity productivity productivity productivity productivity productivity productivity productivity productivity productivity
-      productivity productivity productivity productivity productivity productivity productivity productivity productivity productivity productivity productivity productivity productivity productivity
-      productivity productivity productivity productivity productivity productivity productivity productivity productivity productivity productivity productivity productivity productivity productivity
-      productivity productivity productivity productivity productivity productivity productivity productivity productivity productivity productivity productivity productivity productivity productivity
-      productivity productivity productivity productivity productivity productivity productivity productivity productivity productivity productivity productivity productivity productivity productivity
-      productivity productivity productivity productivity productivity productivity productivity productivity productivity productivity productivity productivity productivity productivity productivity
-      productivity productivity productivity productivity productivity productivity productivity productivity productivity productivity productivity productivity productivity productivity productivity
-      productivity productivity productivity productivity productivity productivity productivity productivity productivity productivity productivity productivity productivity productivity productivity
-      productivity productivity productivity productivity productivity productivity productivity productivity productivity productivity productivity productivity productivity productivity productivity
-      productivity productivity productivity productivity productivity productivity productivity productivity productivity productivity productivity productivity productivity productivity productivity
-      productivity productivity productivity productivity productivity productivity productivity productivity productivity productivity productivity productivity productivity productivity productivity
-      productivity productivity productivity productivity productivity productivity productivity productivity productivity productivity productivity productivity productivity productivity productivity
-      productivity productivity productivity productivity productivity productivity productivity productivity productivity productivity productivity productivity productivity productivity productivity
-      productivity productivity productivity productivity productivity productivity productivity productivity productivity productivity productivity productivity productivity productivity productivity
-      productivity productivity productivity productivity productivity productivity productivity productivity productivity productivity productivity productivity productivity productivity productivity
-      productivity productivity productivity productivity productivity productivity productivity productivity productivity productivity productivity productivity productivity productivity productivity
-      productivity productivity productivity productivity productivity productivity productivity productivity productivity productivity productivity productivity productivity productivity productivity
-      productivity productivity productivity productivity productivity productivity productivity productivity productivity productivity productivity productivity productivity productivity productivity
-      productivity productivity productivity productivity productivity productivity productivity productivity productivity productivity productivity productivity productivity productivity productivity
-      productivity productivity productivity productivity productivity productivity productivity productivity productivity productivity productivity productivity productivity productivity productivity
-      productivity productivity productivity productivity productivity productivity productivity productivity productivity productivity productivity productivity productivity productivity productivity
-      productivity productivity productivity productivity productivity productivity productivity productivity productivity productivity productivity productivity productivity productivity productivity
-      productivity productivity productivity productivity productivity productivity productivity productivity productivity productivity productivity productivity productivity productivity productivity
-      productivity productivity productivity productivity productivity productivity productivity productivity productivity productivity productivity productivity productivity productivity productivity
-      productivity productivity productivity productivity productivity productivity productivity productivity productivity productivity productivity productivity productivity productivity productivity
+      <Chart /> 
     </Card>
   )
 }

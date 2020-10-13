@@ -84,6 +84,7 @@ export default function About() {
                 roundedCircle
                 src={Maxwell}
                 width={140}
+                height={140}
               />
               <h5 className="mb-0">Maxwell Wong</h5>
               <i>Backend Developer</i>

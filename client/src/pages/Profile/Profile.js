@@ -19,16 +19,18 @@ export default function Profile() {
             <h2>Productivity</h2>
             <Productivity />
           </Grid>
-          <Grid container item xs="10" md="4" direction="row" alignItems="center" justify="flex-end">
+          <Grid container item xs="10" md="4" direction="column" justify="flex-start">
+            <Grid container item alignItems="center">
               <Grid item xs>
                 <h2>TodoList</h2>
               </Grid>
-              <Grid item xs="6">
-                <Button className="mb-1" variant="contained" color="primary" fullWidth href="/create">
+              <Grid item xs="6" className="mb-1">
+                <Button variant="contained" color="primary" fullWidth href="/create">
                   <div className="white-text">Create Todo</div>
                 </Button>
               </Grid>
-            <TodoList />
+            </Grid>
+            <Grid item xs><TodoList /></Grid>
           </Grid>
         </Grid>
       </Container>
