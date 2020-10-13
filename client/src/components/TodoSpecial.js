@@ -9,7 +9,6 @@ import Collapse from '@material-ui/core/Collapse';
 import Avatar from '@material-ui/core/Avatar';
 import IconButton from '@material-ui/core/IconButton';
 import Typography from '@material-ui/core/Typography';
-import { red } from '@material-ui/core/colors';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import Divider from '@material-ui/core/Divider';
 import EditIcon from '@material-ui/icons/Edit';
@@ -17,6 +16,7 @@ import getBackgrounds from '../utils/get.backgrounds';
 import Image from 'react-bootstrap/Image';
 import Badge from 'react-bootstrap/Badge';
 import Border from './Border';
+import Vincent from '../images/vincent.jpg';
 
 const useStyles = makeStyles((theme) => ({
   expand: {
@@ -30,7 +30,7 @@ const useStyles = makeStyles((theme) => ({
     transform: 'rotate(180deg)',
   },
   avatar: {
-    backgroundColor: red[500],
+    backgroundColor: "black",
   },
 }));
 
@@ -49,9 +49,7 @@ export default function RecipeReviewCard() {
         avatar={
           <div>
             <Border>
-              <Avatar aria-label="recipe" className={classes.avatar}>
-                V
-              </Avatar>
+              <Avatar aria-label="recipe" className={classes.avatar} src={Vincent} />
             </Border>
           </div>
         }
