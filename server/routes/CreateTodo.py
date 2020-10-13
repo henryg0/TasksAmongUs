@@ -37,4 +37,8 @@ def createTodoRoute(userId):
 
   todoId = uuid.uuid4()
 
+  query = (f"INSERT INTO todo.UserTodo (userId, todoId, status, addedDate, duedate, taskName, description, imageUrl) VALUES {userId} {todoId} {status} {addedDate} {duedate} '{taskName}' '{description}' '{imageUrl}'")
+
+  result = session.execute(query).one()
+  print (result)
   return {"msg": "Todo created"}

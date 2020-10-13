@@ -14,6 +14,6 @@ def getUserRoute(userId):
   results = session.execute(query).one()
 
   if not results:
-    return ({"msg": "User does not exist"})
+    return (jsonify({"error": "User does not exist"}), 404)
 
   return ({"user": results})
