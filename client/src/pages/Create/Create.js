@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import Layout from '../../components/Layout';
+import Toast from '../../components/Toast';
 import getBackgrounds from '../../utils/get.backgrounds';
 import authenticate from '../../utils/authenticate';
 import Form from 'react-bootstrap/Form';
@@ -67,7 +68,7 @@ export default function Create() {
     <Layout user={user}>
       <Container>
         <Grid container spacing={3}>
-          <Grid item xs="10" md="9">
+          <Grid item xs={10} sm={9}>
             <h2>
               <Button className="mb-2 mr-2" variant="contained" color="primary" href="/profile" size="small">
                 <div className="text-white">
@@ -83,7 +84,7 @@ export default function Create() {
               <Form onSubmit={createTodo}>
                 <Grid container spacing={1} direction="column">
                   <Grid container item spacing={1}>
-                    <Grid item xs="12" md="6">
+                    <Grid item xs={12} md={6}>
                       <TextField
                         size="small"
                         fullWidth
@@ -93,7 +94,7 @@ export default function Create() {
                         onChange={(e) => setcreateTitle(e.target.value)}
                       />
                     </Grid>
-                    <Grid item xs="12" md="3">
+                    <Grid item xs={12} md={3}>
                       <MuiPickersUtilsProvider utils={DateFnsUtils}>
                         <DatePicker
                           inputVariant="outlined"
@@ -105,7 +106,7 @@ export default function Create() {
                         />
                       </MuiPickersUtilsProvider>
                     </Grid>
-                    <Grid item xs="12" md="3">
+                    <Grid item xs={12} md={3}>
                       <MuiPickersUtilsProvider utils={DateFnsUtils}>
                         <TimePicker
                           inputVariant="outlined"
@@ -120,7 +121,6 @@ export default function Create() {
                   </Grid>
                   <Grid container item>
                     <TextField
-                      size="large"
                       fullWidth
                       label="Event Desciption" 
                       variant="outlined"
@@ -140,13 +140,13 @@ export default function Create() {
                     </a>
                   </Grid> */}
                   <Grid container item>
-                    <Button type="submit" className="mb-2" variant="contained" color="primary" fullWidth>Submit</Button>
+                    <Toast type="submit" className="mb-2" variant="contained" color="primary" fullWidth msg="Todo Created">Submit</Toast>
                   </Grid>
                 </Grid>
               </Form>
             </Card>
           </Grid>
-          <Grid item xs="10" md="3">
+          <Grid item xs={10} sm={3}>
             <h2>Backgrounds
           </h2>
             <Card

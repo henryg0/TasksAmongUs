@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import Layout from '../../components/Layout';
 import authenticate from '../../utils/authenticate';
 import Productivity from './Productivity';
@@ -15,18 +15,18 @@ export default function Profile() {
     <Layout user={user}>
       <Container>
         <Grid container spacing={3}>
-          <Grid item xs="10" md="8">
+          <Grid item xs="10" sm="10" lg="8">
             <h2>Productivity</h2>
             <Productivity />
           </Grid>
-          <Grid container item xs="10" md="4" direction="column" justify="flex-start">
+          <Grid container item xs="10" sm="10" lg="4" direction="column" justify="flex-start">
             <Grid container item alignItems="center">
               <Grid item xs>
                 <h2>TodoList</h2>
               </Grid>
               <Grid item xs="6" className="mb-1">
                 <Button variant="contained" color="primary" fullWidth href="/create">
-                  <div className="white-text">Create Todo</div>
+                  <div className="white-text">Create</div>
                 </Button>
               </Grid>
             </Grid>
