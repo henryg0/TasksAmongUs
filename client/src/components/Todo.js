@@ -105,7 +105,7 @@ export default function Todo() {
               <Modal icon={DeleteIcon} component={
                 ({onClose}) => {
                   return <Card className="p-2">
-                    <h2>Confirm To Delete Todo?</h2>
+                    <h2>Confirm To Delete Todo</h2>
                     <Button fullWidth variant="contained" color="secondary" onClick={() => {deleteTodo(); onClose()}}>Yes</Button>
                   </Card>
                 }

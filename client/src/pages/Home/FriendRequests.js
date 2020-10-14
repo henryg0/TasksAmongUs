@@ -37,7 +37,7 @@ export default function FriendRequests() {
             <Modal icon={ClearIcon} component={
               ({onClose}) => {
                 return <Card className="p-2">
-                  <h2>Confirm To Reject Friend Request?</h2>
+                  <h2>Confirm To Reject Friend Request</h2>
                   <Button fullWidth variant="contained" color="secondary" onClick={() => {denyRequest(); onClose()}}>Yes</Button>
                 </Card>
               }

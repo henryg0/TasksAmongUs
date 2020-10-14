@@ -27,7 +27,7 @@ export default function ConfirmedRequests() {
             <Modal icon={ClearIcon} component={
               ({onClose}) => {
                 return <Card className="p-2">
-                  <h2>Confirm To Unfriend?</h2>
+                  <h2>Confirm To Unfriend</h2>
                   <Button fullWidth variant="contained" color="secondary" onClick={() => {unFriend(); onClose()}}>Yes</Button>
                 </Card>
               }
@@ -43,7 +43,7 @@ export default function ConfirmedRequests() {
             <Modal icon={ClearIcon} component={
               ({onClose}) => {
                 return <Card className="p-2">
-                  <h2>Confirm To Unfriend?</h2>
+                  <h2>Confirm To Unfriend</h2>
                   <Button fullWidth variant="contained" color="secondary" onClick={() => {unFriend(); onClose()}}>Yes</Button>
                 </Card>
               }
@@ -59,7 +59,7 @@ export default function ConfirmedRequests() {
             <Modal icon={ClearIcon} component={
               ({onClose}) => {
                 return <Card className="p-2">
-                  <h2>Confirm to Unfriend?</h2>
+                  <h2>Confirm To Unfriend</h2>
                   <Button fullWidth variant="contained" color="secondary" onClick={() => {unFriend(); onClose()}}>Yes</Button>
                 </Card>
               }

@@ -27,7 +27,7 @@ export default function PendingRequests() {
             <Modal icon={ClearIcon} component={
               ({onClose}) => {
                 return <Card className="p-2">
-                  <h2>Confirm To Cancel Friend Request?</h2>
+                  <h2>Confirm To Cancel Friend Request</h2>
                   <Button fullWidth variant="contained" color="secondary" onClick={() => {cancelRequest(); onClose()}}>Yes</Button>
                 </Card>
               }
