@@ -1,5 +1,4 @@
-import React, { useState } from 'react';
-import List from '@material-ui/core/List';
+import React from 'react';
 import Card from '@material-ui/core/Card';
 import Todo from '../../components/Todo';
 import TodoSpecial from '../../components/TodoSpecial';
@@ -12,16 +11,15 @@ export default function Upcoming() {
         overflowY: "auto",
         maxHeight: "450px",
         height: "450px",
+        width: "100%",
       }}
     >
-      <List>
-        <TodoSpecial />
-        <Todo />
-        <Todo />
-        <TodoSpecial />
-        <TodoSpecial />
-        <Todo />
-      </List>
+      <TodoSpecial />
+      <Todo />
+      <Todo />
+      <TodoSpecial />
+      <TodoSpecial />
+      <Todo />
     </Card>
   );
 }

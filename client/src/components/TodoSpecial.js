@@ -11,12 +11,12 @@ import IconButton from '@material-ui/core/IconButton';
 import Typography from '@material-ui/core/Typography';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import Divider from '@material-ui/core/Divider';
-import EditIcon from '@material-ui/icons/Edit';
 import getBackgrounds from '../utils/get.backgrounds';
 import Image from 'react-bootstrap/Image';
 import Badge from 'react-bootstrap/Badge';
 import Border from './Border';
 import Vincent from '../images/vincent.jpg';
+import Blur from 'react-blur';
 
 const useStyles = makeStyles((theme) => ({
   expand: {
@@ -55,9 +55,6 @@ export default function RecipeReviewCard() {
         }
         action={
           <CardActions>
-            <IconButton>
-              <EditIcon fontSize="small" />
-            </IconButton>
             <IconButton
               className={clsx(classes.expand, {
                 [classes.expandOpen]: expanded,
@@ -87,13 +84,12 @@ export default function RecipeReviewCard() {
             and I was thinking about trolling your garden…
           </Typography>
           <br/>
+          {/* <Blur img="https://i.imgur.com/HLkruVA.jpg" style={{maxWidth:"400px"}} blurRadius={40}/> */}
           <Image
             style={{maxWidth: "400px"}}
             width="100%"
             src="https://i.imgur.com/HLkruVA.jpg"
-          >
-
-          </Image>
+          />
         </CardContent>
       </Collapse>
       <Divider />

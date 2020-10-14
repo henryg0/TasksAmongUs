@@ -1,5 +1,4 @@
-import React, { useState } from 'react';
-import List from '@material-ui/core/List';
+import React from 'react';
 import Card from '@material-ui/core/Card';
 import Todo from '../../components/Todo';
 
@@ -13,11 +12,9 @@ export default function Highlights() {
         height: "450px",
       }}
     >
-      <List>
-        <Todo />
-        <Todo />
-        <Todo />
-      </List>
+      <Todo />
+      <Todo />
+      <Todo />
     </Card>
   );
 }

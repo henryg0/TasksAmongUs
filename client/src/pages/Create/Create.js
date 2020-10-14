@@ -4,7 +4,7 @@ import Toast from '../../components/Toast';
 import getBackgrounds from '../../utils/get.backgrounds';
 import authenticate from '../../utils/authenticate';
 import Form from 'react-bootstrap/Form';
-import Container from 'react-bootstrap/Container';
+import Container from '@material-ui/core/Container';
 import Image from 'react-bootstrap/Image';
 import Button from '@material-ui/core/Button';
 import Grid from '@material-ui/core/Grid';
