@@ -33,13 +33,12 @@ def createTodoRoute(userId):
 
   addedDate = date.today()
   addedDate.strftime('%y-%m-%d')
-  addedDate = datetime.datetime(addedDate).date()
-
+  # addedDate = datetime.datetime(addedDate).date()
   todoId = uuid.uuid4()
   status = False
-  print (todoId)
-  print (type(addedDate))
-  query = (f"INSERT INTO todo.UserTodo (userId, todoId, status, addedDate, duedate, taskName, description, imageUrl) VALUES ({userId}, '{todoId}', {status}, '{addedDate}', {duedate}, '{taskName}', '{description}', '{imageUrl}')")
+
+  print (duedate)
+  query = (f"INSERT INTO todo.UserTodo (userId, todoId, status, addedDate, duedate, taskName, description, imageUrl) VALUES ({userId}, {todoId}, {status}, '{addedDate}', '{duedate}', '{taskName}', '{description}', '{imageUrl}')")
   print (query)
   result = session.execute(query).one()
   print (result)
