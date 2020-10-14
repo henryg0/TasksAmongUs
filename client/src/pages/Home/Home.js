@@ -3,7 +3,7 @@ import authenticate from '../../utils/authenticate';
 import Layout from '../../components/Layout';
 import Upcoming from './Upcoming';
 import Finished from './Finished';
-import AddNewFriendForm from './AddNewFriendForm';
+import SendFriendRequest from './SendFriendRequest';
 import FriendRequests from './FriendRequests';
 import PendingRequests from './PendingRequests';
 import ConfirmedRequests from './ConfirmedRequests';
@@ -43,7 +43,7 @@ export default function Home() {
           </Grid>
           <Grid item xs={10} md={3}>
             <h2>Friends</h2>
-            <AddNewFriendForm />
+            <SendFriendRequest />
             <FriendRequests />
             <PendingRequests />
             <ConfirmedRequests />

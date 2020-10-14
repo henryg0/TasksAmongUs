@@ -1,6 +1,7 @@
 import React from 'react'; 
 import { BrowserRouter, Route, Switch} from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import { SnackbarProvider } from 'notistack';
 
 import init_auth from './utils/init.auth';
 
@@ -28,6 +29,7 @@ export default class App extends React.Component {
 
   render() {  
     return (
+      <SnackbarProvider maxSnack={5}>
       <BrowserRouter>
         <Switch>
           <PrivateRoute path="/" exact component={Home} />
@@ -39,6 +41,7 @@ export default class App extends React.Component {
           <Route path="/" component={ErrorPage} />
         </Switch>
       </BrowserRouter>
+      </SnackbarProvider>
     )
   }
 }

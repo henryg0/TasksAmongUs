@@ -1,11 +1,19 @@
 import React from "react";
+import Modal from '../../components/Modal';
+import { useSnackbar } from 'notistack';
+import ClearIcon from '@material-ui/icons/Clear';
 import Grid from '@material-ui/core/Grid';
 import Card from '@material-ui/core/Card';
-import IconButton from '@material-ui/core/IconButton';
-import ClearIcon from '@material-ui/icons/Clear';
+import Button from '@material-ui/core/Button';
 import Divider from "@material-ui/core/Divider";
 
 export default function ConfirmedRequests() {
+  const { enqueueSnackbar } = useSnackbar();
+
+  function unFriend() {
+    enqueueSnackbar("Friend Removed", {variant: "success"}) 
+  }
+
   return (
     <div>
       <Card className="mb-2 p-2" variant="outlined">
@@ -16,9 +24,14 @@ export default function ConfirmedRequests() {
             Vincent Tieu
           </Grid>
           <Grid item xs={2}>
-            <IconButton color="primary" component="span">
-              <ClearIcon />
-            </IconButton>
+            <Modal icon={ClearIcon} component={
+              ({onClose}) => {
+                return <Card className="p-2">
+                  <h2>Confirm To Unfriend?</h2>
+                  <Button fullWidth variant="contained" color="secondary" onClick={() => {unFriend(); onClose()}}>Yes</Button>
+                </Card>
+              }
+            }/>
           </Grid>
         </Grid>
         <Divider />
@@ -27,9 +40,14 @@ export default function ConfirmedRequests() {
             Henry Gip
           </Grid>
           <Grid item xs={2}>
-            <IconButton color="primary" component="span">
-              <ClearIcon />
-            </IconButton>
+            <Modal icon={ClearIcon} component={
+              ({onClose}) => {
+                return <Card className="p-2">
+                  <h2>Confirm To Unfriend?</h2>
+                  <Button fullWidth variant="contained" color="secondary" onClick={() => {unFriend(); onClose()}}>Yes</Button>
+                </Card>
+              }
+            }/>
           </Grid>
         </Grid>
         <Divider />
@@ -38,9 +56,14 @@ export default function ConfirmedRequests() {
             Maxwell Wong
           </Grid>
           <Grid item xs={2}>
-            <IconButton color="primary" component="span">
-              <ClearIcon />
-            </IconButton>
+            <Modal icon={ClearIcon} component={
+              ({onClose}) => {
+                return <Card className="p-2">
+                  <h2>Confirm to Unfriend?</h2>
+                  <Button fullWidth variant="contained" color="secondary" onClick={() => {unFriend(); onClose()}}>Yes</Button>
+                </Card>
+              }
+            }/>
           </Grid>
         </Grid>
       </Card>

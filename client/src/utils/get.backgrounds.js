@@ -15,5 +15,6 @@ export default function getBackgrounds() {
     "https://i.imgur.com/00jEYKH.jpg",
     "https://i.imgur.com/dBxmIm3.jpg",
     "https://i.imgur.com/VE5hvmW.jpg",
+    "https://i.imgur.com/2ccfSc9.jpg",
   ]
 }
