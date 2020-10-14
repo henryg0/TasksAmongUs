@@ -8,15 +8,11 @@ getUser = Blueprint("getUser", __name__)
 def getUserRoute(userId):
   if not userId:
     return (jsonify({"error": "Missing userId"}), 400)
+  
+  docs = db.collection('Users')
+  result = docs.where("userId", "==", userId).stream()
 
-  print (db)
-  return ("hi")
+  for doc in result:
+    return ({"user": doc.to_dict()})
     
-  # query = (f"SELECT * FROM todo.UserProfile WHERE userId = {userId}")
-
-  # results = session.execute(query).one()
-
-  # if not results:
-  #   return (jsonify({"error": "User does not exist"}), 404)
-
-  # return ({"user": results})
+  return (jsonify({"error": "User does not exist"}), 404)

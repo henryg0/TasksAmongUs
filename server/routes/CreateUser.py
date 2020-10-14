@@ -1,5 +1,6 @@
 from flask import Blueprint, request, jsonify
-from ..database.database import session
+from ..database.database import db
+from firebase_admin import exceptions
 
 createUser = Blueprint("createUser", __name__)
 
@@ -27,14 +28,9 @@ def createUserRoute():
   for key in error_log:
     if not error_log.get(key):
       return (jsonify({"msg": "Missing {}".format(key)}), 400)
-    
-  print (userId)
-  print (firstName)
-  print (lastName)
-  print (email)
-  query = "INSERT INTO todo.UserProfile (userId, firstName, lastName, email, imageUrl) VALUES ({}, '{}', '{}', '{}') IF NOT EXISTS".format(userId, firstName, lastName, email, imageUrl)
-  # print (query)
-  results = session.execute(query).one()
-  print (results)
-  print (results[0])
-  return {"msg": "User Created"}
+
+
+  # IF SOMEONE ELSE HAS SAME ID, IT OVERRIDES
+  db.collection("Users").document(userId).set(data)
+
+  return ({"msg": "User created"})

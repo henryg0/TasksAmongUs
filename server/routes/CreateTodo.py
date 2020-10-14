@@ -1,5 +1,5 @@
 from flask import Blueprint, request, jsonify
-from ..database.database import session
+from ..database.database import db
 import uuid
 from datetime import date
 
@@ -33,13 +33,15 @@ def createTodoRoute(userId):
 
   addedDate = date.today()
   addedDate.strftime('%y-%m-%d')
-  # addedDate = datetime.datetime(addedDate).date()
-  todoId = uuid.uuid4()
+  
+  todoId = uuid.uuid4().hex
   status = False
 
-  print (duedate)
-  query = (f"INSERT INTO todo.UserTodo (userId, todoId, status, addedDate, duedate, taskName, description, imageUrl) VALUES ({userId}, {todoId}, {status}, '{addedDate}', '{duedate}', '{taskName}', '{description}', '{imageUrl}')")
-  print (query)
-  result = session.execute(query).one()
-  print (result)
-  return {"msg": "Todo created"}
+  data["addedDate"] = str(addedDate)
+  data["todoId"] = todoId
+  data["status"] = status
+  data["userId"] = userId
+  
+  db.collection("Todo").document(todoId).set(data)
+
+  return data

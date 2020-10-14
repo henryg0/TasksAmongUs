@@ -9,6 +9,7 @@ cred = credentials.Certificate('./database/firebase-key.json')
 firebase_admin.initialize_app(cred)
 
 db = firestore.client()
+
 # from cassandra.cluster import Cluster
 # from cassandra.auth import PlainTextAuthProvider
 # import os

@@ -1,5 +1,5 @@
 from flask import request, Blueprint
-from ..database.database import session
+from ..database.database import db
 
 
 getAllTodoByUser = Blueprint("getAllTodoByUser", __name__)
@@ -9,11 +9,10 @@ def getAllTodoByUserRoute(userId):
   if not userId:
     return (jsonify({"error": "Missing userId"}), 400)
 
-  query = (f"SELECT * FROM todo.UserTodo WHERE userId = {userId}")
-
-  results = session.execute(query)
-  print (list(results))
-  # colNames = results._fields
-  # print (colNames)
-  # print (str(results))
-  return {"todo" : "tmp"}
+  docs = db.collection('Todo')
+  # result = docs.where("userId", "==", userId).stream()
+  result = docs.where("userId", "==", userId).stream()
+  
+  res = [doc.to_dict() for doc in result]
+  
+  return {"todos": res}
