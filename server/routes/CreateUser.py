@@ -14,12 +14,14 @@ def createUserRoute():
   firstName = data.get("firstName")
   lastName = data.get("lastName")
   email = data.get("email")
+  imageUrl = data.get("imageUrl")
 
   error_log = {
-    "userId":userId,
-    "firstName":firstName,
-    "lastName":lastName,
-    "email":email
+    "userId": userId,
+    "firstName": firstName,
+    "lastName": lastName,
+    "email": email,
+    "imageUrl": imageUrl
   }
 
   for key in error_log:
@@ -30,9 +32,9 @@ def createUserRoute():
   print (firstName)
   print (lastName)
   print (email)
-  query = "INSERT INTO todo.UserProfile (userId, firstName, lastName, email) VALUES ({}, '{}', '{}', '{}') IF NOT EXISTS".format(userId, firstName, lastName, email)
+  query = "INSERT INTO todo.UserProfile (userId, firstName, lastName, email, imageUrl) VALUES ({}, '{}', '{}', '{}') IF NOT EXISTS".format(userId, firstName, lastName, email, imageUrl)
   # print (query)
   results = session.execute(query).one()
   print (results)
-  print (results[1])
+  print (results[0])
   return {"msg": "User Created"}

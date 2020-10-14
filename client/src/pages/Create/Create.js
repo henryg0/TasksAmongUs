@@ -55,13 +55,13 @@ export default function Create() {
 
     console.log(data);
 
-    axios.post("/api/group/create", data)
-      .then((res) => {
-        console.log(res);
-      })
-      .catch((err) => {
-        console.log(err);
-      })
+    // axios.post("/api/group/create", data)
+    //   .then((res) => {
+    //     console.log(res);
+    //   })
+    //   .catch((err) => {
+    //     console.log(err);
+    //   })
   }
 
   return (

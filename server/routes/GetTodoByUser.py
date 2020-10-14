@@ -1,7 +1,7 @@
 from flask import request, Blueprint
 
-getAllTodoByUser = Blueprint("getAllTodoByUser", __name__)
+getTodoByUser = Blueprint("getTodoByUser", __name__)
 
-@getAllTodoByUser.route("/api/user/<id>/todo", methods=["GET"])
-def getAllTodoByUserRoute(id):
+@getTodoByUser.route("/api/user/<id>/todo", methods=["GET"])
+def getTodoByUserRoute(id):
   return {"todo" : ["todo1", "todo2", "todo3"]}
