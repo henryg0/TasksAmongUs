@@ -1,13 +1,11 @@
-import React, { useState } from "react";
+import React from 'react';
+import Toast from '../../components/Toast';
+import Modal from '../../components/Modal';
 import Grid from '@material-ui/core/Grid';
 import Card from '@material-ui/core/Card';
 import IconButton from '@material-ui/core/IconButton';
 import CheckIcon from '@material-ui/icons/Check';
 import ClearIcon from '@material-ui/icons/Clear';
-
-function Request() {
-  return
-}
 
 export default function FriendRequests() {
   return (
@@ -15,19 +13,19 @@ export default function FriendRequests() {
       <Card className="mb-2 p-2" variant="outlined">
         <h5 className="text-center">Requests</h5>
         <hr/>
-        <Grid container justify="space between">
+        <Grid container>
           <Grid item xs className="mt-3">
             Honbon Boy
           </Grid>
-          <Grid item xs="2">
-            <IconButton color="primary" component="span">
+          <Grid item xs={2}>
+            <Toast color="primary" component="span" msg="Friend Added">
               <CheckIcon />
-            </IconButton>
+            </Toast>
           </Grid>
-          <Grid item xs="2">
-            <IconButton color="primary" component="span">
+          <Grid item xs={2}>
+            <Toast color="primary" component="span" msg="Friend Rejected">
               <ClearIcon />
-            </IconButton>
+            </Toast>
           </Grid>
         </Grid>
       </Card>

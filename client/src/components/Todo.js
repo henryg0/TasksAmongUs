@@ -13,10 +13,13 @@ import { red } from '@material-ui/core/colors';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import Divider from '@material-ui/core/Divider';
 import EditIcon from '@material-ui/icons/Edit';
+import DeleteIcon from '@material-ui/icons/Delete';
 import getBackgrounds from '../utils/get.backgrounds';
 import Image from 'react-bootstrap/Image';
 import Badge from 'react-bootstrap/Badge';
 import Border from './Border';
+import Blur from 'react-blur';
+import Grid from '@material-ui/core/Grid';
 
 const useStyles = makeStyles((theme) => ({
   expand: {
@@ -38,7 +41,6 @@ export default function RecipeReviewCard() {
   const classes = useStyles();
   const [expanded, setExpanded] = React.useState(false);
   const backgrounds = getBackgrounds();
-
   const handleExpandClick = () => {
     setExpanded(!expanded);
   };
@@ -47,18 +49,16 @@ export default function RecipeReviewCard() {
     <Card className={classes.root}>
       <CardHeader
         avatar={
-          <div>
-            <Avatar aria-label="recipe" className={classes.avatar}>
-              A
-            </Avatar>
-          </div>
+          <Border>
+              <Avatar aria-label="recipe" className={classes.avatar}>
+                A
+              </Avatar>
+          </Border>
         }
         action={
           <CardActions>
-            <IconButton>
-              <EditIcon fontSize="small" />
-            </IconButton>
             <IconButton
+              fontSize="small"
               className={clsx(classes.expand, {
                 [classes.expandOpen]: expanded,
               })}
@@ -82,18 +82,29 @@ export default function RecipeReviewCard() {
       />
       <Collapse in={expanded} timeout="auto" unmountOnExit>
         <CardContent>
-          <Typography variant="body2" color="textSecondary" component="p">
-            I'll be in your neighborhood doing errands this weekend
-            and I was thinking about trolling your garden…
-          </Typography>
+          <Grid container direction="row">
+            <Grid item xs>
+              <Typography variant="body2" color="textSecondary">
+                I'll be in your neighborhood doing errands this weekend
+                and I was thinking about trolling your garden…
+              </Typography>
+            </Grid>
+            <Grid container item xs={1} direction="column" className="mr-3">
+              <IconButton item xs>
+                <EditIcon />
+              </IconButton>
+              <IconButton item xs>
+                <DeleteIcon />
+              </IconButton>
+            </Grid>
+          </Grid>
           <br/>
+          {/* <Blur img="https://i.imgur.com/HLkruVA.jpg" style={{maxWidth:"400px"}} blurRadius={40}/> */}
           <Image
-            style={{maxWidth: "400px"}}
+            style={{maxWidth:"400px"}}
             width="100%"
             src="https://i.imgur.com/HLkruVA.jpg"
-          >
-
-          </Image>
+          />
         </CardContent>
       </Collapse>
       <Divider />
