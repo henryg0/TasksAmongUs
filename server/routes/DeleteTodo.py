@@ -1,7 +1,18 @@
-from flask import request, Blueprint
+from flask import request, Blueprint, jsonify
+from ..database.database import db
+
 
 deleteTodo = Blueprint("deleteTodo", __name__)
 
-@deleteTodo.route("/api/user/<id>/todo/<todo_id>/delete", methods = ["DELETE"])
-def deleteTodoRoute(id, todo_id):
-  return {"msg": "Todo deleted"}
+@deleteTodo.route("/api/user/<userId>/todo/<todoId>/delete", methods = ["DELETE"])
+def deleteTodoRoute(userId, todoId):
+  # add a checking method where only user can delete their own todo
+  if not userId:
+    return (jsonify({"msg": "Missing userId"}), 400)
+
+  if not todoId:
+    return (jsonify({"msg": "Missing todoId"}), 400)
+
+  db.collection('Todo').document(todoId).delete()
+  
+  return ({"msg": "Todo deleted"})

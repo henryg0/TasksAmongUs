@@ -34,7 +34,7 @@ def createTodoRoute(userId):
   addedDate = date.today()
   addedDate.strftime('%y-%m-%d')
   
-  todoId = uuid.uuid4().hex
+  todoId = str(uuid.uuid4())
   status = False
 
   data["addedDate"] = str(addedDate)
