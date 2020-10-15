@@ -55,7 +55,7 @@ export default function TransitionsModal({icon: Icon, msg: msg, component: Compo
         }}
       >
         <Fade in={open}>
-          <Component onClose={handleClose}/>
+          <Component onClose={handleClose} />
         </Fade>
       </Modal>
     </div>

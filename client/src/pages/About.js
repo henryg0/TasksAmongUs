@@ -38,7 +38,7 @@ export default function About() {
                 At its core, TasksAmongUs is a todo list app but with a twist. Whenever you fail to 
                 meet a deadline, an embarassing notification is sent to all your friends letting
                 them how unresponsible you are. OOF. Having *<i>good</i>* *<i>responsible</i>* friends tease
-                you slacking off would hopefully motivate you to finish your them next time!
+                you for slacking off would hopefully be a good motivator!
               </p>
               <br />
             </Grid>

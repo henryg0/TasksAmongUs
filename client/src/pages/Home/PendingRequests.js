@@ -28,7 +28,8 @@ export default function PendingRequests() {
               ({onClose}) => {
                 return <Card className="p-2">
                   <h2>Confirm To Cancel Friend Request</h2>
-                  <Button fullWidth variant="contained" color="secondary" onClick={() => {cancelRequest(); onClose()}}>Yes</Button>
+                  <Button fullWidth variant="contained" color="secondary" onClick={() => {cancelRequest(); onClose()}}>Confirm</Button>
+                  <Button className="mt-2" fullWidth onClick={onClose} variant="outlined">Close</Button>
                 </Card>
               }
             }/>

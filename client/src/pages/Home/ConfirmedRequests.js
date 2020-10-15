@@ -28,7 +28,8 @@ export default function ConfirmedRequests() {
               ({onClose}) => {
                 return <Card className="p-2">
                   <h2>Confirm To Unfriend</h2>
-                  <Button fullWidth variant="contained" color="secondary" onClick={() => {unFriend(); onClose()}}>Yes</Button>
+                  <Button fullWidth variant="contained" color="secondary" onClick={() => {unFriend(); onClose()}}>Confirm</Button>
+                  <Button className="mt-2" fullWidth onClick={onClose} variant="outlined">Close</Button>
                 </Card>
               }
             }/>
@@ -45,6 +46,7 @@ export default function ConfirmedRequests() {
                 return <Card className="p-2">
                   <h2>Confirm To Unfriend</h2>
                   <Button fullWidth variant="contained" color="secondary" onClick={() => {unFriend(); onClose()}}>Yes</Button>
+                  <Button className="mt-2" fullWidth onClick={onClose} variant="outlined">Close</Button>
                 </Card>
               }
             }/>
@@ -61,6 +63,7 @@ export default function ConfirmedRequests() {
                 return <Card className="p-2">
                   <h2>Confirm To Unfriend</h2>
                   <Button fullWidth variant="contained" color="secondary" onClick={() => {unFriend(); onClose()}}>Yes</Button>
+                  <Button className="mt-2" fullWidth onClick={onClose} variant="outlined">Close</Button>
                 </Card>
               }
             }/>

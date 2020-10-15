@@ -38,7 +38,8 @@ export default function FriendRequests() {
               ({onClose}) => {
                 return <Card className="p-2">
                   <h2>Confirm To Reject Friend Request</h2>
-                  <Button fullWidth variant="contained" color="secondary" onClick={() => {denyRequest(); onClose()}}>Yes</Button>
+                  <Button fullWidth variant="contained" color="secondary" onClick={() => {denyRequest(); onClose()}}>Confirm</Button>
+                  <Button className="mt-2" fullWidth onClick={onClose} variant="outlined">Close</Button>
                 </Card>
               }
             }/>

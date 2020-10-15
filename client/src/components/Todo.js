@@ -96,17 +96,22 @@ export default function Todo() {
               <Typography variant="body2" color="textSecondary">
                 I'll be in your neighborhood doing errands this weekend
                 and I was thinking about trolling your garden…
+
+                Trolling trolling trolling :)
               </Typography>
             </Grid>
             <Grid container item xs={1} direction="column" className="mr-3">
-              <IconButton item xs>
-                <EditIcon color="primary"/>
-              </IconButton>
+              <div>
+                <IconButton>
+                  <EditIcon color="primary"/>
+                </IconButton>
+              </div>
               <Modal icon={DeleteIcon} component={
                 ({onClose}) => {
                   return <Card className="p-2">
                     <h2>Confirm To Delete Todo</h2>
-                    <Button fullWidth variant="contained" color="secondary" onClick={() => {deleteTodo(); onClose()}}>Yes</Button>
+                    <Button fullWidth variant="contained" color="secondary" onClick={() => {deleteTodo(); onClose()}}>Confirm</Button>
+                    <Button className="mt-2" fullWidth onClick={onClose} variant="outlined">Close</Button>
                   </Card>
                 }
               }/>
