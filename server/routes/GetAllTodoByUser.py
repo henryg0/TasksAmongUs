@@ -10,7 +10,6 @@ def getAllTodoByUserRoute(userId):
     return (jsonify({"error": "Missing userId"}), 400)
 
   docs = db.collection('Todo')
-  # result = docs.where("userId", "==", userId).stream()
   result = docs.where("userId", "==", userId).stream()
   
   res = [doc.to_dict() for doc in result]

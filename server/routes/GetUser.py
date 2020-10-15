@@ -14,5 +14,5 @@ def getUserRoute(userId):
 
   for doc in result:
     return ({"user": doc.to_dict()})
-    
+
   return (jsonify({"error": "User does not exist"}), 404)
