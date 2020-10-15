@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import Layout from '../../components/Layout';
-import Toast from '../../components/Toast';
 import getBackgrounds from '../../utils/get.backgrounds';
 import authenticate from '../../utils/authenticate';
 import Form from 'react-bootstrap/Form';
@@ -21,8 +20,10 @@ import {
   MuiPickersUtilsProvider,
 } from '@material-ui/pickers';
 import axios from "axios";
+import { useSnackbar } from 'notistack';
 
 export default function Create() {
+  const { enqueueSnackbar } = useSnackbar();
   let user = authenticate();
   const backgrounds = getBackgrounds();
   const [createTitle, setcreateTitle] = useState();
@@ -40,6 +41,8 @@ export default function Create() {
 
   function createTodo(e) {
     e.preventDefault();
+    e.stopPropagation();
+    enqueueSnackbar("Todo Created", {variant: "success"})
     setcreateTitle("");
     setCreateDueDateTime(new Date());
     setCreateDescription("");
@@ -140,7 +143,7 @@ export default function Create() {
                     </a>
                   </Grid> */}
                   <Grid container item>
-                    <Toast type="submit" className="mb-2" variant="contained" color="primary" fullWidth msg="Todo Created">Submit</Toast>
+                    <Button type="submit" className="mb-2" variant="contained" color="primary" fullWidth>Submit</Button>
                   </Grid>
                 </Grid>
               </Form>

@@ -20,6 +20,9 @@ import Badge from 'react-bootstrap/Badge';
 import Border from './Border';
 import Blur from 'react-blur';
 import Grid from '@material-ui/core/Grid';
+import Modal from './Modal';
+import { useSnackbar } from 'notistack';
+import Button from '@material-ui/core/Button';
 
 const useStyles = makeStyles((theme) => ({
   expand: {
@@ -37,13 +40,19 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function RecipeReviewCard() {
+export default function Todo() {
   const classes = useStyles();
   const [expanded, setExpanded] = React.useState(false);
   const backgrounds = getBackgrounds();
+  const { enqueueSnackbar } = useSnackbar();
+
   const handleExpandClick = () => {
     setExpanded(!expanded);
   };
+
+  function deleteTodo() {
+    enqueueSnackbar("Todo Deleted", {variant: "success"}) 
+  }
 
   return (
     <Card className={classes.root}>
@@ -91,11 +100,16 @@ export default function RecipeReviewCard() {
             </Grid>
             <Grid container item xs={1} direction="column" className="mr-3">
               <IconButton item xs>
-                <EditIcon />
+                <EditIcon color="primary"/>
               </IconButton>
-              <IconButton item xs>
-                <DeleteIcon />
-              </IconButton>
+              <Modal icon={DeleteIcon} component={
+                ({onClose}) => {
+                  return <Card className="p-2">
+                    <h2>Confirm To Delete Todo</h2>
+                    <Button fullWidth variant="contained" color="secondary" onClick={() => {deleteTodo(); onClose()}}>Yes</Button>
+                  </Card>
+                }
+              }/>
             </Grid>
           </Grid>
           <br/>

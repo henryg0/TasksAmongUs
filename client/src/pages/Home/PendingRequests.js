@@ -1,12 +1,19 @@
-import React, { useState } from "react";
+import React from "react";
+import Modal from '../../components/Modal';
+import { useSnackbar } from 'notistack';
+import ClearIcon from '@material-ui/icons/Clear';
 import Grid from '@material-ui/core/Grid';
 import Card from '@material-ui/core/Card';
-import IconButton from '@material-ui/core/IconButton';
-import CheckIcon from '@material-ui/icons/Check';
-import ClearIcon from '@material-ui/icons/Clear';
+import Button from '@material-ui/core/Button';
 import Divider from "@material-ui/core/Divider";
 
 export default function PendingRequests() {
+  const { enqueueSnackbar } = useSnackbar();
+
+  function cancelRequest() {
+    enqueueSnackbar("Friend Request Canceled", {variant: "success"}) 
+  }
+
   return (
     <div>
       <Card className="mb-2 p-2" variant="outlined">
@@ -17,14 +24,14 @@ export default function PendingRequests() {
             Honbon's Twin
           </Grid>
           <Grid item xs={2}>
-            <IconButton color="primary" component="span">
-              <CheckIcon />
-            </IconButton>
-          </Grid>
-          <Grid item xs={2}>
-            <IconButton color="primary" component="span">
-              <ClearIcon />
-            </IconButton>
+            <Modal icon={ClearIcon} component={
+              ({onClose}) => {
+                return <Card className="p-2">
+                  <h2>Confirm To Cancel Friend Request</h2>
+                  <Button fullWidth variant="contained" color="secondary" onClick={() => {cancelRequest(); onClose()}}>Yes</Button>
+                </Card>
+              }
+            }/>
           </Grid>
         </Grid>
       </Card>

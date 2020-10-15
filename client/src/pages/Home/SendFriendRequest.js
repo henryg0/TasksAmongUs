@@ -1,13 +1,15 @@
 import React, { useState } from "react";
 import TextField from '@material-ui/core/TextField';
 import Grid from '@material-ui/core/Grid';
-import Toast from '../../components/Toast';
+import { useSnackbar } from 'notistack';
+import Button from '@material-ui/core/Button';
 
-export default function AddNewFriendForm() {
+export default function SendFriendRequest() {
   const [friendEmail, setFriendEmail] = useState("");
-
-  function print() {
-    console.log("yeeet")
+  const { enqueueSnackbar } = useSnackbar();
+  
+  function send() {
+    enqueueSnackbar("Friend Request Sent", {variant: "success"})
   }
 
   return (
@@ -24,16 +26,15 @@ export default function AddNewFriendForm() {
           />
         </Grid>
         <Grid item xs={12}>
-          <Toast 
+          <Button 
             fullWidth
             id="find-group-form" 
             color="primary"
             variant="contained"
-            onClick={print}
-            msg = "Friend request sent!"
+            onClick={send}
           >
             Send Friend Request
-          </Toast>
+          </Button>
         </Grid>
       </Grid>
     </form>
