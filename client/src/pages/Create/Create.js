@@ -12,7 +12,10 @@ import TextField from '@material-ui/core/TextField';
 import RadioGroup from '@material-ui/core/RadioGroup';
 import Radio from '@material-ui/core/Radio';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
+import ArrowBackIcon from '@material-ui/icons/ArrowBack';
+import Fab from '@material-ui/core/Fab';
 import 'date-fns';
+import { useSnackbar } from 'notistack';
 import DateFnsUtils from '@date-io/date-fns';
 import {
   DatePicker,
@@ -20,7 +23,6 @@ import {
   MuiPickersUtilsProvider,
 } from '@material-ui/pickers';
 import axios from "axios";
-import { useSnackbar } from 'notistack';
 
 export default function Create() {
   const { enqueueSnackbar } = useSnackbar();
@@ -28,7 +30,7 @@ export default function Create() {
   const backgrounds = getBackgrounds();
   const [createTitle, setcreateTitle] = useState();
   const [createDueDateTime, setCreateDueDateTime] = useState(new Date());
-  const [createDescription, setCreateDescription] = useState();
+  const [createDescription, setCreateDescription] = useState("");
   const [createBackground, setCreateBackground] = useState(backgrounds[0]);
 
   function getBackground() {
@@ -43,11 +45,7 @@ export default function Create() {
     e.preventDefault();
     e.stopPropagation();
     enqueueSnackbar("Todo Created", {variant: "success"})
-    setcreateTitle("");
-    setCreateDueDateTime(new Date());
-    setCreateDescription("");
-    setCreateBackground(backgrounds[0]);
-
+    
     let data = {
       userId: user.id,
       todoTitle: createTitle,
@@ -55,8 +53,14 @@ export default function Create() {
       todoDescription: createDescription,
       todoBackground: createBackground,
     }
-
+    
     console.log(data);
+    
+    setcreateTitle("");
+    setCreateDueDateTime(new Date());
+    setCreateDescription("");
+    setCreateBackground(backgrounds[0]);
+
 
     // axios.post("/api/group/create", data)
     //   .then((res) => {
@@ -73,11 +77,9 @@ export default function Create() {
         <Grid container spacing={3}>
           <Grid item xs={10} sm={9}>
             <h2>
-              <Button className="mb-2 mr-2" variant="contained" color="primary" href="/profile" size="small">
-                <div className="text-white">
-                  &#x3c;
-                </div>
-              </Button>
+              <Fab className="mb-1 mr-2" color="primary" href="/profile" size="small">
+                <ArrowBackIcon className="white-text" />
+              </Fab>
               Create
             </h2>
             <Card
@@ -89,6 +91,7 @@ export default function Create() {
                   <Grid container item spacing={1}>
                     <Grid item xs={12} md={6}>
                       <TextField
+                        required
                         size="small"
                         fullWidth
                         label="Event Name" 
@@ -100,6 +103,7 @@ export default function Create() {
                     <Grid item xs={12} md={3}>
                       <MuiPickersUtilsProvider utils={DateFnsUtils}>
                         <DatePicker
+                          required
                           inputVariant="outlined"
                           size="small"
                           label="Due Date"
@@ -112,6 +116,7 @@ export default function Create() {
                     <Grid item xs={12} md={3}>
                       <MuiPickersUtilsProvider utils={DateFnsUtils}>
                         <TimePicker
+                          required
                           inputVariant="outlined"
                           size="small"
                           label="Due Time"
@@ -131,17 +136,13 @@ export default function Create() {
                       rows={4}
                       rowsMax={10}
                       value={createDescription}
+                      inputProps={{ maxLength: 1000 }}
                       onChange={(e) => setCreateDescription(e.target.value)}
                     />
                   </Grid>
                   <Grid container item>
                     <Image style={{width: "100%"}} src={createBackground} rounded></Image>
                   </Grid>
-                  {/* <Grid container item>
-                    <a href={d["Background" + background]} download="da-meme.jpg" style={{width:"100%"}}>
-                      <Button className="mb-2" variant="contained" color="primary" fullWidth>Download</Button>
-                    </a>
-                  </Grid> */}
                   <Grid container item>
                     <Button type="submit" className="mb-2" variant="contained" color="primary" fullWidth>Submit</Button>
                   </Grid>
@@ -161,7 +162,7 @@ export default function Create() {
                 height: "600px",
               }}
             >
-              <RadioGroup value={createBackground} onChange={(e) => setCreateBackground(e.target.value)}>
+              <RadioGroup required value={createBackground} onChange={(e) => setCreateBackground(e.target.value)}>
                 {getBackground()}
               </RadioGroup>
             </Card>
