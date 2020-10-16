@@ -7,8 +7,10 @@ from .routes.UpdateTodo import updateTodo
 from .routes.DeleteTodo import deleteTodo
 from .routes.CreateUser import createUser
 from .routes.GetUser import getUser
-
-
+from .routes.CreateFriendRequest import createFriendRequest
+from .routes.GetFriendRequest import getFriendRequest
+from .routes.GetPendingFriendRequest import getPendingFriendRequest
+from .routes.DeleteFriendRequest import deleteFriendRequest
 
 
 app = Flask(__name__)
@@ -21,6 +23,10 @@ app.register_blueprint(updateTodo)
 app.register_blueprint(deleteTodo)
 app.register_blueprint(createUser)
 app.register_blueprint(getUser)
+app.register_blueprint(createFriendRequest)
+app.register_blueprint(getFriendRequest)
+app.register_blueprint(getPendingFriendRequest)
+app.register_blueprint(deleteFriendRequest)
 
 
 @app.route('/')

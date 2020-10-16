@@ -1,7 +1,6 @@
 from flask import request, Blueprint
 from ..database.database import db
 
-
 getAllTodoByUser = Blueprint("getAllTodoByUser", __name__)
 
 @getAllTodoByUser.route("/api/user/<userId>/todo", methods=["GET"])
