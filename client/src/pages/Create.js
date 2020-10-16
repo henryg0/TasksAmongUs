@@ -47,8 +47,8 @@ export default function Create() {
     enqueueSnackbar("Todo Created", {variant: "success"})
     
     let data = {
-      taskName: todoName,
-      duedate: dueDate,
+      todoName: todoName,
+      dueDate: dueDate,
       description: description,
       imageUrl: imageURL
     }

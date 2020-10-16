@@ -16,7 +16,7 @@ export default function authenticate() {
       userId: profile.getId(),
       fullName: profile.getName(),
       firstName: profile.getGivenName(),
-      lastName: profile.getFamilyName(),
+    lastName: profile.getFamilyName(),
       imageUrl: profile.getImageUrl(),
       email: profile.getEmail(),
     }

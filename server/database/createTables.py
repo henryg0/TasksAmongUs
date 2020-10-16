@@ -21,7 +21,7 @@ query = "CREATE TABLE IF NOT EXISTS todo.UserTodo( {}, {}, {}, {}, {}, {}, {}, {
   "status boolean",
   "addedDate text",
   "duedate timestamp",
-  "taskName text",
+  "todoName text",
   "description text",
   "imageUrl text",
   "PRIMARY KEY (userId, duedate)"

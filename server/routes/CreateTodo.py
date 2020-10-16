@@ -15,14 +15,14 @@ def createTodoRoute(userId):
   if not data:
     return (jsonify({"msg": "Missing data"}), 400)
 
-  taskName = data.get("taskName")
+  todoName = data.get("todoName")
   description = data.get("description")
-  duedate = data.get("duedate")
+  dueDate = data.get("dueDate")
   imageUrl = data.get("imageUrl")
 
   error_log = {
-    "taskName":taskName,
-    "duedate":duedate,
+    "todoName":todoName,
+    "dueDate":dueDate,
     "imageUrl":imageUrl
   }
 

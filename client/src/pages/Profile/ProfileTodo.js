@@ -41,8 +41,8 @@ const useStyles = makeStyles((theme) => ({
 
 export default function ProfileTodo(props) {
   const classes = useStyles();
-  const { user, todoId, taskName, duedate, description, imageUrl, handleDelete, idx } = props;
-  let displayDate = new Date(duedate);
+  const { user, todoId, todoName, dueDate, description, imageUrl, handleDelete, idx } = props;
+  let displayDate = new Date(dueDate);
   const [expanded, setExpanded] = React.useState(false);
   const { enqueueSnackbar } = useSnackbar();
 
@@ -91,7 +91,7 @@ export default function ProfileTodo(props) {
             {user.fullname}{" "}
             <Badge variant="info">NORMIE</Badge>
             <br/>
-            {taskName}
+            {todoName}
           </div>
         }
         subheader={

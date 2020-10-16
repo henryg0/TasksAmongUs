@@ -25,8 +25,8 @@ export default function TodoList(props) {
         <ProfileTodo 
           user={user}
           todoId={todos[idx].todoId}
-          taskName={todos[idx].taskName}
-          duedate={todos[idx].duedate}
+          todoName={todos[idx].todoName}
+          dueDate={todos[idx].dueDate}
           description={todos[idx].description}
           imageUrl={todos[idx].imageUrl}
           handleDelete={handleDelete}
