@@ -22,14 +22,13 @@ def createTodoRoute(userId):
 
   error_log = {
     "taskName":taskName,
-    "description":description,
     "duedate":duedate,
     "imageUrl":imageUrl
   }
 
   for key in error_log:
     if not error_log[key]:
-      return jsonify({f"error: missing {key}"}, 400)
+      return (jsonify({"error": "Missing {}".format(key)}), 400)
 
   addedDate = date.today()
   addedDate.strftime('%y-%m-%d')
@@ -43,5 +42,4 @@ def createTodoRoute(userId):
   data["userId"] = userId
   
   db.collection("Todo").document(todoId).set(data)
-
   return data

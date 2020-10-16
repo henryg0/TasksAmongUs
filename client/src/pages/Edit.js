@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
-import Layout from '../../components/Layout';
-import getBackgrounds from '../../utils/get.backgrounds';
-import authenticate from '../../utils/authenticate';
+import Layout from '../components/Layout';
+import getBackgrounds from '../utils/get.backgrounds';
+import authenticate from '../utils/authenticate';
 import Form from 'react-bootstrap/Form';
 import Container from '@material-ui/core/Container';
 import Image from 'react-bootstrap/Image';
@@ -23,15 +23,17 @@ import {
   MuiPickersUtilsProvider,
 } from '@material-ui/pickers';
 import axios from "axios";
+import { useParams } from "react-router";
 
-export default function Create() {
-  const { enqueueSnackbar } = useSnackbar();
+export default function Edit() {
   let user = authenticate();
+  const { enqueueSnackbar } = useSnackbar();
   const backgrounds = getBackgrounds();
-  const [createTitle, setcreateTitle] = useState();
-  const [createDueDateTime, setCreateDueDateTime] = useState(new Date());
-  const [createDescription, setCreateDescription] = useState("");
-  const [createBackground, setCreateBackground] = useState(backgrounds[0]);
+  const [todoName, setTodoName] = useState();
+  const [dueDate, setDueDate] = useState(new Date());
+  const [description, setDesciption] = useState("");
+  const [imageURL, setImageURL] = useState(backgrounds[0]);
+  const { todoId } = useParams();
 
   function getBackground() {
     let result = []
@@ -47,28 +49,24 @@ export default function Create() {
     enqueueSnackbar("Todo Created", {variant: "success"})
     
     let data = {
-      userId: user.id,
-      todoTitle: createTitle,
-      todoDueDateTime: createDueDateTime,
-      todoDescription: createDescription,
-      todoBackground: createBackground,
+      taskName: todoName,
+      duedate: dueDate,
+      description: description,
+      imageUrl: imageURL
     }
-    
-    console.log(data);
-    
-    setcreateTitle("");
-    setCreateDueDateTime(new Date());
-    setCreateDescription("");
-    setCreateBackground(backgrounds[0]);
+        
+    setTodoName("");
+    setDueDate(new Date());
+    setDesciption("");
+    setImageURL(backgrounds[0]);
 
-
-    // axios.post("/api/group/create", data)
-    //   .then((res) => {
-    //     console.log(res);
-    //   })
-    //   .catch((err) => {
-    //     console.log(err);
-    //   })
+    axios.post("/api/user/" + user.id + "/todo/create", data)
+      .then((res) => {
+        console.log(res);
+      })
+      .catch((err) => {
+        console.log(err);
+      })
   }
 
   return (
@@ -80,7 +78,7 @@ export default function Create() {
               <Fab className="mb-1 mr-2" color="primary" href="/profile" size="small">
                 <ArrowBackIcon className="white-text" />
               </Fab>
-              Create
+              Edit {todoId}
             </h2>
             <Card
               className="p-2 mb-2"
@@ -96,8 +94,8 @@ export default function Create() {
                         fullWidth
                         label="Event Name" 
                         variant="outlined"
-                        value={createTitle}
-                        onChange={(e) => setcreateTitle(e.target.value)}
+                        value={todoName}
+                        onChange={(e) => setTodoName(e.target.value)}
                       />
                     </Grid>
                     <Grid item xs={12} md={3}>
@@ -107,8 +105,8 @@ export default function Create() {
                           inputVariant="outlined"
                           size="small"
                           label="Due Date"
-                          value={createDueDateTime}
-                          onChange={setCreateDueDateTime}
+                          value={dueDate}
+                          onChange={setDueDate}
                           fullWidth
                         />
                       </MuiPickersUtilsProvider>
@@ -120,8 +118,8 @@ export default function Create() {
                           inputVariant="outlined"
                           size="small"
                           label="Due Time"
-                          value={createDueDateTime}
-                          onChange={setCreateDueDateTime}
+                          value={dueDate}
+                          onChange={setDueDate}
                           fullWidth
                         />
                       </MuiPickersUtilsProvider>
@@ -135,13 +133,13 @@ export default function Create() {
                       multiline
                       rows={4}
                       rowsMax={10}
-                      value={createDescription}
+                      value={description}
                       inputProps={{ maxLength: 1000 }}
-                      onChange={(e) => setCreateDescription(e.target.value)}
+                      onChange={(e) => setDesciption(e.target.value)}
                     />
                   </Grid>
                   <Grid container item>
-                    <Image style={{width: "100%"}} src={createBackground} rounded></Image>
+                    <Image style={{width: "100%"}} src={imageURL} rounded></Image>
                   </Grid>
                   <Grid container item>
                     <Button type="submit" className="mb-2" variant="contained" color="primary" fullWidth>Submit</Button>
@@ -162,7 +160,7 @@ export default function Create() {
                 height: "600px",
               }}
             >
-              <RadioGroup required value={createBackground} onChange={(e) => setCreateBackground(e.target.value)}>
+              <RadioGroup required value={imageURL} onChange={(e) => setImageURL(e.target.value)}>
                 {getBackground()}
               </RadioGroup>
             </Card>

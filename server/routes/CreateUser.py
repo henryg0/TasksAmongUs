@@ -12,6 +12,7 @@ def createUserRoute():
     return (jsonify({"msg": "Missing data"}), 400)
 
   userId = data.get("userId")
+  fullName = data.get("fullName")
   firstName = data.get("firstName")
   lastName = data.get("lastName")
   email = data.get("email")
@@ -19,6 +20,7 @@ def createUserRoute():
 
   error_log = {
     "userId": userId,
+    "fullName": fullName,
     "firstName": firstName,
     "lastName": lastName,
     "email": email,
@@ -27,7 +29,7 @@ def createUserRoute():
 
   for key in error_log:
     if not error_log.get(key):
-      return (jsonify({"msg": "Missing {}".format(key)}), 400)
+      return (jsonify({"error": "Missing {}".format(key)}), 400)
 
 
   # IF SOMEONE ELSE HAS SAME ID, IT OVERRIDES

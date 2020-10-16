@@ -31,7 +31,7 @@ export default function Profile() {
                 </h2>
               </Grid>
             </Grid>
-            <Grid item xs><TodoList /></Grid>
+            <Grid item xs><TodoList user={user}/></Grid>
           </Grid>
         </Grid>
       </Container>

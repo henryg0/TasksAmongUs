@@ -1,8 +1,48 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import Card from '@material-ui/core/Card';
-import Todo from '../../components/Todo';
+import ProfileTodo from './ProfileTodo';
+import axios from 'axios';
 
-export default function TodoList() {
+export default function TodoList(props) {
+  let { user } = props;
+  const [todos, setTodos] = useState([]);
+
+  useEffect(() => {
+    axios.get("/api/user/" + user.id + "/todo")
+      .then((res) => {
+        // not new object
+        setTodos(res.data.todos);
+      })
+      .catch((err) => {
+        console.log(err);
+      })
+  }, [])
+
+  function getTodos() {
+    let result = [];
+    for (let idx = 0; idx < todos.length; idx++) {
+      result.push(
+        <ProfileTodo 
+          user={user}
+          todoId={todos[idx].todoId}
+          taskName={todos[idx].taskName}
+          duedate={todos[idx].duedate}
+          description={todos[idx].description}
+          imageUrl={todos[idx].imageUrl}
+          handleDelete={handleDelete}
+          idx={idx}
+        />
+      );
+    }
+    return result;
+  }
+
+  const handleDelete = (idx) => {
+    let newTodos = [...todos];
+    newTodos.splice(idx, 1);
+    setTodos(newTodos);
+  }
+
   return (
     <Card 
       variant="outlined"
@@ -14,11 +54,7 @@ export default function TodoList() {
       }}
       className="mb-2"
     >
-      <Todo />
-      <Todo />
-      <Todo />
-      <Todo />
-      <Todo />
+      {getTodos()}
     </Card>
   );
 }

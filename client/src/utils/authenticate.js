@@ -13,21 +13,21 @@ export default function authenticate() {
     const profile = user.getBasicProfile();
 
     const data = {
-      id : profile.getId(),
-      fullname: profile.getName(),
-      givenName: profile.getGivenName(),
-      familyName: profile.getFamilyName(),
+      userId: profile.getId(),
+      fullName: profile.getName(),
+      firstName: profile.getGivenName(),
+      lastName: profile.getFamilyName(),
       imageUrl: profile.getImageUrl(),
       email: profile.getEmail(),
     }
     
-    // axios.post("/api/user/create", data)
-    //   .then((res) => {
-    //     console.log(res);
-    //   })
-    //   .catch((err) => {
-    //     console.log(err);
-    //   })
+    axios.post("/api/user/create", data)
+      .then((res) => {
+        console.log(res);
+      })
+      .catch((err) => {
+        console.log(err);
+      })
 
     return ({
       id: profile.getId(),
