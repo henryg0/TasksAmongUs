@@ -119,11 +119,13 @@ export default function ProfileTodo(props) {
           <Grid container direction="row">
             <Modal icon={DoneIcon} component={
               ({onClose}) => {
-                return <Card className="p-2">
-                  <h2>Confirm That Todo Is Complete</h2>
-                  <Button fullWidth variant="contained" color="secondary" onClick={() => {completeTodo(); onClose()}}>Confirm</Button>
-                  <Button className="mt-2" fullWidth onClick={onClose} variant="outlined">Close</Button>
-                </Card>
+                return (
+                  <Card className="p-2" style={{maxWidth: "80%"}}>
+                    <h2>Confirm That Todo Is Complete</h2>
+                    <Button fullWidth variant="contained" color="secondary" onClick={() => {completeTodo(); onClose()}}>Confirm</Button>
+                    <Button className="mt-2" fullWidth onClick={onClose} variant="outlined">Close</Button>
+                  </Card>
+                )
               }
             }/>
             <div>
