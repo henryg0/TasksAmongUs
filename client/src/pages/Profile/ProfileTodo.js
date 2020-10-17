@@ -14,6 +14,7 @@ import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import Divider from '@material-ui/core/Divider';
 import EditIcon from '@material-ui/icons/Edit';
 import DeleteIcon from '@material-ui/icons/Delete';
+import DoneIcon from '@material-ui/icons/Done';
 import Image from 'react-bootstrap/Image';
 import Badge from 'react-bootstrap/Badge';
 import Border from '../../components/Border';
@@ -63,6 +64,17 @@ export default function ProfileTodo(props) {
       })
   }
 
+  function completeTodo() {
+    enqueueSnackbar(
+      <Grid container direction="column">
+        <h2>Todo Completed!</h2>
+        <video autoPlay loop muted width="300px">
+          <source src={"https://i.imgur.com/ooOK2Mn.mp4"} type="video/mp4" />
+        </video>
+      </Grid>
+    ) 
+  }
+
   return (
     <Card className={classes.root}>
       <CardHeader
@@ -89,7 +101,7 @@ export default function ProfileTodo(props) {
         title={
           <div>
             {user.fullname}{" "}
-            <Badge variant="info">NORMIE</Badge>
+            <Badge variant="dark">MOD</Badge>
             <br/>
             {todoName}
           </div>
@@ -105,6 +117,15 @@ export default function ProfileTodo(props) {
           </Typography>
           <br />
           <Grid container direction="row">
+            <Modal icon={DoneIcon} component={
+              ({onClose}) => {
+                return <Card className="p-2">
+                  <h2>Confirm That Todo Is Complete</h2>
+                  <Button fullWidth variant="contained" color="secondary" onClick={() => {completeTodo(); onClose()}}>Confirm</Button>
+                  <Button className="mt-2" fullWidth onClick={onClose} variant="outlined">Close</Button>
+                </Card>
+              }
+            }/>
             <div>
               <IconButton>
                 <EditIcon color="primary"/>

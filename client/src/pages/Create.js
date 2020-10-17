@@ -36,7 +36,7 @@ export default function Create() {
   function getBackground() {
     let result = []
     for (let i=0; i < backgrounds.length; i++) {
-      result.push(<FormControlLabel value={backgrounds[i]} control={<Radio />} label={<Image style={{width: "100%"}} src={backgrounds[i]} rounded></Image>} />)
+      result.push(<FormControlLabel value={backgrounds[i]} control={<Radio />} key={i} label={<Image style={{width: "100%"}} src={backgrounds[i]} rounded></Image>} />)
     }
     return result
   }

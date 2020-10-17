@@ -84,12 +84,12 @@ export default function RecipeReviewCard() {
             and I was thinking about trolling your garden…
           </Typography>
           <br/>
-          {/* <Blur img="https://i.imgur.com/HLkruVA.jpg" style={{maxWidth:"400px"}} blurRadius={40}/> */}
-          <Image
+          <Blur img="https://i.imgur.com/HLkruVA.jpg" style={{maxWidth:"400px"}} blurRadius={40}/>
+          {/* <Image
             style={{maxWidth: "400px"}}
             width="100%"
             src="https://i.imgur.com/HLkruVA.jpg"
-          />
+          /> */}
         </CardContent>
       </Collapse>
       <Divider />

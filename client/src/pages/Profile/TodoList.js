@@ -31,6 +31,7 @@ export default function TodoList(props) {
           imageUrl={todos[idx].imageUrl}
           handleDelete={handleDelete}
           idx={idx}
+          key={idx}
         />
       );
     }

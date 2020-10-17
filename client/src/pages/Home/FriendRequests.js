@@ -12,7 +12,9 @@ export default function FriendRequests() {
   const { enqueueSnackbar } = useSnackbar();
 
   function acceptRequest() {
-    enqueueSnackbar("Friend Request Accepted", {variant: "success"})  
+    enqueueSnackbar(
+      "Friend Request Accepted", {variant: "success"}
+    )  
   }
 
   function denyRequest() {

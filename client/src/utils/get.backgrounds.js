@@ -13,8 +13,15 @@ export default function getBackgrounds() {
     "https://i.imgur.com/uF1KnOK.jpg",
     "https://i.imgur.com/WXM7qRL.jpg",
     "https://i.imgur.com/00jEYKH.jpg",
+    "https://i.imgur.com/n3PLKQz.jpg",
     "https://i.imgur.com/dBxmIm3.jpg",
     "https://i.imgur.com/VE5hvmW.jpg",
     "https://i.imgur.com/2ccfSc9.jpg",
+    "https://i.imgur.com/5i0dn43.jpg",
+    "https://i.imgur.com/dB9fOyf.jpg",
+    "https://i.imgur.com/0er2asL.gif",
+    "https://i.imgur.com/vs5wsaE.jpg",
+    "https://i.imgur.com/yZb45vs.jpg",
+    "https://i.imgur.com/RNNeDMo.jpg",
   ]
 }

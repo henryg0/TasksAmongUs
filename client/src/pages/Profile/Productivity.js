@@ -1,6 +1,6 @@
 import React from 'react';
 import Card from '@material-ui/core/Card';
-import Chart from '../../components/Chart';
+import Chart from './Chart';
 
 export default function Productivity() {
   return (

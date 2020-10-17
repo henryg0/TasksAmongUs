@@ -91,39 +91,19 @@ export default function Todo() {
       />
       <Collapse in={expanded} timeout="auto" unmountOnExit>
         <CardContent>
-          <Grid container direction="row">
-            <Grid item xs>
-              <Typography variant="body2" color="textSecondary">
-                I'll be in your neighborhood doing errands this weekend
-                and I was thinking about trolling your garden…
+          <Typography variant="body2" color="textSecondary">
+            I'll be in your neighborhood doing errands this weekend
+            and I was thinking about trolling your garden…
 
-                Trolling trolling trolling :)
-              </Typography>
-            </Grid>
-            <Grid container item xs={1} direction="column" className="mr-3">
-              <div>
-                <IconButton>
-                  <EditIcon color="primary"/>
-                </IconButton>
-              </div>
-              <Modal icon={DeleteIcon} component={
-                ({onClose}) => {
-                  return <Card className="p-2">
-                    <h2>Confirm To Delete Todo</h2>
-                    <Button fullWidth variant="contained" color="secondary" onClick={() => {deleteTodo(); onClose()}}>Confirm</Button>
-                    <Button className="mt-2" fullWidth onClick={onClose} variant="outlined">Close</Button>
-                  </Card>
-                }
-              }/>
-            </Grid>
-          </Grid>
+            Trolling trolling trolling :)
+          </Typography>
           <br/>
-          {/* <Blur img="https://i.imgur.com/HLkruVA.jpg" style={{maxWidth:"400px"}} blurRadius={40}/> */}
-          <Image
+          <Blur img="https://i.imgur.com/HLkruVA.jpg" style={{maxWidth:"400px"}} blurRadius={40}/>
+          {/* <Image
             style={{maxWidth:"400px"}}
             width="100%"
             src="https://i.imgur.com/HLkruVA.jpg"
-          />
+          /> */}
         </CardContent>
       </Collapse>
       <Divider />
