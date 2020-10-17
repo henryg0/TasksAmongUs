@@ -60,11 +60,13 @@ export default function ConfirmedRequests() {
           <Grid item xs={2}>
             <Modal icon={ClearIcon} component={
               ({onClose}) => {
-                return <Card className="p-2">
-                  <h2>Confirm To Unfriend</h2>
-                  <Button fullWidth variant="contained" color="secondary" onClick={() => {unFriend(); onClose()}}>Yes</Button>
-                  <Button className="mt-2" fullWidth onClick={onClose} variant="outlined">Close</Button>
-                </Card>
+                return (
+                  <Card className="p-2" style={{maxWidth: "80%"}}>
+                    <h2>Confirm To Unfriend</h2>
+                    <Button fullWidth variant="contained" color="secondary" onClick={() => {unFriend(); onClose()}}>Yes</Button>
+                    <Button className="mt-2" fullWidth onClick={onClose} variant="outlined">Close</Button>
+                  </Card>
+                )
               }
             }/>
           </Grid>

@@ -15,7 +15,7 @@ export default function Profile() {
   return (
     <Layout user={user}>
       <Container>
-        <Grid container spacing={3}>
+        <Grid container spacing={3} justify="center">
           <Grid item xs={10} md={8}>
             <h2>Productivity</h2>
             <Productivity />

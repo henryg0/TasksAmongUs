@@ -38,7 +38,7 @@ export default function TransitionsModal({icon: Icon, msg: msg, component: Compo
       <IconButton color="primary" onClick={handleOpen}>
         <Icon />
       </IconButton> :
-      <Button onClick={handleOpen}>
+      <Button onClick={handleOpen} color="primary" fullWidth variant="contained">
         {msg}
       </Button>}
 

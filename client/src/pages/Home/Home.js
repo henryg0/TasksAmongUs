@@ -18,7 +18,7 @@ export default function Home() {
   return (
     <Layout user={user}>
       <Container>
-        <Grid container spacing={3}>
+        <Grid container spacing={3} justify="center">
           <Grid item xs={10} md={9}>
             {homeToggle ?
               <div>
