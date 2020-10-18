@@ -50,7 +50,7 @@ export default function AppNavbar(props) {
                       width={24}
                       height={24}
                     />
-                    {user.fullname.toUpperCase()}
+                    {user.fullName.toUpperCase()}
                   </>
                 } id="nav-profile">
                   <NavDropdown.Item href="#action/3.1">Settings</NavDropdown.Item>

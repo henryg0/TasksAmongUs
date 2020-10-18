@@ -4,9 +4,9 @@ import Layout from '../../components/Layout';
 import Upcoming from './Upcoming';
 import Finished from './Finished';
 import SendFriendRequest from './SendFriendRequest';
-import FriendRequests from './FriendRequests';
-import PendingRequests from './PendingRequests';
-import ConfirmedRequests from './ConfirmedRequests';
+import FriendRequestsList from './FriendRequestsList';
+import PendingRequestsList from './PendingRequestsList';
+import FriendsList from './FriendsList';
 import Container from '@material-ui/core/Container';
 import Grid from '@material-ui/core/Grid';
 import Button from '@material-ui/core/Button';
@@ -43,10 +43,10 @@ export default function Home() {
           </Grid>
           <Grid item xs={10} md={3}>
             <h2>Friends</h2>
-            <SendFriendRequest />
-            <FriendRequests />
-            <PendingRequests />
-            <ConfirmedRequests />
+            <SendFriendRequest user={user} />
+            <FriendRequestsList user={user}/>
+            <PendingRequestsList user={user} />
+            <FriendsList user={user} />
           </Grid>
         </Grid>
       </Container>

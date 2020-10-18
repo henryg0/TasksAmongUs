@@ -16,7 +16,7 @@ export default function authenticate() {
       userId: profile.getId(),
       fullName: profile.getName(),
       firstName: profile.getGivenName(),
-    lastName: profile.getFamilyName(),
+      lastName: profile.getFamilyName(),
       imageUrl: profile.getImageUrl(),
       email: profile.getEmail(),
     }
@@ -31,9 +31,9 @@ export default function authenticate() {
 
     return ({
       id: profile.getId(),
-      fullname : profile.getName(),
-      givenName: profile.getGivenName(),
-      familyName: profile.getFamilyName(),
+      fullName : profile.getName(),
+      firstName: profile.getGivenName(),
+      lastName: profile.getFamilyName(),
       imageUrl: profile.getImageUrl(),
       email: profile.getEmail(),
       signOut: authInstance.signOut,

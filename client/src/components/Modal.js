@@ -20,7 +20,8 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function TransitionsModal({icon: Icon, msg: msg, component: Component}) {
+export default function TransitionsModal(props) {
+  const {icon: Icon, msg: msg, component: Component} = props;
   const classes = useStyles();
   const [open, setOpen] = React.useState(false);
 
@@ -55,7 +56,9 @@ export default function TransitionsModal({icon: Icon, msg: msg, component: Compo
         }}
       >
         <Fade in={open}>
-          <Component onClose={handleClose} />
+          <div>
+            <Component onClose={handleClose} />
+          </div>
         </Fade>
       </Modal>
     </div>

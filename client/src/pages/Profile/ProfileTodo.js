@@ -80,7 +80,7 @@ export default function ProfileTodo(props) {
       <CardHeader
         avatar={
           <Border>
-              <Avatar aria-label="recipe" className={classes.avatar} src={user.imageUrl} />
+            <Avatar className={classes.avatar} src={user.imageUrl} />
           </Border>
         }
         action={
@@ -100,7 +100,7 @@ export default function ProfileTodo(props) {
         }
         title={
           <div>
-            {user.fullname}{" "}
+            {user.fullName}{" "}
             <Badge variant="dark">MOD</Badge>
             <br/>
             {todoName}
@@ -135,11 +135,13 @@ export default function ProfileTodo(props) {
             </div>
             <Modal icon={DeleteIcon} component={
               ({onClose}) => {
-                return <Card className="p-2">
-                  <h2>Confirm To Delete Todo</h2>
-                  <Button fullWidth variant="contained" color="secondary" onClick={() => {deleteTodo(); onClose()}}>Confirm</Button>
-                  <Button className="mt-2" fullWidth onClick={onClose} variant="outlined">Close</Button>
-                </Card>
+                return (
+                  <Card className="p-2" style={{maxWidth: "80%"}}>
+                    <h2>Confirm To Delete Todo</h2>
+                    <Button fullWidth variant="contained" color="secondary" onClick={() => {deleteTodo(); onClose()}}>Confirm</Button>
+                    <Button className="mt-2" fullWidth onClick={onClose} variant="outlined">Close</Button>
+                  </Card>
+                )
               }
             }/>
           </Grid>
