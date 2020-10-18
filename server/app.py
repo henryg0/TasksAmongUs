@@ -11,6 +11,9 @@ from .routes.CreateFriendRequest import createFriendRequest
 from .routes.GetFriendRequest import getFriendRequest
 from .routes.GetPendingFriendRequest import getPendingFriendRequest
 from .routes.DeleteFriendRequest import deleteFriendRequest
+from .routes.AcceptFriendRequest import acceptFriendRequest
+from .routes.GetAllFriends import getAllFriends
+
 
 
 app = Flask(__name__)
@@ -27,6 +30,9 @@ app.register_blueprint(createFriendRequest)
 app.register_blueprint(getFriendRequest)
 app.register_blueprint(getPendingFriendRequest)
 app.register_blueprint(deleteFriendRequest)
+app.register_blueprint(acceptFriendRequest)
+app.register_blueprint(getAllFriends)
+
 
 
 @app.route('/')
