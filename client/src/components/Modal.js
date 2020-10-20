@@ -5,6 +5,7 @@ import Backdrop from '@material-ui/core/Backdrop';
 import Fade from '@material-ui/core/Fade';
 import Button from '@material-ui/core/Button';
 import IconButton from '@material-ui/core/IconButton';
+import Grid from '@material-ui/core/Grid';
 
 const useStyles = makeStyles((theme) => ({
   modal: {
@@ -56,9 +57,9 @@ export default function TransitionsModal(props) {
         }}
       >
         <Fade in={open}>
-          <div>
+          <Grid container justify="center">
             <Component onClose={handleClose} />
-          </div>
+          </Grid>
         </Fade>
       </Modal>
     </div>

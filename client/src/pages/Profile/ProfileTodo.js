@@ -45,7 +45,7 @@ export default function ProfileTodo(props) {
   const { user, todoId, todoName, dueDate, description, imageUrl, handleDelete, idx } = props;
   let displayDate = new Date(dueDate);
   const [expanded, setExpanded] = React.useState(false);
-  const { enqueueSnackbar } = useSnackbar();
+  const { enqueueSnackbar, closeSnackbar } = useSnackbar();
 
   const handleExpandClick = () => {
     setExpanded(!expanded);
@@ -67,10 +67,11 @@ export default function ProfileTodo(props) {
   function completeTodo() {
     enqueueSnackbar(
       <Grid container direction="column">
-        <h2>Todo Completed!</h2>
+        <h3 className="text-center">Todo Completed!</h3>
         <video autoPlay loop muted width="300px">
           <source src={"https://i.imgur.com/ooOK2Mn.mp4"} type="video/mp4" />
         </video>
+        <Button className="text-white" onClick={() => closeSnackbar()}>Close</Button>
       </Grid>
     ) 
   }
