@@ -12,17 +12,11 @@ import Typography from '@material-ui/core/Typography';
 import { red } from '@material-ui/core/colors';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import Divider from '@material-ui/core/Divider';
-import EditIcon from '@material-ui/icons/Edit';
-import DeleteIcon from '@material-ui/icons/Delete';
 import getBackgrounds from '../utils/get.backgrounds';
-import Image from 'react-bootstrap/Image';
 import Badge from 'react-bootstrap/Badge';
 import Border from './Border';
 import Blur from 'react-blur';
-import Grid from '@material-ui/core/Grid';
-import Modal from './Modal';
 import { useSnackbar } from 'notistack';
-import Button from '@material-ui/core/Button';
 
 const useStyles = makeStyles((theme) => ({
   expand: {
@@ -58,10 +52,10 @@ export default function Todo() {
     <Card className={classes.root}>
       <CardHeader
         avatar={
-          <Border>
-              <Avatar aria-label="recipe" className={classes.avatar}>
-                A
-              </Avatar>
+          <Border borderColor="black">
+            <Avatar className={classes.avatar}>
+              A
+            </Avatar>
           </Border>
         }
         action={
