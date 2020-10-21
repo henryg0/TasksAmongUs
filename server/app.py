@@ -13,6 +13,7 @@ from .routes.GetPendingFriendRequest import getPendingFriendRequest
 from .routes.DeleteFriendRequest import deleteFriendRequest
 from .routes.AcceptFriendRequest import acceptFriendRequest
 from .routes.GetAllFriends import getAllFriends
+from .routes.Gettodo import getTodo
 
 
 
@@ -32,6 +33,7 @@ app.register_blueprint(getPendingFriendRequest)
 app.register_blueprint(deleteFriendRequest)
 app.register_blueprint(acceptFriendRequest)
 app.register_blueprint(getAllFriends)
+app.register_blueprint(getTodo)
 
 
 
