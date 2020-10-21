@@ -18,16 +18,13 @@ def updateTodoRoute(userId, todoId):
 
   todoName = data.get("todoName")
   description = data.get("description")
-  deadline = data.get("deadline")
+  dueDate = data.get("dueDate")
   imageUrl = data.get("imageUrl")
-  status = data.get("status")
 
   dataLog = {
     "todoName":todoName,
-    "deadline":deadline,
-    "imageUrl":imageUrl,
-    "description":description,
-    "status":status
+    "dueDate":dueDate,
+    "imageUrl":imageUrl
   }
 
   for key in dataLog:

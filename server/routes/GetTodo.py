@@ -10,7 +10,7 @@ def createTodoRoute(todoId):
 
   doc = db.collection("Todo").document(todoId).get()
 
-  if not doc.exists():
+  if not doc.exists:
     return (jsonify({"error": "Todo doesn't exist"}), 400)  
 
   doc = doc.to_dict()

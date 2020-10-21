@@ -13,7 +13,7 @@ from .routes.GetPendingFriendRequest import getPendingFriendRequest
 from .routes.DeleteFriendRequest import deleteFriendRequest
 from .routes.AcceptFriendRequest import acceptFriendRequest
 from .routes.GetAllFriends import getAllFriends
-from .routes.Gettodo import getTodo
+from .routes.GetTodo import getTodo
 
 
 

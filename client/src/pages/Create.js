@@ -32,7 +32,7 @@ export default function Create() {
   const [todoName, setTodoName] = useState();
   const [dueDate, setDueDate] = useState(new Date());
   const [description, setDesciption] = useState("");
-  const [imageURL, setImageURL] = useState(backgrounds[0]);
+  const [imageUrl, setImageUrl] = useState(backgrounds[0]);
 
   function getBackground() {
     let result = []
@@ -45,23 +45,23 @@ export default function Create() {
   function createTodo(e) {
     e.preventDefault();
     e.stopPropagation();
-    enqueueSnackbar("Todo Created", {variant: "success"})
     
     let data = {
       todoName: todoName,
       dueDate: dueDate,
       description: description,
-      imageUrl: imageURL
+      imageUrl: imageUrl
     }
         
     setTodoName("");
     setDueDate(new Date());
     setDesciption("");
-    setImageURL(backgrounds[0]);
+    setImageUrl(backgrounds[0]);
 
-    axios.post("/api/user/" + user.id + "/todo/create", data)
+    axios.post(`/api/user/${user.id}/todo/create`, data)
       .then((res) => {
         console.log(res);
+        enqueueSnackbar("Todo Created", {variant: "success"})
       })
       .catch((err) => {
         console.log(err);
@@ -156,7 +156,7 @@ export default function Create() {
                               }}
                             >
                               <Grid container direcion="row">
-                                <RadioGroup required value={imageURL} onChange={(e) => {setImageURL(e.target.value)}} onClick={onClose}>
+                                <RadioGroup required value={imageUrl} onChange={(e) => {setImageUrl(e.target.value)}} onClick={onClose}>
                                   <Grid item>{getBackground()}</Grid>
                                 </RadioGroup>
                               </Grid>
@@ -168,7 +168,7 @@ export default function Create() {
                     }/>
                   </Grid>
                   <Grid container item>
-                    <Image style={{width: "100%"}} src={imageURL} rounded></Image>
+                    <Image style={{width: "100%"}} src={imageUrl} rounded></Image>
                   </Grid>
                   <Grid container item>
                     <Button type="submit" className="mb-2" variant="contained" color="primary" fullWidth>Create</Button>
