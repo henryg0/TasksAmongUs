@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Layout from '../components/Layout';
 import getBackgrounds from '../utils/get.backgrounds';
 import authenticate from '../utils/authenticate';
@@ -26,15 +26,32 @@ import axios from 'axios';
 import Modal from '../components/Modal';
 import { useParams } from 'react-router';
 
-export default function Create() {
+export default function Edit() {
   let user = authenticate();
   const { enqueueSnackbar } = useSnackbar();
   const backgrounds = getBackgrounds();
-  const [todoName, setTodoName] = useState();
+  const [todoName, setTodoName] = useState("");
   const [dueDate, setDueDate] = useState(new Date());
-  const [description, setDesciption] = useState("");
-  const [imageURL, setImageURL] = useState(backgrounds[0]);
+  const [description, setDescription] = useState("");
+  const [imageUrl, setImageUrl] = useState(backgrounds[0]);
   const { todoId } = useParams();
+
+  useEffect(() => {
+    axios.get(`/api/todo/${todoId}`)
+      .then((res) => {
+          if (res.data.error) {
+            console.log(res.data.error);
+          } else {
+            setTodoName(res.data.todo.todoName)
+            setDueDate(res.data.todo.dueDate)
+            setDescription(res.data.todo.description)
+            setImageUrl(res.data.todo.imageUrl)
+          }
+      })
+      .catch((err) => {
+        console.log(err);
+      })
+  }, [])
 
   function getBackground() {
     let result = []
@@ -44,26 +61,25 @@ export default function Create() {
     return result
   }
 
-  function createTodo(e) {
+  function submitEditTodo(e) {
     e.preventDefault();
     e.stopPropagation();
-    enqueueSnackbar("Todo Created", {variant: "success"})
     
     let data = {
       todoName: todoName,
       dueDate: dueDate,
       description: description,
-      imageUrl: imageURL
+      imageUrl: imageUrl
     }
-        
-    setTodoName("");
-    setDueDate(new Date());
-    setDesciption("");
-    setImageURL(backgrounds[0]);
 
-    axios.post("/api/user/" + user.id + "/todo/create", data)
+    axios.patch(`/api/user/${user.id}/todo/${todoId}/update`, data)
       .then((res) => {
-        console.log(res);
+          if (res.data.error) {
+            console.log(res.data.error);
+          } else {
+            console.log(res.data.todo);
+            enqueueSnackbar("Todo Edited", {variant: "success"})
+          }
       })
       .catch((err) => {
         console.log(err);
@@ -79,13 +95,13 @@ export default function Create() {
               <Fab className="mb-1 mr-2" color="primary" href="/profile" size="small">
                 <ArrowBackIcon className="white-text" />
               </Fab>
-              Edit {todoId}
+              Edit
             </h2>
             <Card
               className="p-2 mb-2"
               variant="outlined"
             >
-              <Form onSubmit={createTodo}>
+              <Form onSubmit={submitEditTodo}>
                 <Grid container spacing={1} direction="column">
                   <Grid container item spacing={1}>
                     <Grid item xs={12} md={6}>
@@ -136,7 +152,7 @@ export default function Create() {
                       rowsMax={10}
                       value={description}
                       inputProps={{ maxLength: 1000 }}
-                      onChange={(e) => setDesciption(e.target.value)}
+                      onChange={(e) => setDescription(e.target.value)}
                     />
                   </Grid>
                   <Grid item>
@@ -158,7 +174,7 @@ export default function Create() {
                               }}
                             >
                               <Grid container direcion="row">
-                                <RadioGroup required value={imageURL} onChange={(e) => {setImageURL(e.target.value)}} onClick={onClose}>
+                                <RadioGroup required value={imageUrl} onChange={(e) => {setImageUrl(e.target.value)}} onClick={onClose}>
                                   <Grid item>{getBackground()}</Grid>
                                 </RadioGroup>
                               </Grid>
@@ -170,7 +186,7 @@ export default function Create() {
                     }/>
                   </Grid>
                   <Grid container item>
-                    <Image style={{width: "100%"}} src={imageURL} rounded></Image>
+                    <Image style={{width: "100%"}} src={imageUrl} rounded></Image>
                   </Grid>
                   <Grid container item>
                     <Button type="submit" className="mb-2" variant="contained" color="primary" fullWidth>Finish Editing</Button>
