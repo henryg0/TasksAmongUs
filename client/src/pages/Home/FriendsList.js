@@ -15,7 +15,7 @@ export default function FriendsList(props) {
   const [friendsList, setFriendsList] = useState([]);
 
   useEffect(() => {
-    axios.get("/api/user/" + user.id + "/friend")
+    axios.get(`/api/user/${user.id}/friend`)
       .then((res) => {
           if (res.data.error) {
             console.log(res.data.error);
@@ -48,7 +48,7 @@ export default function FriendsList(props) {
     return result;
   }
 
-  const handleDelete = (idx) => {
+  const renderOutFriend = (idx) => {
     let newFriendsList = [...friendsList];
     newFriendsList.splice(idx, 1);
     setFriendsList(newFriendsList);

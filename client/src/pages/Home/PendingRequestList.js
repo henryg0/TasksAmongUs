@@ -9,13 +9,13 @@ import Button from '@material-ui/core/Button';
 import Divider from '@material-ui/core/Divider';
 import Avatar from '@material-ui/core/Avatar';
 
-export default function PendingRequests(props) {
+export function PendingRequests(props) {
   const { user } = props;
   const { enqueueSnackbar } = useSnackbar();
   const [pendingRequests, setPendingRequests] = useState([]);
 
   useEffect(() => {
-    axios.get("/api/user/" + user.id + "/friend/pending")
+    axios.get(`/api/user/${user.id}/friend/pending`)
       .then((res) => {
           if (res.data.error) {
             console.log(res.data.error);
@@ -68,7 +68,7 @@ export default function PendingRequests(props) {
 
   function PendingRequest(props) {
     const { fullName, imageUrl, requestId, idx } = props;
-
+  
     return (
       <div>
         <Divider />
