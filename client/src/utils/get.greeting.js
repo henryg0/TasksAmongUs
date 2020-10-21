@@ -38,7 +38,7 @@ export default function getGreeting(user) {
     `☆ﾟ°˖* ☆ﾟ°˖* ☆ﾟ°˖* ᕕ( ᐛ )ᕗ`,
     `(*ﾉᐛ)ﾉ♫♩ヽ(ᐖヽ*)♬ヽ(*ᐛ)ﾉ`,
     `.｡*ﾟ+.*.｡ଘ( ᐛ ) ଓ+..｡*ﾟ+`,
-    `/╲/\(╭ ᐛ ╮)/\╱`,
+    `╲/\(╭ ᐛ ╮)/\╱`,
     `♩♪♩♪(ノᐛ)ノ♩♪♩♪♩♪♩♪`,
   ]
   return greetings[Math.floor(Math.random() * greetings.length)]

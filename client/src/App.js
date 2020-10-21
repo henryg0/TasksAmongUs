@@ -35,18 +35,18 @@ export default class App extends React.Component {
   render() {  
     return (
       <SnackbarProvider maxSnack={5}>
-      <BrowserRouter>
-        <Switch>
-          <PrivateRoute path="/" exact component={Home} />
-          <PrivateRoute path="/profile" exact component={Profile} />
-          <PrivateRoute path="/create" exact component={Create} />
-          <PrivateRoute path="/social" exact component={Social} />
-          <PrivateRoute path="/template" exact component={Template} />
-          <PrivateRoute path="/edit/:todoId" component={Edit} />
-          <Route path="/about" exact component={About} />
-          <Route path="/" component={ErrorPage} />
-        </Switch>
-      </BrowserRouter>
+        <BrowserRouter>
+          <Switch>
+            <PrivateRoute path="/" exact component={Home} />
+            <PrivateRoute path="/profile" exact component={Profile} />
+            <PrivateRoute path="/create" exact component={Create} />
+            <PrivateRoute path="/social" exact component={Social} />
+            <PrivateRoute path="/template" exact component={Template} />
+            <PrivateRoute path="/edit/:todoId" component={Edit} />
+            <Route path="/about" exact component={About} />
+            <Route path="/" component={ErrorPage} />
+          </Switch>
+        </BrowserRouter>
       </SnackbarProvider>
     )
   }

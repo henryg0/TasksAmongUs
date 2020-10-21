@@ -17,11 +17,10 @@ export default function FriendsList(props) {
   useEffect(() => {
     axios.get("/api/user/" + user.id + "/friend")
       .then((res) => {
-        console.log(res)
           if (res.data.error) {
             console.log(res.data.error);
           } else {
-            console.log(res.data.friends);
+            // console.log(res.data.friends);
             setFriendsList(res.data.friends);
           }
       })

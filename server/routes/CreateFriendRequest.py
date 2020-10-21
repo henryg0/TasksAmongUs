@@ -9,20 +9,30 @@ def createFriendRequestRoute():
   data = request.get_json()
 
   if not data:
-    return (jsonify({"msg": "Missing data"}), 400)
+    return (jsonify({"error": "Missing data"}), 400)
 
   userId = data.get("userId")
-  friendId = data.get("friendId")
   firstName = data.get("firstName")
   lastName = data.get("lastName")
+  fullName = data.get("fullName")
   imageUrl = data.get("imageUrl")
+  friendId = data.get("friendId")
+  friendFirstName = data.get("friendFirstName")
+  friendLastName = data.get("friendLastName")
+  friendFullName = data.get("friendFullName")
+  friendImageUrl = data.get("friendImageUrl")
   
   error_log = {
     "userId":userId,
-    "friendId":friendId,
     "firstName":firstName,
     "lastName":lastName,
+    "fullName": fullName,
     "imageUrl":imageUrl,
+    "friendId":friendId,
+    "friendFirstName":friendFirstName,
+    "friendLastName":friendLastName,
+    "friendFullName": friendFullName,
+    "friendImageUrl":friendImageUrl,
   }
 
   for key in error_log:
@@ -31,7 +41,8 @@ def createFriendRequestRoute():
 
   requestId = str(uuid.uuid4())
   data["requestId"] = requestId
-
+  print (data)
+  print (requestId)
   db.collection("Request").document(requestId).set(data)
-
+  print ("hi")
   return {"msg": "Friend request sent"}

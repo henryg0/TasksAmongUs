@@ -22,10 +22,11 @@ import {
   TimePicker,
   MuiPickersUtilsProvider,
 } from '@material-ui/pickers';
-import axios from "axios";
-import { useParams } from "react-router";
+import axios from 'axios';
+import Modal from '../components/Modal';
+import { useParams } from 'react-router';
 
-export default function Edit() {
+export default function Create() {
   let user = authenticate();
   const { enqueueSnackbar } = useSnackbar();
   const backgrounds = getBackgrounds();
@@ -38,7 +39,7 @@ export default function Edit() {
   function getBackground() {
     let result = []
     for (let i=0; i < backgrounds.length; i++) {
-      result.push(<FormControlLabel value={backgrounds[i]} control={<Radio />} label={<Image style={{width: "100%"}} src={backgrounds[i]} rounded></Image>} />)
+      result.push(<FormControlLabel value={backgrounds[i]} control={<Radio />} key={i} label={<Image style={{width: "200px"}} src={backgrounds[i]} rounded></Image>} />)
     }
     return result
   }
@@ -49,8 +50,8 @@ export default function Edit() {
     enqueueSnackbar("Todo Created", {variant: "success"})
     
     let data = {
-      taskName: todoName,
-      duedate: dueDate,
+      todoName: todoName,
+      dueDate: dueDate,
       description: description,
       imageUrl: imageURL
     }
@@ -72,7 +73,7 @@ export default function Edit() {
   return (
     <Layout user={user}>
       <Container>
-        <Grid container spacing={3}>
+        <Grid container justify="center">
           <Grid item xs={10} sm={9}>
             <h2>
               <Fab className="mb-1 mr-2" color="primary" href="/profile" size="small">
@@ -138,31 +139,44 @@ export default function Edit() {
                       onChange={(e) => setDesciption(e.target.value)}
                     />
                   </Grid>
+                  <Grid item>
+                    <Modal msg={"Change Background"} component={
+                      ({onClose}) => {
+                        return (
+                          <Card 
+                            className="p-2 text-center"
+                            style={{
+                              width: "80%",
+                            }}
+                          >
+                            <h2>Choose a New Background</h2>
+                            <Card
+                              style={{
+                                overflowY: "auto",
+                                maxHeight: "600px",
+                                height: "600px",
+                              }}
+                            >
+                              <Grid container direcion="row">
+                                <RadioGroup required value={imageURL} onChange={(e) => {setImageURL(e.target.value)}} onClick={onClose}>
+                                  <Grid item>{getBackground()}</Grid>
+                                </RadioGroup>
+                              </Grid>
+                            </Card>
+                            <Button className="mt-2" fullWidth onClick={onClose} variant="outlined">Close</Button>
+                          </Card>
+                        )
+                      }
+                    }/>
+                  </Grid>
                   <Grid container item>
                     <Image style={{width: "100%"}} src={imageURL} rounded></Image>
                   </Grid>
                   <Grid container item>
-                    <Button type="submit" className="mb-2" variant="contained" color="primary" fullWidth>Submit</Button>
+                    <Button type="submit" className="mb-2" variant="contained" color="primary" fullWidth>Finish Editing</Button>
                   </Grid>
                 </Grid>
               </Form>
-            </Card>
-          </Grid>
-          <Grid item xs={10} sm={3}>
-            <h2>Backgrounds
-          </h2>
-            <Card
-              className="mb-2 p-2"
-              variant="outlined"
-              style={{
-                overflowY: "auto",
-                maxHeight: "600px",
-                height: "600px",
-              }}
-            >
-              <RadioGroup required value={imageURL} onChange={(e) => setImageURL(e.target.value)}>
-                {getBackground()}
-              </RadioGroup>
             </Card>
           </Grid>
         </Grid>

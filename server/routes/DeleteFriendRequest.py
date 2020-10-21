@@ -9,6 +9,10 @@ def deleteFriendRequestRoute(requestId):
   if not requestId:
     return (jsonify({"msg": "Missing requestId"}), 400)
 
+  requestInfo = db.collection('Request').document(requestId).get()
+  if not requestInfo.exists:
+    return (jsonify({"error": "Friend request not found"}), 404)
+
   db.collection('Request').document(requestId).delete()
   
   return ({"msg": "Friend request deleted"})

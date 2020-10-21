@@ -22,7 +22,7 @@ export default function FriendRequestsList(props) {
           if (res.data.error) {
             console.log(res.data.error);
           } else {
-            console.log(res.data.friends);
+            // console.log(res.data.friends);
             setFriendRequests(res.data.friends);
           }
       })
@@ -37,7 +37,7 @@ export default function FriendRequestsList(props) {
         if (res.data.error) {
           console.log(res.data.error);
         } else {
-          handleDelete(idx);
+          renderOutFriendRequest(idx);
           enqueueSnackbar("Friend Request Accepted", {variant: "success"});
         }
       })
@@ -46,14 +46,14 @@ export default function FriendRequestsList(props) {
       })
   }
 
-  function denyRequest(idx, requestId) {
+  function denyFriendRequest(idx, requestId) {
     axios.delete("/api/friend/request/" + requestId + "/delete")
       .then((res) => {
         if (res.data.error) {
           console.log(res.data.error);
         } else {
           enqueueSnackbar("Friend Request Denied", {variant: "success"});
-          handleDelete(idx);
+          renderOutFriendRequest(idx);
         }
       })
       .catch((err) => {
@@ -77,7 +77,7 @@ export default function FriendRequestsList(props) {
     return result;
   }
 
-  const handleDelete = (idx) => {
+  const renderOutFriendRequest = (idx) => {
     let newFriendRequests = [...friendRequests];
     newFriendRequests.splice(idx, 1);
     setFriendRequests(newFriendRequests);
@@ -108,7 +108,7 @@ export default function FriendRequestsList(props) {
                       fullWidth variant="contained" 
                       color="secondary" 
                       onClick={() => {
-                        denyRequest(idx, requestId); 
+                        denyFriendRequest(idx, requestId); 
                         onClose();
                       }}
                     >Confirm

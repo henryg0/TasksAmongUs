@@ -130,8 +130,8 @@ export default function ProfileTodo(props) {
               }
             }/>
             <div>
-              <IconButton>
-                <EditIcon color="primary"/>
+              <IconButton href={`/edit/${todoId}`}>
+                <EditIcon color="primary" />
               </IconButton>
             </div>
             <Modal icon={DeleteIcon} component={

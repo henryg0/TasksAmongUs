@@ -20,7 +20,7 @@ export default function PendingRequests(props) {
           if (res.data.error) {
             console.log(res.data.error);
           } else {
-            console.log(res.data.pending);
+            // console.log(res.data.pending);
             setPendingRequests(res.data.pending);
           }
       })
@@ -29,14 +29,14 @@ export default function PendingRequests(props) {
       })
   }, [])
 
-  function cancelRequest(idx, requestId) {
+  function cancelPendingRequest(idx, requestId) {
     axios.delete("/api/friend/request/" + requestId + "/delete")
       .then((res) => {
         if (res.data.error) {
           console.log(res.data.error);
         } else {
           enqueueSnackbar("Friend Request Canceled", {variant: "success"});
-          handleDelete(idx);
+          renderOutPendingRequest(idx);
         }
       })
       .catch((err) => {
@@ -60,7 +60,7 @@ export default function PendingRequests(props) {
     return result;
   }
 
-  const handleDelete = (idx) => {
+  const renderOutPendingRequest = (idx) => {
     let newPendingRequests = [...pendingRequests];
     newPendingRequests.splice(idx, 1);
     setPendingRequests(newPendingRequests);
@@ -88,7 +88,7 @@ export default function PendingRequests(props) {
                       variant="contained" 
                       color="secondary" 
                       onClick={() => {
-                        cancelRequest(idx, requestId); 
+                        cancelPendingRequest(idx, requestId); 
                         onClose();
                     }}>
                       Confirm
