@@ -4,7 +4,7 @@ import ProfileTodo from './ProfileTodo';
 import axios from 'axios';
 
 export default function TodoList(props) {
-  let { user } = props;
+  let { user, renderInCompletedCount } = props;
   const [todos, setTodos] = useState([]);
 
   useEffect(() => {
@@ -32,6 +32,7 @@ export default function TodoList(props) {
           handleDelete={handleDelete}
           idx={idx}
           key={idx}
+          renderInCompletedCount={renderInCompletedCount}
         />
       );
     }

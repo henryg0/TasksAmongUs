@@ -41,8 +41,8 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export default function ProfileTodo(props) {
+  const { user, todoId, todoName, dueDate, description, imageUrl, handleDelete, idx, renderInCompletedCount } = props;
   const classes = useStyles();
-  const { user, todoId, todoName, dueDate, description, imageUrl, handleDelete, idx } = props;
   let displayDate = new Date(dueDate);
   const [expanded, setExpanded] = React.useState(false);
   const { enqueueSnackbar, closeSnackbar } = useSnackbar();
@@ -67,6 +67,7 @@ export default function ProfileTodo(props) {
   function completeTodo() {
     enqueueSnackbar(
       <Grid container direction="column">
+        {renderInCompletedCount()}
         <h3 className="text-center">Todo Completed!</h3>
         <video autoPlay loop muted width="300px">
           <source src={"https://i.imgur.com/ooOK2Mn.mp4"} type="video/mp4" />

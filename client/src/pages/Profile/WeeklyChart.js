@@ -3,31 +3,33 @@ import {
   LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer,
 } from 'recharts';
 
-const data = [
-  {
-    name: 'Mon', completed: 4, failed: 1,
-  },
-  {
-    name: 'Tues', completed: 6, failed: 0,
-  },
-  {
-    name: 'Wed', completed: 2, failed: 0,
-  },
-  {
-    name: 'Thur', completed: 1, failed: 3,
-  }, 
-  {
-    name: 'Fri', completed: 3, failed: 0,
-  },
-  {
-    name: 'Sat', completed: 4, failed: 0,
-  },
-  {
-    name: 'Sun', completed: 5, failed: 1,
-  },
-];
+export default function WeeklyChart(props) {
+  let { dayOne, dayTwo, dayThree, dayFour, dayFive, daySix, daySeven } = props;
 
-export default function WeeklyChart() {
+  let data = [
+    {
+      name: daySeven.date, completed: daySeven.completed, failed: daySeven.failed,
+    },
+    {
+      name: daySix.date, completed: daySix.completed, failed: daySix.failed,
+    },
+    {
+      name: dayFive.date, completed: dayFive.completed, failed: dayFive.failed,
+    },
+    {
+      name: dayFour.date, completed: dayFour.completed, failed: dayFour.failed,
+    }, 
+    {
+      name: dayThree.date, completed: dayThree.completed, failed: dayThree.failed,
+    },
+    {
+      name: dayTwo.date, completed: dayTwo.completed, failed: dayTwo.failed,
+    },
+    {
+      name: dayOne.date, completed: dayOne.completed, failed: dayOne.failed,
+    },
+  ];
+
   return (
     <ResponsiveContainer>
       <LineChart
