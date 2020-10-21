@@ -47,7 +47,7 @@ export default function FriendRequestsList(props) {
   }
 
   function denyFriendRequest(idx, requestId) {
-    axios.delete("/api/friend/request/" + requestId + "/delete")
+    axios.delete(`/api/friend/request/${requestId}/delete`)
       .then((res) => {
         if (res.data.error) {
           console.log(res.data.error);
