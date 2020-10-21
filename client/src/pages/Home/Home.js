@@ -3,10 +3,6 @@ import authenticate from '../../utils/authenticate';
 import Layout from '../../components/Layout';
 import Unfinished from './Unfinished';
 import Finished from './Finished';
-// import SendFriendRequest from './SendFriendRequest';
-// import FriendRequestsList from './FriendRequestsList';
-// import PendingRequestsList from './PendingRequestsList';
-// import FriendsList from './FriendsList';
 import FriendsSection from './FriendsSection';
 import Container from '@material-ui/core/Container';
 import Grid from '@material-ui/core/Grid';
@@ -44,10 +40,6 @@ export default function Home() {
           </Grid>
           <Grid item xs={10} md={3}>
             <h2>Friends</h2>
-            {/* <SendFriendRequest user={user} />
-            <FriendRequestsList user={user}/>
-            <PendingRequestsList user={user} />
-            <FriendsList user={user} /> */}
             <FriendsSection user={user} />
           </Grid>
         </Grid>

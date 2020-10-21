@@ -48,7 +48,7 @@ export default function FriendsList(props) {
     return result;
   }
 
-  const handleDelete = (idx) => {
+  const renderOutFriend = (idx) => {
     let newFriendsList = [...friendsList];
     newFriendsList.splice(idx, 1);
     setFriendsList(newFriendsList);
