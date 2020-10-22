@@ -2,12 +2,12 @@ import React, { useState } from 'react';
 import { PieChart, Pie, Sector, ResponsiveContainer } from 'recharts';
 
 export default function AllTimeChart(props) {
-  let { completedTotal, failedTotal } = props;
+  let { allTimeCompleted, allTimeFailed } = props;
   let [activeIndex, setActiveIndex] = useState(0);
 
   let data = [
-    { name: 'Completed', value: completedTotal, fill: '#0168AB'},
-    { name: 'Failed', value: failedTotal, fill: '#EA6650' },
+    { name: 'Completed', value: allTimeCompleted, fill: '#0168AB'},
+    { name: 'Failed', value: allTimeFailed, fill: '#EA6650' },
   ]
 
   const onPieEnter = (data, index) => {

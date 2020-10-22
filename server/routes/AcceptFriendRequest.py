@@ -15,29 +15,33 @@ def acceptFriendRequestRoute(requestId):
   if not requestInfo.exists:
     return (jsonify({"error": "Friend request not found"}), 404)
   requestInfo = requestInfo.to_dict()
-  print (requestInfo)
-  data = {
+
+  userFriendIdOne = str(uuid.uuid4())
+  userFriendIdTwo = str(uuid.uuid4())
+  userData = {
     "userId": requestInfo["userId"],
     "fullName": requestInfo["friendFullName"],
     "firstName": requestInfo["friendFirstName"],
     "lastName": requestInfo["friendLastName"],
     "imageUrl": requestInfo["friendImageUrl"],
-    "friendId": requestInfo["friendId"]
+    "friendId": requestInfo["friendId"],
+    "userFriendIdOne": userFriendIdOne,
+    "userFriendIdTwo": userFriendIdTwo
   }
 
-  docId = str(uuid.uuid4())
-  db.collection("Friends").document(docId).set(data)
+  db.collection("Friends").document(userFriendIdOne).set(userData)
 
-  data = {
+  friendData = {
     "userId": requestInfo["friendId"],
     "fullName": requestInfo["fullName"],
     "firstName": requestInfo["firstName"],
     "lastName": requestInfo["lastName"],
     "imageUrl": requestInfo["imageUrl"],
-    "friendId": requestInfo["userId"]
+    "friendId": requestInfo["userId"],
+    "userFriendIdTwo": userFriendIdOne,
+    "userFriendIdOne": userFriendIdTwo
   }
-  docId = str(uuid.uuid4())
-  db.collection("Friends").document(docId).set(data)
+  db.collection("Friends").document(userFriendIdTwo).set(friendData)
   db.collection('Request').document(requestId).delete()
   
-  return ({"msg": "Friend request accepted"})
+  return ({"friend": userData})

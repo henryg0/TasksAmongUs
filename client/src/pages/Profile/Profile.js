@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import Layout from '../../components/Layout';
 import Border from '../../components/Border';
+import Modal from '../../components/Modal';
 import authenticate from '../../utils/authenticate';
 import getGreeting from '../../utils/get.greeting';
 import TodoList from './TodoList';
@@ -14,11 +15,12 @@ import Fab from '@material-ui/core/Fab';
 import AddIcon from '@material-ui/icons/Add';
 import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
+import RadioGroup from '@material-ui/core/RadioGroup';
 
 export default function Profile() {
   let user = authenticate();
-  let [completedTotal, setCompletedTotal] = useState(0);
-  let [failedTotal, setFailedTotal] = useState(0);
+  let [allTimeCompleted, setAllTimeCompleted] = useState(0);
+  let [allTimeFailed, setAllTimeFailed] = useState(0);
 
   let [dayOne, setDayOne] = useState({date: "Sun", completed: 0, failed: 0});
   let [dayTwo, setDayTwo] = useState({date: "Sat", completed: 0, failed: 0});
@@ -29,7 +31,7 @@ export default function Profile() {
   let [daySeven, setDaySeven] = useState({date: "Mon", completed: 0, failed: 0});
 
   function renderInCompletedCount() {
-    setCompletedTotal(completedTotal + 1);
+    setAllTimeCompleted(allTimeCompleted + 1);
     setDayOne({date: dayOne.date, completed: dayOne.completed + 1, failed: dayOne.failed});
   }
 
@@ -46,8 +48,8 @@ export default function Profile() {
     //   .catch((err) => {
     //     console.log(err);
     //   })
-    setCompletedTotal(400);
-    setFailedTotal(40);
+    setAllTimeCompleted(400);
+    setAllTimeFailed(40);
     setDayOne({date: "Sun", completed: 2, failed: 1});
     setDayTwo({date: "Sat", completed: 6, failed: 0});
     setDayThree({date: "Fri", completed: 2, failed: 0});
@@ -72,18 +74,56 @@ export default function Profile() {
                 height: "470px",
               }}
             >
-              <Grid container>
-                <Grid item xs={4} sm={3} md={2} className="p-2">
+              <Grid container justify="center">
+                <Grid item xs="auto" className="p-2">
                   <Border borderThickness={5}>
                     <Avatar src={user.imageUrl} style={{width: "100px", height: "100px"}} />
                   </Border>
                 </Grid>
-                <Grid item xs={8} sm={9} md={10} className="p-2">
-                  <h3>
-                    {user.fullName} {" "}
-                    <Badge />
-                  </h3>
-                  <Button variant="contained" color="primary">Customize</Button>
+                <Grid container item direction="column" xs={12} md={6} alignItems="center">
+                  <Grid item xs className="p-2">
+                    <h3>
+                      {user.fullName} {" "}
+                      <Badge />
+                    </h3>
+                  </Grid>
+                  <Grid item xs className="mt-0">
+                    <Modal
+                      msg="Customize"
+                      component={
+                        ({onClose}) => {
+                          return (
+                            <Card 
+                              className="p-2 text-center"
+                              style={{
+                                width: "80%",
+                                height: "90vh",
+                                overflowY: "auto",
+                              }}
+                            >
+                              <h2>Customize</h2>
+                              <Card
+                                style={{
+                                  overflowY: "auto",
+                                  height: "80%",
+                                }}
+                              >
+                                <Grid container direcion="row">
+                                  <RadioGroup required value={/*imageUrl*/ "test"} onChange={(e) => {
+                                    // setImageUrl(e.target.value)
+                                  }}
+                                    onClick={onClose}>
+                                    {/* <Grid item>{getBackground()}</Grid> */}
+                                  </RadioGroup>
+                                </Grid>
+                              </Card>
+                              <Button className="mt-2" fullWidth onClick={onClose} variant="outlined">Close</Button>
+                            </Card>
+                          )
+                        }
+                      }
+                    />
+                  </Grid>
                 </Grid>
               </Grid>
               <br />
@@ -104,7 +144,7 @@ export default function Profile() {
                 </Grid>
                 <Grid item xs={12} md={3}>
                 <h3 className="text-center">All Time Progress</h3>
-                  <div style={{height: "150px"}}><AllTimeChart completedTotal={completedTotal} failedTotal={failedTotal} /></div>
+                  <div style={{height: "150px"}}><AllTimeChart allTimeCompleted={allTimeCompleted} allTimeFailed={allTimeFailed} /></div>
                 </Grid>
               </Grid>
             </Card>

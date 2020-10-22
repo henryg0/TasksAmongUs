@@ -1,6 +1,5 @@
 from flask import Blueprint, request, jsonify
 from ..database.database import db
-import uuid
 
 getUser = Blueprint("getUser", __name__)
 

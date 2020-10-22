@@ -90,19 +90,19 @@ export default function FriendsSection(props) {
       })
   }
 
-  function renderInFriendRequest(friend) {
+  function renderInFriend(friend) {
     let newFriendsList = [...friendsList];
     newFriendsList.push(friend);
     setFriendsList(newFriendsList);
   }
 
   function acceptRequest(idx, requestId) {
-    axios.post("/api/friend/request/" + requestId + "/accept")
+    axios.post(`/api/friend/request/${requestId}/accept`)
       .then((res) => {
         if (res.data.error) {
           console.log(res.data.error);
         } else {
-          renderInFriendRequest(friendRequests[idx]);
+          renderInFriend(res.data.friend);
           renderOutFriendRequest(idx);
           enqueueSnackbar("Friend Request Accepted", {variant: "success"});
         }
@@ -237,9 +237,19 @@ export default function FriendsSection(props) {
     setPendingRequests(newPendingRequests);
   }
 
-  function unFriend(idx) {
-    enqueueSnackbar("Friend Removed", {variant: "success"}) 
-    renderOutFriend(idx)
+  function removeFriend(idx, userFriendIdOne, userFriendIdTwo) {
+    axios.delete(`/api/friend/${userFriendIdOne}/${userFriendIdTwo}/delete`)
+      .then((res) => {
+        if (res.data.error) {
+          console.log(res.data.error);
+        } else {
+          enqueueSnackbar("Friend Removed", {variant: "success"});
+          renderOutFriend(idx);
+        }
+      })
+      .catch((err) => {
+        console.log(err);
+      })
   }
 
   function getFriendsList() {
@@ -251,6 +261,8 @@ export default function FriendsSection(props) {
           imageUrl = {friendsList[idx].imageUrl}
           key={idx}
           idx={idx}
+          userFriendIdOne={friendsList[idx].userFriendIdOne}
+          userFriendIdTwo={friendsList[idx].userFriendIdTwo}
         />
       );
     }
@@ -264,7 +276,7 @@ export default function FriendsSection(props) {
   }
 
   function Friend(props) {
-    const {idx, fullName, imageUrl} = props;
+    const {idx, fullName, imageUrl, userFriendIdOne, userFriendIdTwo} = props;
     return (
       <div>
         <Divider />
@@ -279,7 +291,15 @@ export default function FriendsSection(props) {
                 return (
                   <Card className="p-2">
                     <h2>Confirm To Unfriend</h2>
-                    <Button fullWidth variant="contained" color="secondary" onClick={() => {unFriend(idx); onClose()}}>Confirm</Button>
+                    <Button 
+                      fullWidth variant="contained" 
+                      color="secondary" 
+                      onClick={() => {
+                        removeFriend(idx, userFriendIdOne, userFriendIdTwo); 
+                        onClose()}
+                      }>
+                        Confirm
+                      </Button>
                     <Button className="mt-2" fullWidth onClick={onClose} variant="outlined">Close</Button>
                   </Card>
                 )

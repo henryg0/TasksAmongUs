@@ -7,7 +7,7 @@ deleteFriendRequest = Blueprint("deleteFriendRequest", __name__)
 def deleteFriendRequestRoute(requestId):
   # add a checking method where only user can delete their own todo
   if not requestId:
-    return (jsonify({"msg": "Missing requestId"}), 400)
+    return (jsonify({"error": "Missing requestId"}), 400)
 
   requestInfo = db.collection('Request').document(requestId).get()
   if not requestInfo.exists:

@@ -34,7 +34,7 @@ export default function Create() {
   const [description, setDesciption] = useState("");
   const [imageUrl, setImageUrl] = useState(backgrounds[0]);
 
-  function getBackground() {
+  function renderBackGround() {
     let result = []
     for (let i=0; i < backgrounds.length; i++) {
       result.push(<FormControlLabel value={backgrounds[i]} control={<Radio />} key={i} label={<Image style={{width: "200px"}} src={backgrounds[i]} rounded></Image>} />)
@@ -145,19 +145,20 @@ export default function Create() {
                             className="p-2 text-center"
                             style={{
                               width: "80%",
+                              height: "90vh",
+                              overflowY: "auto",
                             }}
                           >
-                            <h2>Choose a New Background</h2>
+                            <h2>Choose New Background</h2>
                             <Card
                               style={{
                                 overflowY: "auto",
-                                maxHeight: "600px",
-                                height: "600px",
+                                height: "70vh",
                               }}
                             >
                               <Grid container direcion="row">
                                 <RadioGroup required value={imageUrl} onChange={(e) => {setImageUrl(e.target.value)}} onClick={onClose}>
-                                  <Grid item>{getBackground()}</Grid>
+                                  <Grid item>{renderBackGround()}</Grid>
                                 </RadioGroup>
                               </Grid>
                             </Card>
