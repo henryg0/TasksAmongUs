@@ -11,6 +11,8 @@ import ClearIcon from '@material-ui/icons/Clear';
 import CheckIcon from '@material-ui/icons/Check';
 import Card from '@material-ui/core/Card';
 import IconButton from '@material-ui/core/IconButton';
+import Form from 'react-bootstrap/Form';
+import { isEqual } from 'lodash';
 
 export default function FriendsSection(props) {
   const { user } = props;
@@ -62,27 +64,91 @@ export default function FriendsSection(props) {
 
   }, [])
 
-  function sendFriendRequest() {
-    let data = {
-      "userId": user.id,
-      "firstName": user.firstName,
-      "lastName": user.lastName,
-      "fullName": user.fullName,
-      "imageUrl": user.imageUrl,
-      "friendId": "116465095581499993123",
-      "friendFirstName": "Vincent",
-      "friendLastName": "Tieu",
-      "friendFullName": "Vincent Tieu",
-      "friendImageUrl": "https://lh3.googleusercontent.com/a-/AOh14GgjemiWQMzd61kB2omYeJQ2kRLse_yCsauN7fpa=s96-c",
+  function copyFriendLink() {
+    var dummy = document.createElement("textarea");
+    // to avoid breaking orgain page when copying more words
+    // cant copy when adding below this code
+    // dummy.style.display = 'none'
+    document.body.appendChild(dummy);
+    //Be careful if you use texarea. setAttribute('value', value), which works with "input" does not work with "textarea". – Eduard
+    dummy.value = `${window.location.origin.toString()}/friend/${user.email}`;
+    dummy.select();
+    document.execCommand("copy");
+    document.body.removeChild(dummy);
+    enqueueSnackbar("Friend Link Copied!", {variant: "success"});
+  }
+
+  function sendFriendRequest(e) {
+    e.preventDefault();
+    e.stopPropagation();
+    
+    if (sendFriendEmail === user.email) {
+      enqueueSnackbar("Can't Friend Yourself! (╯°□°)╯︵ ┻━┻", {variant: "error"});
+      return
     }
 
-    axios.post("/api/friend/request", data)
+    let friend;
+    axios.get("/api/user/search", {
+      params: {
+        email: sendFriendEmail
+      }
+    })
       .then((res) => {
+        // console.log(res);
         if (res.data.error) {
-          console.log(res.data.error); // for future put error
+          console.log(res.data.error);
+          enqueueSnackbar("Invalid Email! (╯°□°)╯︵ ┻━┻", {variant: "error"});
         } else {
-          renderInPendingRequest();
-          enqueueSnackbar("Friend Request Sent", {variant: "success"});
+          friend = res.data.user;
+
+          for (let i = 0; i < friendRequests.length; i++) {
+            if (friendRequests[i].userId == friend.userId) {
+              enqueueSnackbar("Request Already Sent To You! (╯°□°)╯︵ ┻━┻", {variant: "error"})
+              return
+            }
+            console.log(friendRequests[i])
+          }
+
+          for (let i = 0; i < pendingRequests.length; i++) {
+            if (pendingRequests[i].friendId == friend.userId) {
+              enqueueSnackbar("Friend Request Already Sent! (╯°□°)╯︵ ┻━┻", {variant: "error"})
+              return
+            }
+          }
+
+          for (let i = 0; i < friendsList.length; i++) {
+            if (friendsList[i].friendId == friend.userId) {
+              enqueueSnackbar("You're Already Friends! (╯°□°)╯︵ ┻━┻", {variant: "error"})
+              return
+            }
+          }
+
+          let data = {
+            "userId": user.id,
+            "firstName": user.firstName,
+            "lastName": user.lastName,
+            "fullName": user.fullName,
+            "imageUrl": user.imageUrl,
+            "friendId": friend.userId,
+            "friendFirstName": friend.firstName,
+            "friendLastName": friend.lastName,
+            "friendFullName": friend.fullName,
+            "friendImageUrl": friend.imageUrl
+          }
+      
+          axios.post("/api/friend/request", data)
+            .then((res) => {
+              if (res.data.error) {
+                console.log(res.data.error);
+              } else {
+                renderInPendingRequest(res.data.request);
+                enqueueSnackbar("Friend Request Sent", {variant: "success"});
+                setSendFriendEmail("")
+              }
+            })
+            .catch((err) => {
+              console.log(err);
+            })
         }
       })
       .catch((err) => {
@@ -171,7 +237,8 @@ export default function FriendsSection(props) {
                   <Card className="p-2" style={{maxWidth: "80%"}}>
                     <h2>Confirm To Reject Friend Request</h2>
                     <Button 
-                      fullWidth variant="contained" 
+                      fullWidth 
+                      variant="contained" 
                       color="secondary" 
                       onClick={() => {
                         denyFriendRequest(idx, requestId); 
@@ -189,13 +256,11 @@ export default function FriendsSection(props) {
     );
   }
 
-  function renderInPendingRequest() {
+  function renderInPendingRequest(data) {
     let newPendingRequests = [...pendingRequests];
-    let friend = {
-      friendFullName: "Jimmy",
-      friendImageUrl: "https://lh4.googleusercontent.com/-GMCM6cpY3T8/AAAAAAAAAAI/AAAAAAAAAAA/AMZuucl03Fy45UTtf4YqH6hlYAaIFH1agA/s96-c/photo.jpg",
-    }
-    newPendingRequests.push(friend);
+    newPendingRequests.push(data);  
+    console.log(data);
+
     setPendingRequests(newPendingRequests);
   }
 
@@ -215,7 +280,7 @@ export default function FriendsSection(props) {
   }
 
   function getPendingRequests() {
-    console.log(pendingRequests);
+    // console.log(pendingRequests);
     let result = [];
     for (let idx = 0; idx < pendingRequests.length; idx++) {
       result.push(
@@ -351,7 +416,7 @@ export default function FriendsSection(props) {
 
   return (
     <div>
-      <form className="mb-2">
+      <Form className="mb-2" onSubmit={sendFriendRequest}>
         <Grid container direction="row" justify="flex-end">
           <Grid item xs={12} className="mb-2">
             <TextField
@@ -369,13 +434,22 @@ export default function FriendsSection(props) {
               id="find-group-form" 
               color="primary"
               variant="contained"
-              onClick={sendFriendRequest}
+              type="submit"
             >
               Send Friend Request
             </Button>
           </Grid>
         </Grid>
-      </form>
+      </Form>
+      <Button 
+        fullWidth
+        id="find-group-form" 
+        variant="contained"
+        onClick={copyFriendLink}
+        className="mb-2"
+      >
+        Invite Friend Link
+      </Button>
       <Card className="mb-2 p-2" variant="outlined">
         <h5 className="text-center">Requests</h5>
         {getFriendRequests()}

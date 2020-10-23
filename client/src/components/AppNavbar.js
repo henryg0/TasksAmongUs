@@ -25,15 +25,15 @@ export default function AppNavbar(props) {
           <Navbar.Collapse id="basic-navbar-nav">
             { user &&
               <Nav className="mr-auto">
-                { window.location.href === "http://localhost:3000/" ?
+                { window.location.href === `${window.location.origin.toString()}/` ?
                   <Nav.Link href="/" className="nav-item"><div className="nav-item"><u>HOME</u></div></Nav.Link> :
                   <Nav.Link href="/" className="nav-item"><div className="nav-item">HOME</div></Nav.Link>
                 }
-                { window.location.href === "http://localhost:3000/profile" ?
+                { window.location.href === `${window.location.origin.toString()}/profile` ?
                   <Nav.Link href="/profile" className="nav-item"><div className="nav-item"><u>PROFILE</u></div></Nav.Link> :
                   <Nav.Link href="/profile" className="nav-item"><div className="nav-item">PROFILE</div></Nav.Link>
                 }
-                { window.location.href === "http://localhost:3000/social" ?
+                { window.location.href === `${window.location.origin.toString()}/social` ?
                   <Nav.Link href="/social" className="nav-item"><div className="nav-item"><u>SOCIAL</u></div></Nav.Link> :
                   <Nav.Link href="/social" className="nav-item"><div className="nav-item">SOCIAL</div></Nav.Link>
                 }
