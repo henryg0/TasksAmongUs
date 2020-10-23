@@ -12,7 +12,6 @@ import CheckIcon from '@material-ui/icons/Check';
 import Card from '@material-ui/core/Card';
 import IconButton from '@material-ui/core/IconButton';
 import Form from 'react-bootstrap/Form';
-import { isEqual } from 'lodash';
 
 export default function FriendsSection(props) {
   const { user } = props;

@@ -33,6 +33,7 @@ export default function FriendLink() {
           enqueueSnackbar("Invalid Email! (╯°□°)╯︵ ┻━┻", {variant: "error"});
         } else {
           friend = res.data.user;
+          
           let data = {
             "userId": user.id,
             "firstName": user.firstName,
