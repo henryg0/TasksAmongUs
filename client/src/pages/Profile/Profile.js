@@ -101,23 +101,27 @@ export default function Profile() {
                                 overflowY: "auto",
                               }}
                             >
-                              <h2>Customize</h2>
-                              <Card
-                                style={{
-                                  overflowY: "auto",
-                                  height: "80%",
-                                }}
-                              >
-                                <Grid container direcion="row">
-                                  <RadioGroup required value={/*imageUrl*/ "test"} onChange={(e) => {
-                                    // setImageUrl(e.target.value)
-                                  }}
-                                    onClick={onClose}>
-                                    {/* <Grid item>{getBackground()}</Grid> */}
-                                  </RadioGroup>
+                              <Grid container direction="column" justify="space-between" style={{height: "100%"}}>
+                                <h2>Customize</h2>
+                                <Grid container alignItems="stretch">
+                                  <Card
+                                    style={{
+                                      overflowY: "auto",
+                                    }}
+                                    elevation={0}
+                                  >
+                                    <Grid container direcion="row">
+                                      <RadioGroup required value={/*imageUrl*/ "test"} onChange={(e) => {
+                                        // setImageUrl(e.target.value)
+                                      }}
+                                        onClick={onClose}>
+                                        {/* <Grid item>{getBackground()}</Grid> */}
+                                      </RadioGroup>
+                                    </Grid>
+                                  </Card>
                                 </Grid>
-                              </Card>
-                              <Button className="mt-2" fullWidth onClick={onClose} variant="outlined">Close</Button>
+                                <Button className="mt-2" fullWidth onClick={onClose} variant="outlined">Close</Button>
+                              </Grid>
                             </Card>
                           )
                         }

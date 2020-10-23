@@ -65,6 +65,11 @@ export default function Edit() {
     e.preventDefault();
     e.stopPropagation();
     
+    if (dueDate.getTime() < new Date().getTime()) {
+      enqueueSnackbar("Date/Time invalid", {variant: "error"})
+      return;
+    }
+
     let data = {
       todoName: todoName,
       dueDate: dueDate,

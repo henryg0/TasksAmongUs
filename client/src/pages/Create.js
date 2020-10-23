@@ -45,6 +45,11 @@ export default function Create() {
   function createTodo(e) {
     e.preventDefault();
     e.stopPropagation();
+
+    if (dueDate.getTime() < new Date().getTime()) {
+      enqueueSnackbar("Date/Time invalid", {variant: "error"})
+      return;
+    }
     
     let data = {
       todoName: todoName,
