@@ -54,7 +54,7 @@ export default function Edit() {
   }, [])
 
   function getBackground() {
-    let result = []
+    let result = [];
     for (let i=0; i < backgrounds.length; i++) {
       result.push(<FormControlLabel value={backgrounds[i]} control={<Radio />} key={i} label={<Image style={{width: "200px"}} src={backgrounds[i]} rounded></Image>} />)
     }

@@ -64,7 +64,7 @@ export default function Profile() {
   return (
     <Layout user={user}>
       <Container>
-        <Grid container justify="center">
+        <Grid container justify="center" spacing={3}>
           <Grid item xs={10} md={8}>
             <h5 className="mt-2 text-secondary">{getGreeting(user)}</h5>
             <Card
