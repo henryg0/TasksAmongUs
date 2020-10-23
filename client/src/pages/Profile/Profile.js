@@ -16,9 +16,11 @@ import AddIcon from '@material-ui/icons/Add';
 import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
 import RadioGroup from '@material-ui/core/RadioGroup';
+import BuildIcon from '@material-ui/icons/Build';
 
 export default function Profile() {
   let user = authenticate();
+
   let [allTimeCompleted, setAllTimeCompleted] = useState(0);
   let [allTimeFailed, setAllTimeFailed] = useState(0);
 
@@ -62,7 +64,7 @@ export default function Profile() {
   return (
     <Layout user={user}>
       <Container>
-        <Grid container spacing={3} justify="center">
+        <Grid container justify="center">
           <Grid item xs={10} md={8}>
             <h5 className="mt-2 text-secondary">{getGreeting(user)}</h5>
             <Card
@@ -74,22 +76,14 @@ export default function Profile() {
                 height: "470px",
               }}
             >
-              <Grid container justify="center">
-                <Grid item xs="auto" className="p-2">
-                  <Border borderThickness={5}>
-                    <Avatar src={user.imageUrl} style={{width: "100px", height: "100px"}} />
-                  </Border>
-                </Grid>
-                <Grid container item direction="column" xs={12} md={6} alignItems="center">
-                  <Grid item xs className="p-2">
-                    <h3>
-                      {user.fullName} {" "}
-                      <Badge />
-                    </h3>
-                  </Grid>
-                  <Grid item xs className="mt-0">
+              <Grid container direction="row" justify="center">
+                <Grid item xs={4} lg={3} className="p-2">
+                  <Grid container item direction="row">
+                    <Border borderThickness={5}>
+                      <Avatar src={user.imageUrl} style={{width: "100px", height: "100px"}} />
+                    </Border>
                     <Modal
-                      msg="Customize"
+                      icon={BuildIcon}
                       component={
                         ({onClose}) => {
                           return (
@@ -128,6 +122,10 @@ export default function Profile() {
                       }
                     />
                   </Grid>
+                </Grid>
+                <Grid container item direction="column" xs={12} md={6} lg={7} className="text-center text-md-left" justify="center">
+                  <h4>{user.fullName}</h4>
+                  <h4><Badge /></h4>
                 </Grid>
               </Grid>
               <br />
