@@ -44,8 +44,6 @@ def createFriendRequestRoute():
 
   requestId = str(uuid.uuid4())
   data["requestId"] = requestId
-  print (data)
-  print (requestId)
+
   db.collection("Request").document(requestId).set(data)
-  print ("hi")
-  return {"msg": "Friend request sent"}
+  return {"request": data}

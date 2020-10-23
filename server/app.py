@@ -15,6 +15,8 @@ from .routes.DeleteFriend import deleteFriend
 from .routes.AcceptFriendRequest import acceptFriendRequest
 from .routes.GetAllFriends import getAllFriends
 from .routes.GetTodo import getTodo
+from .routes.SearchUser import searchUser
+
 
 
 
@@ -36,6 +38,8 @@ app.register_blueprint(deleteFriend)
 app.register_blueprint(acceptFriendRequest)
 app.register_blueprint(getAllFriends)
 app.register_blueprint(getTodo)
+app.register_blueprint(searchUser)
+
 
 
 
