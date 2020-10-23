@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { useParams } from 'react-router-dom';
 import { useSnackbar } from 'notistack';
 import axios from 'axios';
 import TextField from '@material-ui/core/TextField';
@@ -20,6 +21,7 @@ export default function FriendsSection(props) {
   const [friendRequests, setFriendRequests] = useState([]);
   const [pendingRequests, setPendingRequests] = useState([]);
   const [friendsList, setFriendsList] = useState([]);
+  const { email } = useParams();
   
   useEffect(() => {
     axios.get(`/api/user/${user.id}/friend/pending`)
@@ -60,7 +62,11 @@ export default function FriendsSection(props) {
       .catch((err) => {
         console.log(err);
       })
-
+    
+    if (email) {
+      setSendFriendEmail(email)
+      enqueueSnackbar("Friend's Email Set. Click Send!", {variant: "success"})
+    }
   }, [])
 
   function copyFriendLink() {

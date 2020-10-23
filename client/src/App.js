@@ -14,7 +14,6 @@ import About from './pages/About';
 import Template from './pages/Template';
 import ErrorPage from './pages/ErrorPage';
 import Edit from './pages/Edit';
-import FriendLink from './pages/FriendLink';
 
 axios.defaults.validateStatus = function (status) {
   return status >= 200 && status < 500;
@@ -35,16 +34,16 @@ export default class App extends React.Component {
 
   render() {  
     return (
-      <SnackbarProvider maxSnack={5}>
+      <SnackbarProvider maxSnack={3}>
         <BrowserRouter basename="localhost:3000">
           <Switch>
             <PrivateRoute path="/" exact component={Home} />
+            <PrivateRoute path="/friend/:email" component={Home} />
             <PrivateRoute path="/profile" exact component={Profile} />
             <PrivateRoute path="/create" exact component={Create} />
             <PrivateRoute path="/social" exact component={Social} />
             <PrivateRoute path="/template" exact component={Template} />
             <PrivateRoute path="/edit/:todoId" component={Edit} />
-            <PrivateRoute path="/friend/:email" component={FriendLink} />
             <Route path="/about" exact component={About} />
             <Route path="/" component={ErrorPage} />
           </Switch>
