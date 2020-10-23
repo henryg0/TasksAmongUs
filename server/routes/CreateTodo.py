@@ -1,6 +1,8 @@
 from flask import Blueprint, request, jsonify
 from ..database.database import db
 import uuid
+import datetime
+# from firebase import firestore
 from datetime import date
 
 createTodo = Blueprint("createTodo", __name__)
@@ -17,8 +19,15 @@ def createTodoRoute(userId):
 
   todoName = data.get("todoName")
   description = data.get("description")
-  dueDate = data.get("dueDate")
+
+  # 2020-10-21T10:00:08.920Z
+  dueDate = datetime.datetime.strptime(data.get("dueDate"), '%Y-%m-%dT%H:%M:%S.%fZ')
+
   imageUrl = data.get("imageUrl")
+
+  print(type(dueDate))
+  # print (dueDate)
+  print (firestore.Timestamp(dueDate))
 
   error_log = {
     "todoName":todoName,
@@ -30,6 +39,7 @@ def createTodoRoute(userId):
     if not error_log[key]:
       return (jsonify({"error": "Missing {}".format(key)}), 400)
 
+  # do the converting
   addedDate = date.today()
   addedDate.strftime('%y-%m-%d')
   
