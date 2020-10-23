@@ -24,7 +24,6 @@ def createTodoRoute(userId):
     "todoName":todoName,
     "dueDate":dueDate,
     "imageUrl":imageUrl,
-    "description":description
   }
 
   for key in error_log:
