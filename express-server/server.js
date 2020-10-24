@@ -1,4 +1,5 @@
 const express = require('express');
+const firebase = require('firebase');
 const db = require('./database');
 const bodyParser = require('body-parser');
 
@@ -12,6 +13,7 @@ app.use(bodyParser.urlencoded({ extended: true }))
 app.use(bodyParser.json());
 
 app.post("/api/user/:userId/todo/create", (req, res) => {
+  var date;
   const {userId} = req.params;
   const {todoName, description, dueDate, imageUrl} = req.body;
   
@@ -25,6 +27,18 @@ app.post("/api/user/:userId/todo/create", (req, res) => {
     "dueDate" : dueDate,
     "imageUrl" : imageUrl
   }
+
+  date = Date.parse(data["dueDate"]);
+  data["dueDate"]  = date;
+
+  console.log(date)
+
+  todoId = 123123123;
+  data["todoId"] = todoId;
+
+  console.log(data);
+
+  db.collection("Todo").doc(todoId).set(data);
 
   for (let item in data) {
     if (!data[item] ) {

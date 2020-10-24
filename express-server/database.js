@@ -6,3 +6,4 @@ admin.initializeApp({
 });
 
 const db = admin.firestore();
+export const database = db;

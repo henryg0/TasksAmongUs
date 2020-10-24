@@ -4,6 +4,7 @@ import uuid
 import datetime
 # from firebase import firestore
 from datetime import date
+import time
 
 createTodo = Blueprint("createTodo", __name__)
 
@@ -17,18 +18,15 @@ def createTodoRoute(userId):
   if not data:
     return (jsonify({"msg": "Missing data"}), 400)
 
+  print(type(time.time()))
   todoName = data.get("todoName")
   description = data.get("description")
-
-  # 2020-10-21T10:00:08.920Z
-  dueDate = datetime.datetime.strptime(data.get("dueDate"), '%Y-%m-%dT%H:%M:%S.%fZ')
-
   imageUrl = data.get("imageUrl")
-
-  print(type(dueDate))
-  # print (dueDate)
-  print (type(datetime.datetime.now()))
-
+  dueDate = data.get("dueDate")
+  
+  # 2020-10-21T10:00:08.920Z
+  dueDate = datetime.datetime.strptime(dueDate, '%Y-%m-%dT%H:%M:%S.%fZ').timestamp() * 1000
+  
   error_log = {
     "todoName":todoName,
     "dueDate":dueDate,
@@ -50,6 +48,7 @@ def createTodoRoute(userId):
   data["todoId"] = todoId
   data["status"] = status
   data["userId"] = userId
+  data["dueDate"] = dueDate
   
   db.collection("Todo").document(todoId).set(data)
   return data
