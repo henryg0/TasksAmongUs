@@ -44,4 +44,4 @@ def acceptFriendRequestRoute(requestId):
   db.collection("Friends").document(userFriendIdTwo).set(friendData)
   db.collection('Request').document(requestId).delete()
   
-  return ({"friend": userData})
+  return ({"friend": friendData})

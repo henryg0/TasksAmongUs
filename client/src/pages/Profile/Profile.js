@@ -1,13 +1,14 @@
 import React, { useState, useEffect } from 'react';
 import Layout from '../../components/Layout';
-import Border from '../../components/Border';
 import Modal from '../../components/Modal';
 import authenticate from '../../utils/authenticate';
 import getGreeting from '../../utils/get.greeting';
+import getBadges from '../../utils/get.badges';
+import getBorders from '../../utils/get.borders';
+import getCelebrations from '../../utils/get.celebrations';
 import TodoList from './TodoList';
 import WeeklyChart from './WeeklyChart';
 import AllTimeChart from './AllTimeChart';
-import Badge from '../../components/Badge';
 import Container from '@material-ui/core/Container';
 import Card from '@material-ui/core/Card';
 import Grid from '@material-ui/core/Grid';
@@ -17,9 +18,77 @@ import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
 import RadioGroup from '@material-ui/core/RadioGroup';
 import BuildIcon from '@material-ui/icons/Build';
+import Radio from '@material-ui/core/Radio';
+import FormControlLabel from '@material-ui/core/FormControlLabel';
+import Tooltip from '@material-ui/core/Tooltip';
 
 export default function Profile() {
   let user = authenticate();
+  let badges = getBadges();
+  let borders = getBorders();
+  let celebrations = getCelebrations();
+
+  function displayBadges() {
+    let result = [];
+    for (let badgeName in badges) {
+      if (badgeName in unlockedBadges) {
+        result.push(
+          <FormControlLabel value={badgeName} control={<Radio style={{color: "red"}} />} key={badgeName} label={
+            <Tooltip title={badges[badgeName][1]} placement="bottom-start">
+              {badges[badgeName][0]}
+            </Tooltip>
+          }/>
+        )
+      } else {
+        result.push(
+          <FormControlLabel value={badgeName} control={<Radio disabled style={{color: "secondary"}} />} key={badgeName} label={
+            <Tooltip title={"LOCKED: " + badges[badgeName][1]} placement="bottom-start">
+              {badges[badgeName][0]}
+            </Tooltip>
+          }/>
+        )
+      }
+
+    }
+    return result;
+  }
+
+  function displayBorders() {
+    let result = [];
+    for (let border in borders) {
+      result.push(
+        <FormControlLabel value={border} control={<Radio />} key={border} label={
+          <Tooltip title={borders[border][1]} placement="bottom-start">
+            <div className={borders[border][0].root}>
+              <Avatar src={user.imageUrl} style={{width: "50px", height: "50px"}} />
+            </div>
+          </Tooltip>
+        }/>
+      )
+    }
+    return result;
+  }
+
+  function displayCelebrations() {
+    let result = [];
+    for (let celebration in celebrations) {
+      result.push(
+        <FormControlLabel value={celebration} control={<Radio />} key={celebration} label={
+          <Tooltip title={celebrations[celebration][1]} placement="bottom-start">
+            <video autoPlay muted loop width="300px">
+              <source src={celebrations[celebration]} type="video/mp4" />
+            </video>
+          </Tooltip>
+        }/>
+      )
+    }
+    return result;
+  }
+
+  let [unlockedBadges, setUnlockedBadges] = useState({"normie": true, "halloweenie": true})
+  let [selectedBadge, setSelectedBadge] = useState("normie");
+  let [selectedBorder, setSelectedBorder] = useState("black");
+  let [selectedCelebration, setSelectedCelebration] = useState("amongUsVictory");
 
   let [allTimeCompleted, setAllTimeCompleted] = useState(0);
   let [allTimeFailed, setAllTimeFailed] = useState(0);
@@ -65,7 +134,7 @@ export default function Profile() {
     <Layout user={user}>
       <Container>
         <Grid container justify="center" spacing={3}>
-          <Grid item xs={10} md={8}>
+          <Grid item xs={10} md={7}>
             <h5 className="mt-2 text-secondary">{getGreeting(user)}</h5>
             <Card
               className="p-2 mb-2 mt-2"
@@ -77,17 +146,17 @@ export default function Profile() {
               }}
             >
               <Grid container direction="row" justify="center">
-                <Grid item xs={4} lg={3} className="p-2">
+                <Grid item xs={3} lg={3} className="p-2">
                   <Grid container item direction="row">
-                    <Border borderThickness={5}>
+                    <div className={borders[selectedBorder][0].root}>
                       <Avatar src={user.imageUrl} style={{width: "100px", height: "100px"}} />
-                    </Border>
+                    </div>
                     <Modal
                       icon={BuildIcon}
                       component={
                         ({onClose}) => {
                           return (
-                            <Card 
+                            <Card
                               className="p-2 text-center"
                               style={{
                                 width: "80%",
@@ -101,15 +170,43 @@ export default function Profile() {
                                   <Card
                                     style={{
                                       overflowY: "auto",
+                                      height: "70vh",
                                     }}
                                     elevation={0}
                                   >
-                                    <Grid container direcion="row">
-                                      <RadioGroup required value={/*imageUrl*/ "test"} onChange={(e) => {
-                                        // setImageUrl(e.target.value)
-                                      }}
-                                        onClick={onClose}>
-                                        {/* <Grid item>{getBackground()}</Grid> */}
+                                    <h5>Badges</h5>
+                                    <Grid container direcion="row" justify="center">
+                                      <RadioGroup required value={selectedBadge} 
+                                        onChange={(e) => {
+                                          setSelectedBadge(e.target.value)
+                                          onClose()
+                                        }}
+                                      >
+                                        <Grid item>{displayBadges()}</Grid>
+                                      </RadioGroup>
+                                    </Grid>
+                                    <br />
+                                    <h5>Borders</h5>
+                                    <Grid container direcion="row" justify="center">
+                                      <RadioGroup required value={selectedBorder}
+                                        onChange={(e) => {
+                                          setSelectedBorder(e.target.value)
+                                          onClose()
+                                        }}
+                                      >
+                                        <Grid item>{displayBorders()}</Grid>
+                                      </RadioGroup>
+                                    </Grid>
+                                    <br />
+                                    <h5>Celebrations</h5>
+                                    <Grid container direcion="row" justify="center">
+                                      <RadioGroup required value={selectedCelebration} 
+                                        onChange={(e) => {
+                                          setSelectedCelebration(e.target.value)
+                                          onClose()
+                                        }}
+                                      >
+                                        <Grid item>{displayCelebrations()}</Grid>
                                       </RadioGroup>
                                     </Grid>
                                   </Card>
@@ -123,9 +220,9 @@ export default function Profile() {
                     />
                   </Grid>
                 </Grid>
-                <Grid container item direction="column" xs={12} md={6} lg={7} className="text-center text-md-left" justify="center">
+                <Grid container item direction="column" xs={12} md={6} lg={7} className="text-center text-lg-left" justify="center">
                   <h4>{user.fullName}</h4>
-                  <h4><Badge /></h4>
+                  <h4>{badges[selectedBadge][0]}</h4>
                 </Grid>
               </Grid>
               <br />
@@ -151,7 +248,7 @@ export default function Profile() {
               </Grid>
             </Card>
           </Grid>
-          <Grid container item xs={10} md={4} direction="column" justify="flex-start">
+          <Grid container item xs={10} md={5} direction="column" justify="flex-start">
             <Grid container>
               <Grid item xs>
                 <h2>
@@ -163,7 +260,12 @@ export default function Profile() {
               </Grid>
             </Grid>
             <Grid item xs>
-              <TodoList user={user} renderInCompletedCount={renderInCompletedCount} />
+              <TodoList user={user} 
+                renderInCompletedCount={renderInCompletedCount} 
+                selectedBadge={selectedBadge}
+                selectedBorder={selectedBorder}
+                selectedCelebration={selectedCelebration} 
+              />
             </Grid>
           </Grid>
         </Grid>
