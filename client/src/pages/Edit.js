@@ -25,6 +25,8 @@ import {
 import axios from 'axios';
 import Modal from '../components/Modal';
 import { useParams } from 'react-router';
+import HelpIcon from '@material-ui/icons/Help';
+import Tooltip from '@material-ui/core/Tooltip';
 
 export default function Edit() {
   let user = authenticate();
@@ -43,7 +45,7 @@ export default function Edit() {
             console.log(res.data.error);
           } else {
             setTodoName(res.data.todo.todoName)
-            setDueDate(res.data.todo.dueDate)
+            setDueDate(new Date(res.data.todo.dueDate))
             setDescription(res.data.todo.description)
             setImageUrl(res.data.todo.imageUrl)
           }
@@ -112,10 +114,11 @@ export default function Edit() {
                     <Grid item xs={12} md={6}>
                       <TextField
                         required
+                        label="Event Name" 
                         size="small"
                         fullWidth
-                        label="Event Name" 
                         variant="outlined"
+                        inputProps={{ maxLength: 50 }}
                         value={todoName}
                         onChange={(e) => setTodoName(e.target.value)}
                       />
@@ -161,7 +164,7 @@ export default function Edit() {
                     />
                   </Grid>
                   <Grid item>
-                    <Modal msg={"Change Background"} component={
+                    <Modal msg={"Change Postcard"} component={
                       ({onClose}) => {
                         return (
                           <Card 
@@ -170,7 +173,10 @@ export default function Edit() {
                               width: "80%",
                             }}
                           >
-                            <h2>Choose a New Background</h2>
+                            <h2>
+                              Choose Postcard {" "}
+                              <Tooltip title="Postcard For If You Fail Your Todo"><HelpIcon /></Tooltip>
+                            </h2>
                             <Card
                               style={{
                                 overflowY: "auto",

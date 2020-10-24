@@ -1,5 +1,8 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
+import getBadges from '../../utils/get.badges';
+import getBorders from '../../utils/get.borders';
+import getCelebrations from '../../utils/get.celebrations';
 import clsx from 'clsx';
 import Card from '@material-ui/core/Card';
 import CardHeader from '@material-ui/core/CardHeader';
@@ -16,8 +19,6 @@ import EditIcon from '@material-ui/icons/Edit';
 import DeleteIcon from '@material-ui/icons/Delete';
 import DoneIcon from '@material-ui/icons/Done';
 import Image from 'react-bootstrap/Image';
-import Badge from 'react-bootstrap/Badge';
-import Border from '../../components/Border';
 import Grid from '@material-ui/core/Grid';
 import Modal from '../../components/Modal';
 import { useSnackbar } from 'notistack';
@@ -41,11 +42,14 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export default function ProfileTodo(props) {
-  const { user, todoId, todoName, dueDate, description, imageUrl, handleDelete, idx, renderInCompletedCount } = props;
+  const { user, todoId, todoName, dueDate, description, imageUrl, handleDelete, idx, renderInCompletedCount, selectedBadge, selectedBorder, selectedCelebration } = props;
+  const { enqueueSnackbar, closeSnackbar } = useSnackbar();
   const classes = useStyles();
   let displayDate = new Date(dueDate);
   const [expanded, setExpanded] = React.useState(false);
-  const { enqueueSnackbar, closeSnackbar } = useSnackbar();
+  const badges = getBadges();
+  const borders = getBorders();
+  const celebrations = getCelebrations();
 
   const handleExpandClick = () => {
     setExpanded(!expanded);
@@ -70,7 +74,7 @@ export default function ProfileTodo(props) {
         {renderInCompletedCount()}
         <h3 className="text-center">Todo Completed!</h3>
         <video autoPlay loop muted width="300px">
-          <source src={"https://i.imgur.com/ooOK2Mn.mp4"} type="video/mp4" />
+          <source src={celebrations[selectedCelebration]} type="video/mp4" />
         </video>
         <Button className="text-white" onClick={() => closeSnackbar()}>Close</Button>
       </Grid>
@@ -81,9 +85,9 @@ export default function ProfileTodo(props) {
     <Card className={classes.root}>
       <CardHeader
         avatar={
-          <Border>
-            <Avatar className={classes.avatar} src={user.imageUrl} />
-          </Border>
+          <div className={borders[selectedBorder][0].root}>
+            <Avatar src={user.imageUrl} style={{width: "50px", height: "50px"}} />
+          </div>
         }
         action={
           <CardActions>
@@ -103,7 +107,7 @@ export default function ProfileTodo(props) {
         title={
           <div>
             {user.fullName}{" "}
-            <Badge variant="dark">MOD</Badge>
+            {badges[selectedBadge][0]}
             <br/>
             {todoName}
           </div>

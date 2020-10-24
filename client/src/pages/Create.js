@@ -24,22 +24,24 @@ import {
 } from '@material-ui/pickers';
 import axios from 'axios';
 import Modal from '../components/Modal';
+import HelpIcon from '@material-ui/icons/Help';
+import Tooltip from '@material-ui/core/Tooltip';
 
 export default function Create() {
   let user = authenticate();
   const { enqueueSnackbar } = useSnackbar();
   const backgrounds = getBackgrounds();
-  const [todoName, setTodoName] = useState();
+  const [todoName, setTodoName] = useState("");
   const [dueDate, setDueDate] = useState(new Date());
   const [description, setDesciption] = useState("");
   const [imageUrl, setImageUrl] = useState(backgrounds[0]);
 
-  function renderBackGround() {
-    let result = []
+  function displayBackGrounds() {
+    let result = [];
     for (let i=0; i < backgrounds.length; i++) {
       result.push(<FormControlLabel value={backgrounds[i]} control={<Radio />} key={i} label={<Image style={{width: "200px"}} src={backgrounds[i]} rounded></Image>} />)
     }
-    return result
+    return result;
   }
 
   function createTodo(e) {
@@ -94,12 +96,14 @@ export default function Create() {
                     <Grid item xs={12} md={6}>
                       <TextField
                         required
+                        label="Todo Name"
                         size="small"
                         fullWidth
-                        label="Event Name" 
                         variant="outlined"
                         value={todoName}
                         onChange={(e) => setTodoName(e.target.value)}
+                        fullWidth
+                        inputProps={{ maxLength: 50 }}
                       />
                     </Grid>
                     <Grid item xs={12} md={3}>
@@ -143,7 +147,7 @@ export default function Create() {
                     />
                   </Grid>
                   <Grid item>
-                    <Modal msg={"Change Background"} component={
+                    <Modal msg={"Change Postcard"} component={
                       ({onClose}) => {
                         return (
                           <Card 
@@ -154,7 +158,10 @@ export default function Create() {
                               overflowY: "auto",
                             }}
                           >
-                            <h2>Choose New Background</h2>
+                            <h2>
+                              Change Postcard {" "}
+                              <Tooltip title="Postcard For If You Fail Your Todo"><HelpIcon /></Tooltip>
+                            </h2>
                             <Card
                               style={{
                                 overflowY: "auto",
@@ -163,7 +170,7 @@ export default function Create() {
                             >
                               <Grid container direcion="row">
                                 <RadioGroup required value={imageUrl} onChange={(e) => {setImageUrl(e.target.value)}} onClick={onClose}>
-                                  <Grid item>{renderBackGround()}</Grid>
+                                  <Grid item>{displayBackGrounds()}</Grid>
                                 </RadioGroup>
                               </Grid>
                             </Card>

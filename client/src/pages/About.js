@@ -4,6 +4,7 @@ import Container from 'react-bootstrap/Container';
 import Layout from '../components/Layout';
 import authenticate from '../utils/authenticate';
 import Grid from '@material-ui/core/Grid';
+import Divider from '@material-ui/core/Divider';
 
 import Vincent from '../images/vincent.jpg';
 import Henry from '../images/henry.jpg';
@@ -15,44 +16,49 @@ export default function About() {
   return (
     <Layout user={user}>
       <Container>
-        <Grid container direction="column" alignItems="center">
+        <Grid container direction="column" alignItems="center" style={{width: "100%"}}>
           <h1>About Our Mission</h1>
-          <Grid container item direction="column" xs="10" md="7">
-            <hr />
-            <br />
+          <Grid container item direction="column" xs="10" md="5">
+          <Divider />
+          <br />
             <Grid item xs="12">
               <p>
-                We wanted a way for friends to keep each other accountable over their goals, 
-                especially with current circumstances.....
+                We wanted a way for friends to keep each other accountable over 
+                their goals, especially during quarentine.....
               </p>
               <br />
             </Grid>
             <Grid item xs="12">
               <h3 className="mb-3">
-                And thus <i>TasksAmongUs</i> was born!!!!!
+                So <i>TasksAmongUs</i> was born!!!!!
               </h3>
               <br />
             </Grid>
             <Grid item xs="12">
               <p>
-                At its core, TasksAmongUs is a todo list app but with a twist. Whenever you fail to 
-                meet a deadline, an embarassing notification is sent to all your friends letting
-                them how unresponsible you are. OOF. Having *<i>good</i>* *<i>responsible</i>* friends tease
-                you for slacking off would hopefully be a good motivator!
+                TasksAmongUs is a productivity app where you can interact with friends.
+                COMPLETE todos that your friends can see or FAIL goals that your friends
+                can tease you for. You can flex or get flexed on.
               </p>
               <br />
             </Grid>
             <Grid item xs="12">
               <p>
-                TasksAmong is all in good fun and we hope to bring a chuckle or a laugh when
-                carrying out your day-to-day tasks. It also serves as a reminder to check in on your friends,
-                no matter how busy you are. We hope you enjoy our app as much as we enjoyed
-                making it!
+                Whether it's browsing through your home page to see what your friends are
+                up to or earning customizations through achievements, TasksAmongUs hopes
+                to keep you productive. Or.. at least bring a smile to your face!
+              </p>
+              <br />
+            </Grid>
+            <Grid>
+              <p>
+                We hope you enjoy our app as much as we enjoyed making it. So please, if
+                you have any ideas of what you'd like to see, let us know!
               </p>
               <br />
             </Grid>
             <Grid item xs="12">
-              <h3>Sincerely, The TasksAmongUs {"Team <3"}</h3>
+              <h3>Sincerely, The TasksAmongUs Team {"<3"}</h3>
             </Grid>
               <hr />
               <br />
@@ -91,6 +97,7 @@ export default function About() {
             </Grid>
           </Grid>
         </Grid>
+        <br />
       </Container>
     </Layout>
   )

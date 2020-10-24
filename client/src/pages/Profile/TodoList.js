@@ -4,11 +4,11 @@ import ProfileTodo from './ProfileTodo';
 import axios from 'axios';
 
 export default function TodoList(props) {
-  let { user, renderInCompletedCount } = props;
+  let { user, renderInCompletedCount, selectedBadge, selectedBorder, selectedCelebration} = props;
   const [todos, setTodos] = useState([]);
 
   useEffect(() => {
-    axios.get("/api/user/" + user.id + "/todo")
+    axios.get(`/api/user/${user.id}/todo`)
       .then((res) => {
         // not new object
         setTodos(res.data.todos);
@@ -33,8 +33,23 @@ export default function TodoList(props) {
           idx={idx}
           key={idx}
           renderInCompletedCount={renderInCompletedCount}
+          selectedBadge={selectedBadge}
+          selectedBorder={selectedBorder}
+          selectedCelebration={selectedCelebration}
         />
       );
+    }
+
+    if (result.length === 0) {
+      result.push(
+        <Card 
+          style={{height: "200px", display: "flex", flexDirection: "column", justifyContent: "center"}}
+          elevation={0}
+        >
+          <h2 className="w3-animate-opacity text-secondary text-center" style={{animationDuration: "3s"}}>No More Todos!</h2>
+          <h2 className="w3-animate-opacity text-secondary text-center" style={{animationDuration: "3s"}}>Create Some :)</h2>
+        </Card>
+      )
     }
     return result;
   }
