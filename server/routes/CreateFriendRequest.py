@@ -38,7 +38,11 @@ def createFriendRequestRoute():
   for key in error_log:
     if not error_log[key]:
       return (jsonify({"error": "Missing {}".format(key)}), 400)
+  
+  if userId == friendId:
+    return (jsonify({"error": "Cannot friend self"}), 400)
 
+  
   requestId = str(uuid.uuid4())
   data["requestId"] = requestId
 
