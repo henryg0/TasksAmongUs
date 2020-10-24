@@ -27,7 +27,7 @@ def createTodoRoute(userId):
 
   print(type(dueDate))
   # print (dueDate)
-  print (firestore.Timestamp(dueDate))
+  print (type(datetime.datetime.now()))
 
   error_log = {
     "todoName":todoName,
