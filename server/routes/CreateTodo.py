@@ -2,7 +2,6 @@ from flask import Blueprint, request, jsonify
 from ..database.database import db
 import uuid
 import datetime
-# from firebase import firestore
 from datetime import date
 import time
 
@@ -18,7 +17,6 @@ def createTodoRoute(userId):
   if not data:
     return (jsonify({"msg": "Missing data"}), 400)
 
-  print(type(time.time()))
   todoName = data.get("todoName")
   description = data.get("description")
   imageUrl = data.get("imageUrl")
