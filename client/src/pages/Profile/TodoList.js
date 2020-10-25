@@ -6,7 +6,7 @@ import axios from 'axios';
 export default function TodoList(props) {
   let { user, renderInCompletedCount, selectedBadge, selectedBorder, selectedCelebration} = props;
   const [todos, setTodos] = useState([]);
-  console.log(todos)
+  console.log(todos);
   useEffect(() => {
     axios.get(`/api/user/${user.id}/todo`)
       .then((res) => {
