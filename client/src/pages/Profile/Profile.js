@@ -30,20 +30,20 @@ export default function Profile() {
 
   function displayBadges() {
     let result = [];
-    for (let badgeName in badges) {
-      if (badgeName in unlockedBadges) {
+    for (let badge in badges) {
+      if (badge in unlockedBadges) {
         result.push(
-          <FormControlLabel value={badgeName} control={<Radio style={{color: "red"}} />} key={badgeName} label={
-            <Tooltip title={badges[badgeName][1]} placement="bottom-start">
-              {badges[badgeName][0]}
+          <FormControlLabel value={badge} control={<Radio style={{color: "red"}} />} key={badge} label={
+            <Tooltip title={badges[badge][1]} placement="bottom-start">
+              {badges[badge][0]}
             </Tooltip>
           }/>
         )
       } else {
         result.push(
-          <FormControlLabel value={badgeName} control={<Radio disabled style={{color: "secondary"}} />} key={badgeName} label={
-            <Tooltip title={"LOCKED: " + badges[badgeName][1]} placement="bottom-start">
-              {badges[badgeName][0]}
+          <FormControlLabel value={badge} control={<Radio disabled style={{color: "secondary"}} />} key={badge} label={
+            <Tooltip title={"LOCKED: " + badges[badge][1]} placement="bottom-start">
+              {badges[badge][0]}
             </Tooltip>
           }/>
         )
@@ -56,15 +56,27 @@ export default function Profile() {
   function displayBorders() {
     let result = [];
     for (let border in borders) {
-      result.push(
-        <FormControlLabel value={border} control={<Radio />} key={border} label={
-          <Tooltip title={borders[border][1]} placement="bottom-start">
-            <div className={borders[border][0].root}>
-              <Avatar src={user.imageUrl} style={{width: "50px", height: "50px"}} />
-            </div>
-          </Tooltip>
-        }/>
-      )
+      if (border in unlockedBorders) {
+        result.push(
+          <FormControlLabel value={border} control={<Radio style={{color: "red"}} />} key={border} label={
+            <Tooltip title={borders[border][1]} placement="bottom-start">
+              <div className={borders[border][0].root}>
+                <Avatar src={user.imageUrl} style={{width: "50px", height: "50px"}} />
+              </div>
+            </Tooltip>
+          }/>
+        )
+      } else {
+        result.push(
+          <FormControlLabel value={border} control={<Radio disabled style={{color: "secondary"}} />} key={border} label={
+            <Tooltip title={"LOCKED: " + borders[border][1]} placement="bottom-start">
+              <div className={borders[border][0].root}>
+                <Avatar src={user.imageUrl} style={{width: "50px", height: "50px"}} />
+              </div>
+            </Tooltip>
+          }/>
+        )
+      }
     }
     return result;
   }
@@ -72,20 +84,34 @@ export default function Profile() {
   function displayCelebrations() {
     let result = [];
     for (let celebration in celebrations) {
-      result.push(
-        <FormControlLabel value={celebration} control={<Radio />} key={celebration} label={
-          <Tooltip title={celebrations[celebration][1]} placement="bottom-start">
-            <video autoPlay muted loop width="300px">
-              <source src={celebrations[celebration]} type="video/mp4" />
-            </video>
-          </Tooltip>
-        }/>
-      )
+      if (celebration in unlockedCelebrations) {
+        result.push(
+          <FormControlLabel value={celebration} control={<Radio style={{color: "red"}} />} key={celebration} label={
+            <Tooltip title={celebrations[celebration][1]} placement="bottom-start">
+              <video autoPlay muted loop width="300px">
+                <source src={celebrations[celebration]} type="video/mp4" />
+              </video>
+            </Tooltip>
+          }/>
+        )
+      } else {
+        result.push(
+          <FormControlLabel value={celebration} control={<Radio />} key={celebration} label={
+            <Tooltip title={"LOCKED: " + celebrations[celebration][1]} placement="bottom-start">
+              <video autoPlay muted loop width="300px">
+                <source src={celebrations[celebration]} type="video/mp4" />
+              </video>
+            </Tooltip>
+          }/>
+        )
+      }
     }
     return result;
   }
 
-  let [unlockedBadges, setUnlockedBadges] = useState({"normie": true, "halloweenie": true})
+  let [unlockedBadges, setUnlockedBadges] = useState({"normie": true, "halloweenie": true, "007": true})
+  let [unlockedBorders, setUnlockedBorders] = useState({"black": true,"lightOrange": true, "rainbowViolet": true})
+  let [unlockedCelebrations, setUnlockedCelebrations] = useState({"amongUsVictory": true,"blackPanther": true, "dragonBallZ": true})
   let [selectedBadge, setSelectedBadge] = useState("normie");
   let [selectedBorder, setSelectedBorder] = useState("black");
   let [selectedCelebration, setSelectedCelebration] = useState("amongUsVictory");

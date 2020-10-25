@@ -5,6 +5,7 @@ export default function getBadges() {
   return {
     "normie": [<Badge variant="info">NORMIE</Badge>, "Awarded for making an account"],
     
+    "007": [<Badge variant="danger">007</Badge>, "Awarded for completing 7 todos"],
     "epic": [<Badge variant="dark">EPIC</Badge>, "Awarded for completing 50 todos"],
     "flexer": [<Badge variant="light">FLEXER</Badge>, "Awarded for completing 75 todos"],
     "friendinator": [<Badge variant="light">FRIENDINATOR</Badge>, "Awarded for friending 10 people"],

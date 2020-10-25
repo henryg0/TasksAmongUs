@@ -5,6 +5,7 @@ getTodo = Blueprint("getTodo", __name__)
 
 @getTodo.route("/api/todo/<todoId>", methods=["GET"])
 def createTodoRoute(todoId):
+  print("yeet")
   if not todoId:
     return (jsonify({"error": "Missing todoId"}), 400)    
 
