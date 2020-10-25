@@ -16,7 +16,7 @@ import ErrorPage from './pages/ErrorPage';
 import Edit from './pages/Edit';
 
 if (process.env.NODE_ENV === "production") {
-  axios.defaults.baseURL = "localhost:5000/";
+  axios.defaults.baseURL = "http://localhost:5000/";
 }
 
 axios.defaults.validateStatus = function (status) {
