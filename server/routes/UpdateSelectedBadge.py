@@ -24,7 +24,6 @@ def updateSelectedBadgeRoute(userId):
     if not error_log.get(key):
       return (jsonify({"error": "Missing {}".format(key)}), 400)
 
-  # IF SOMEONE ELSE HAS SAME ID, IT OVERRIDES
   db.collection("Users").document(userId).update({"selectedBadge": selectedBadge})
 
   return ({"msg": "Selected Badge Updated"})

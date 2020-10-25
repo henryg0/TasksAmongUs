@@ -24,7 +24,6 @@ def updateSelectedCelebrationRoute(userId):
     if not error_log.get(key):
       return (jsonify({"error": "Missing {}".format(key)}), 400)
 
-  # IF SOMEONE ELSE HAS SAME ID, IT OVERRIDES
   db.collection("Users").document(userId).update({"selectedCelebration": selectedCelebration})
 
   return ({"msg": "Selected Celebration Updated"})

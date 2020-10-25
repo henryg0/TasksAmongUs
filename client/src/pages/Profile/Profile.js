@@ -35,9 +35,9 @@ export default function Profile() {
   let [selectedBadge, setSelectedBadge] = useState("none");
   let [selectedBorder, setSelectedBorder] = useState("none");
   let [selectedCelebration, setSelectedCelebration] = useState("amongUsVictory");
-  let [unlockedBadges, setUnlockedBadges] = useState({"normie": true, "halloweenie": true, "007": true})
-  let [unlockedBorders, setUnlockedBorders] = useState({"black": true,"lightOrange": true, "rainbowViolet": true})
-  let [unlockedCelebrations, setUnlockedCelebrations] = useState({"amongUsVictory": true,"blackPanther": true, "dragonBallZ": true})
+  let [unlockedBadges, setUnlockedBadges] = useState({})
+  let [unlockedBorders, setUnlockedBorders] = useState({})
+  let [unlockedCelebrations, setUnlockedCelebrations] = useState({})
 
   let [allTimeCompleted, setAllTimeCompleted] = useState(0);
   let [allTimeFailed, setAllTimeFailed] = useState(0);
@@ -49,6 +49,38 @@ export default function Profile() {
   let [dayFive, setDayFive] = useState({date: "Wed", completed: 0, failed: 0});
   let [daySix, setDaySix] = useState({date: "Tue", completed: 0, failed: 0});
   let [daySeven, setDaySeven] = useState({date: "Mon", completed: 0, failed: 0});
+
+  useEffect(() => {
+    setGreeting(getGreeting(user));
+    axios.get(`/api/user/${user.id}`)
+      .then((res) => {
+          if (res.data.error) {
+            console.log(res.data.error);
+          } else {
+            if (res.data.user.selectedBadge) {
+              setSelectedBadge(res.data.user.selectedBadge);
+            }
+            if (res.data.user.selectedBorder) {
+              setSelectedBorder(res.data.user.selectedBorder);
+            }
+          }
+          setUnlockedBadges(res.data.user.unlockedBadges);
+          setUnlockedBorders(res.data.user.unlockedBorders);
+          setUnlockedCelebrations(res.data.user.unlockedCelebrations);
+      })
+      .catch((err) => {
+        console.log(err);
+      })
+    setAllTimeCompleted(400);
+    setAllTimeFailed(40);
+    setDayOne({date: "Sun", completed: 2, failed: 1});
+    setDayTwo({date: "Sat", completed: 6, failed: 0});
+    setDayThree({date: "Fri", completed: 2, failed: 0});
+    setDayFour({date: "Thu", completed: 5, failed: 2});
+    setDayFive({date: "Wed", completed: 1, failed: 0});
+    setDaySix({date: "Tue", completed: 0, failed: 1});
+    setDaySeven({date: "Mon", completed: 4, failed: 0});
+  }, [])
 
   function displayBadges() {
     let result = [];
@@ -144,7 +176,7 @@ export default function Profile() {
       })
       .catch((err) => {
         console.log(err);
-        enqueueSnackbar("Badge Failed To Change", {variant: "danger"})
+        enqueueSnackbar("Badge Failed To Change", {variant: "error"})
       })
   }
 
@@ -160,7 +192,7 @@ export default function Profile() {
       })
       .catch((err) => {
         console.log(err);
-        enqueueSnackbar("Border Failed To Change", {variant: "danger"})
+        enqueueSnackbar("Border Failed To Change", {variant: "error"})
       })
   }
 
@@ -176,7 +208,7 @@ export default function Profile() {
       })
       .catch((err) => {
         console.log(err);
-        enqueueSnackbar("Celebration Failed To Change", {variant: "danger"})
+        enqueueSnackbar("Celebration Failed To Change", {variant: "error"})
       })
   }
 
@@ -185,34 +217,6 @@ export default function Profile() {
     setDayOne({date: dayOne.date, completed: dayOne.completed + 1, failed: dayOne.failed});
   }
 
-  useEffect(() => {
-    setGreeting(getGreeting(user));
-    axios.get(`/api/user/${user.id}`)
-      .then((res) => {
-          if (res.data.error) {
-            console.log(res.data.error);
-          } else {
-            if (res.data.user.selectedBadge) {
-              setSelectedBadge(res.data.user.selectedBadge);
-            }
-            if (res.data.user.selectedBorder) {
-              setSelectedBorder(res.data.user.selectedBorder);
-            }
-          }
-      })
-      .catch((err) => {
-        console.log(err);
-      })
-    setAllTimeCompleted(400);
-    setAllTimeFailed(40);
-    setDayOne({date: "Sun", completed: 2, failed: 1});
-    setDayTwo({date: "Sat", completed: 6, failed: 0});
-    setDayThree({date: "Fri", completed: 2, failed: 0});
-    setDayFour({date: "Thu", completed: 5, failed: 2});
-    setDayFive({date: "Wed", completed: 1, failed: 0});
-    setDaySix({date: "Tue", completed: 0, failed: 1});
-    setDaySeven({date: "Mon", completed: 4, failed: 0});
-  }, [])
 
   return (
     <Layout user={user}>

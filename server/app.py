@@ -19,6 +19,9 @@ from .routes.SearchUser import searchUser
 from .routes.UpdateSelectedBadge import updateSelectedBadge
 from .routes.UpdateSelectedBorder import updateSelectedBorder
 from .routes.UpdateSelectedCelebration import updateSelectedCelebration
+from .routes.UpdateUnlockedBadges import updateUnlockedBadges
+from .routes.UpdateUnlockedBorders import updateUnlockedBorders
+from .routes.UpdateUnlockedCelebrations import updateUnlockedCelebrations
 
 
 
@@ -45,7 +48,9 @@ app.register_blueprint(searchUser)
 app.register_blueprint(updateSelectedBadge)
 app.register_blueprint(updateSelectedBorder)
 app.register_blueprint(updateSelectedCelebration)
-
+app.register_blueprint(updateUnlockedBadges)
+app.register_blueprint(updateUnlockedBorders)
+app.register_blueprint(updateUnlockedCelebrations)
 
 
 
