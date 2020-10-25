@@ -7,10 +7,6 @@ export default function getBadges() {
     
     "epic": [<Badge variant="dark">EPIC</Badge>, "Awarded for completing 50 todos"],
     "flexer": [<Badge variant="light">FLEXER</Badge>, "Awarded for completing 75 todos"],
-    
-    "halloweenie": [<Badge variant="danger">HALLOWEENIE</Badge>, "Awarded for making a todo in October"],
-    "thankful": [<Badge variant="primary">THANKFUL</Badge>, "Awarded for making a todo in November"],
-    "santa": [<Badge variant="success">SANTA</Badge>, "Awarded for making a todo in December"],
     "friendinator": [<Badge variant="light">FRIENDINATOR</Badge>, "Awarded for friending 10 people"],
     
     
@@ -28,6 +24,10 @@ export default function getBadges() {
     // "lucky-clover": [<Badge variant="success">LUCKY CLOVER</Badge>, "???"],
     // "joker": [<Badge variant="light">JOKER</Badge>, "???"],
     // "may-day": [<Badge variant="danger">MAYDAY</Badge>, "???"],
+    
+    "halloweenie": [<Badge variant="danger">HALLOWEENIE</Badge>, "Awarded for making a todo in October"],
+    "thankful": [<Badge variant="primary">THANKFUL</Badge>, "Awarded for making a todo in November"],
+    "santa": [<Badge variant="success">SANTA</Badge>, "Awarded for making a todo in December"],
     
     "legendary": [<Badge variant="primary">LEGENDARY</Badge>, "Awarded for making an account during launch of TasksAmongUs <3"],
     "mod": [<Badge variant="dark">MOD</Badge>, "Awarded for app developers"],
