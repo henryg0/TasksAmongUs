@@ -15,6 +15,10 @@ import Template from './pages/Template';
 import ErrorPage from './pages/ErrorPage';
 import Edit from './pages/Edit';
 
+if (process.env.NODE_ENV === "production") {
+  axios.defaults.baseURL = "localhost:5000/";
+}
+
 axios.defaults.validateStatus = function (status) {
   return status >= 200 && status < 500;
 }
