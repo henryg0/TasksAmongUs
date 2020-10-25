@@ -16,6 +16,9 @@ from .routes.AcceptFriendRequest import acceptFriendRequest
 from .routes.GetAllFriends import getAllFriends
 from .routes.GetTodo import getTodo
 from .routes.SearchUser import searchUser
+from .routes.UpdateSelectedBadge import updateSelectedBadge
+from .routes.UpdateSelectedBorder import updateSelectedBorder
+from .routes.UpdateSelectedCelebration import updateSelectedCelebration
 
 
 
@@ -39,6 +42,9 @@ app.register_blueprint(acceptFriendRequest)
 app.register_blueprint(getAllFriends)
 app.register_blueprint(getTodo)
 app.register_blueprint(searchUser)
+app.register_blueprint(updateSelectedBadge)
+app.register_blueprint(updateSelectedBorder)
+app.register_blueprint(updateSelectedCelebration)
 
 
 

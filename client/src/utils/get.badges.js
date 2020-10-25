@@ -32,5 +32,7 @@ export default function getBadges() {
     
     "legendary": [<Badge variant="primary">LEGENDARY</Badge>, "Awarded for making an account during launch of TasksAmongUs <3"],
     "mod": [<Badge variant="dark">MOD</Badge>, "Awarded for app developers"],
+
+    "none": [<br/>, ""]
   }
 }

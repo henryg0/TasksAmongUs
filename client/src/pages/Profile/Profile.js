@@ -1,4 +1,6 @@
 import React, { useState, useEffect } from 'react';
+import axios from 'axios';
+import { useSnackbar } from 'notistack';
 import Layout from '../../components/Layout';
 import Modal from '../../components/Modal';
 import authenticate from '../../utils/authenticate';
@@ -27,6 +29,26 @@ export default function Profile() {
   let badges = getBadges();
   let borders = getBorders();
   let celebrations = getCelebrations();
+  let { enqueueSnackbar } = useSnackbar();
+  let [greeting, setGreeting] = useState("");
+
+  let [selectedBadge, setSelectedBadge] = useState("none");
+  let [selectedBorder, setSelectedBorder] = useState("none");
+  let [selectedCelebration, setSelectedCelebration] = useState("amongUsVictory");
+  let [unlockedBadges, setUnlockedBadges] = useState({"normie": true, "halloweenie": true, "007": true})
+  let [unlockedBorders, setUnlockedBorders] = useState({"black": true,"lightOrange": true, "rainbowViolet": true})
+  let [unlockedCelebrations, setUnlockedCelebrations] = useState({"amongUsVictory": true,"blackPanther": true, "dragonBallZ": true})
+
+  let [allTimeCompleted, setAllTimeCompleted] = useState(0);
+  let [allTimeFailed, setAllTimeFailed] = useState(0);
+
+  let [dayOne, setDayOne] = useState({date: "Sun", completed: 0, failed: 0});
+  let [dayTwo, setDayTwo] = useState({date: "Sat", completed: 0, failed: 0});
+  let [dayThree, setDayThree] = useState({date: "Fri", completed: 0, failed: 0});
+  let [dayFour, setDayFour] = useState({date: "Thur", completed: 0, failed: 0});
+  let [dayFive, setDayFive] = useState({date: "Wed", completed: 0, failed: 0});
+  let [daySix, setDaySix] = useState({date: "Tue", completed: 0, failed: 0});
+  let [daySeven, setDaySeven] = useState({date: "Mon", completed: 0, failed: 0});
 
   function displayBadges() {
     let result = [];
@@ -48,8 +70,8 @@ export default function Profile() {
           }/>
         )
       }
-
     }
+    result = result.slice(0, -1);
     return result;
   }
 
@@ -78,6 +100,7 @@ export default function Profile() {
         )
       }
     }
+    result = result.slice(0, -1);
     return result;
   }
 
@@ -96,7 +119,7 @@ export default function Profile() {
         )
       } else {
         result.push(
-          <FormControlLabel value={celebration} control={<Radio />} key={celebration} label={
+          <FormControlLabel value={celebration} control={<Radio disabled style={{color: "secondary"}} />} key={celebration} label={
             <Tooltip title={"LOCKED: " + celebrations[celebration][1]} placement="bottom-start">
               <video autoPlay muted loop width="300px">
                 <source src={celebrations[celebration]} type="video/mp4" />
@@ -109,23 +132,53 @@ export default function Profile() {
     return result;
   }
 
-  let [unlockedBadges, setUnlockedBadges] = useState({"normie": true, "halloweenie": true, "007": true})
-  let [unlockedBorders, setUnlockedBorders] = useState({"black": true,"lightOrange": true, "rainbowViolet": true})
-  let [unlockedCelebrations, setUnlockedCelebrations] = useState({"amongUsVictory": true,"blackPanther": true, "dragonBallZ": true})
-  let [selectedBadge, setSelectedBadge] = useState("normie");
-  let [selectedBorder, setSelectedBorder] = useState("black");
-  let [selectedCelebration, setSelectedCelebration] = useState("amongUsVictory");
+  function updateSelectedBadge(selectedBadge) {
+    const data = {
+      "selectedBadge": selectedBadge
+    };
 
-  let [allTimeCompleted, setAllTimeCompleted] = useState(0);
-  let [allTimeFailed, setAllTimeFailed] = useState(0);
+    axios.put(`/api/user/${user.id}/selected/badge/update`, data)
+      .then((res) => {
+        console.log(res);
+        enqueueSnackbar("Badge Changed", {variant: "success"})
+      })
+      .catch((err) => {
+        console.log(err);
+        enqueueSnackbar("Badge Failed To Change", {variant: "danger"})
+      })
+  }
 
-  let [dayOne, setDayOne] = useState({date: "Sun", completed: 0, failed: 0});
-  let [dayTwo, setDayTwo] = useState({date: "Sat", completed: 0, failed: 0});
-  let [dayThree, setDayThree] = useState({date: "Fri", completed: 0, failed: 0});
-  let [dayFour, setDayFour] = useState({date: "Thur", completed: 0, failed: 0});
-  let [dayFive, setDayFive] = useState({date: "Wed", completed: 0, failed: 0});
-  let [daySix, setDaySix] = useState({date: "Tue", completed: 0, failed: 0});
-  let [daySeven, setDaySeven] = useState({date: "Mon", completed: 0, failed: 0});
+  function updateSelectedBorder(selectedBorder) {
+    const data = {
+      "selectedBorder": selectedBorder
+    };
+
+    axios.put(`/api/user/${user.id}/selected/border/update`, data)
+      .then((res) => {
+        console.log(res);
+        enqueueSnackbar("Border Changed", {variant: "success"})
+      })
+      .catch((err) => {
+        console.log(err);
+        enqueueSnackbar("Border Failed To Change", {variant: "danger"})
+      })
+  }
+
+  function updateSelectedCelebration(selectedCelebration) {
+    const data = {
+      "selectedCelebration": selectedCelebration
+    };
+
+    axios.put(`/api/user/${user.id}/selected/celebration/update`, data)
+      .then((res) => {
+        console.log(res);
+        enqueueSnackbar("Celebration Changed", {variant: "success"})
+      })
+      .catch((err) => {
+        console.log(err);
+        enqueueSnackbar("Celebration Failed To Change", {variant: "danger"})
+      })
+  }
 
   function renderInCompletedCount() {
     setAllTimeCompleted(allTimeCompleted + 1);
@@ -133,18 +186,23 @@ export default function Profile() {
   }
 
   useEffect(() => {
-    // axios.get(`/api/user/${user.id}/friend/pending`)
-    //   .then((res) => {
-    //       if (res.data.error) {
-    //         console.log(res.data.error);
-    //       } else {
-    //         // console.log(res.data.pending);
-    //         setPendingRequests(res.data.pending);
-    //       }
-    //   })
-    //   .catch((err) => {
-    //     console.log(err);
-    //   })
+    setGreeting(getGreeting(user));
+    axios.get(`/api/user/${user.id}`)
+      .then((res) => {
+          if (res.data.error) {
+            console.log(res.data.error);
+          } else {
+            if (res.data.user.selectedBadge) {
+              setSelectedBadge(res.data.user.selectedBadge);
+            }
+            if (res.data.user.selectedBorder) {
+              setSelectedBorder(res.data.user.selectedBorder);
+            }
+          }
+      })
+      .catch((err) => {
+        console.log(err);
+      })
     setAllTimeCompleted(400);
     setAllTimeFailed(40);
     setDayOne({date: "Sun", completed: 2, failed: 1});
@@ -161,7 +219,7 @@ export default function Profile() {
       <Container>
         <Grid container justify="center" spacing={3}>
           <Grid item xs={10} md={7}>
-            <h5 className="mt-2 text-secondary">{getGreeting(user)}</h5>
+            <h5 className="mt-2 text-secondary">{greeting}</h5>
             <Card
               className="p-2 mb-2 mt-2"
               variant="outlined"
@@ -204,8 +262,9 @@ export default function Profile() {
                                     <Grid container direcion="row" justify="center">
                                       <RadioGroup required value={selectedBadge} 
                                         onChange={(e) => {
-                                          setSelectedBadge(e.target.value)
-                                          onClose()
+                                          setSelectedBadge(e.target.value);
+                                          updateSelectedBadge(e.target.value);
+                                          onClose();
                                         }}
                                       >
                                         <Grid item>{displayBadges()}</Grid>
@@ -216,8 +275,9 @@ export default function Profile() {
                                     <Grid container direcion="row" justify="center">
                                       <RadioGroup required value={selectedBorder}
                                         onChange={(e) => {
-                                          setSelectedBorder(e.target.value)
-                                          onClose()
+                                          setSelectedBorder(e.target.value);
+                                          updateSelectedBorder(e.target.value);
+                                          onClose();
                                         }}
                                       >
                                         <Grid item>{displayBorders()}</Grid>
@@ -228,8 +288,9 @@ export default function Profile() {
                                     <Grid container direcion="row" justify="center">
                                       <RadioGroup required value={selectedCelebration} 
                                         onChange={(e) => {
-                                          setSelectedCelebration(e.target.value)
-                                          onClose()
+                                          setSelectedCelebration(e.target.value);
+                                          updateSelectedCelebration(e.target.value);
+                                          onClose();
                                         }}
                                       >
                                         <Grid item>{displayCelebrations()}</Grid>
