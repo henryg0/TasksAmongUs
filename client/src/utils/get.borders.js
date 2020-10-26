@@ -2,7 +2,7 @@ import { useGradientAvatarStyles } from '@mui-treasury/styles/avatar/gradient';
 
 export default function Border() {
   return {
-    "black": [
+    "BLACK": [
       useGradientAvatarStyles({
         gap: 2,
         thickness: 3,
@@ -10,7 +10,7 @@ export default function Border() {
         color: 'black',
       }), "Awarded for making an account"
     ],
-    "greenBlue": [
+    "SEAWEED GREEN": [
       useGradientAvatarStyles({
         gap: 2,
         thickness: 3,
@@ -18,7 +18,7 @@ export default function Border() {
         color: '#03B2A2',
       }), "Awarded for completing 1 todo"
     ],
-    "oceanBlue": [
+    "OCEAN BLUE": [
       useGradientAvatarStyles({
         gap: 2,
         thickness: 3,
@@ -26,7 +26,7 @@ export default function Border() {
         color: '#04A0D3',
       }), "Awarded for completing 3 todos"
     ],
-    "darkOrange": [
+    "PUMPKIN ORANGE": [
       useGradientAvatarStyles({
         gap: 2,
         thickness: 3,
@@ -34,7 +34,7 @@ export default function Border() {
         color: '#DF665A',
       }), "Awarded for completing 20 todos"
     ],
-    "rainbowViolet": [
+    "VIOLET FADE": [
       useGradientAvatarStyles({
         gap: 2,
         thickness: 3,
@@ -42,7 +42,7 @@ export default function Border() {
         color: 'linear-gradient(to bottom right, #feac5e, #c779d0, #4bc0c8)',
       }), "Awarded for adding a friend"
     ],
-    "lightOrange": [
+    "SUNFLOWER ORANGE": [
       useGradientAvatarStyles({
         gap: 2,
         thickness: 3,

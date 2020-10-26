@@ -29,15 +29,15 @@ export default function Profile() {
   let badges = getBadges();
   let borders = getBorders();
   let celebrations = getCelebrations();
-  let { enqueueSnackbar } = useSnackbar();
+  const { enqueueSnackbar } = useSnackbar();
   let [greeting, setGreeting] = useState("");
 
   let [selectedBadge, setSelectedBadge] = useState("none");
   let [selectedBorder, setSelectedBorder] = useState("none");
-  let [selectedCelebration, setSelectedCelebration] = useState("amongUsVictory");
-  let [unlockedBadges, setUnlockedBadges] = useState({})
-  let [unlockedBorders, setUnlockedBorders] = useState({})
-  let [unlockedCelebrations, setUnlockedCelebrations] = useState({})
+  let [selectedCelebration, setSelectedCelebration] = useState("AMONG US WIN");
+  let [unlockedBadges, setUnlockedBadges] = useState({"NORMIE": true})
+  let [unlockedBorders, setUnlockedBorders] = useState({"BLACK": true})
+  let [unlockedCelebrations, setUnlockedCelebrations] = useState({"AMONG US WIN": true})
 
   let [allTimeCompleted, setAllTimeCompleted] = useState(0);
   let [allTimeFailed, setAllTimeFailed] = useState(0);
@@ -57,16 +57,32 @@ export default function Profile() {
           if (res.data.error) {
             console.log(res.data.error);
           } else {
-            if (res.data.user.selectedBadge) {
-              setSelectedBadge(res.data.user.selectedBadge);
+            const user = res.data.user;
+            if (user.setSelectedBadge) {
+              setSelectedBadge(user.selectedBadge);
+            } else {
+              setSelectedBadge("NORMIE");
             }
-            if (res.data.user.selectedBorder) {
-              setSelectedBorder(res.data.user.selectedBorder);
+            if (user.selectedBorder) {
+              setSelectedBorder(user.selectedBorder);
+            } else {
+              setSelectedBorder("BLACK");
+            }
+            if (user.selectedCelebration) {
+              setSelectedCelebration(user.selectedCelebration);
+            } else {
+              setSelectedCelebration("AMONG US WIN")
+            }
+            if (user.unlockedBadges) {
+              setUnlockedBadges(user.unlockedBadges);
+            }
+            if (user.unlockedBorders) {
+              setUnlockedBorders(user.unlockedBorders);
+            }
+            if (user.unlockedCelebrations) {
+              setUnlockedCelebrations(user.unlockedCelebrations);
             }
           }
-          setUnlockedBadges(res.data.user.unlockedBadges);
-          setUnlockedBorders(res.data.user.unlockedBorders);
-          setUnlockedCelebrations(res.data.user.unlockedCelebrations);
       })
       .catch((err) => {
         console.log(err);

@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import Layout from '../components/Layout';
-import getBackgrounds from '../utils/get.backgrounds';
+import getPostcards from '../utils/get.postcards';
 import authenticate from '../utils/authenticate';
 import Form from 'react-bootstrap/Form';
 import Container from '@material-ui/core/Container';
@@ -31,11 +31,11 @@ import Tooltip from '@material-ui/core/Tooltip';
 export default function Edit() {
   let user = authenticate();
   const { enqueueSnackbar } = useSnackbar();
-  const backgrounds = getBackgrounds();
+  const postcards = getPostcards();
   const [todoName, setTodoName] = useState("");
   const [dueDate, setDueDate] = useState(new Date());
   const [description, setDescription] = useState("");
-  const [imageUrl, setImageUrl] = useState(backgrounds[0]);
+  const [imageUrl, setImageUrl] = useState(postcards[0]);
   const { todoId } = useParams();
 
   useEffect(() => {
@@ -55,10 +55,10 @@ export default function Edit() {
       })
   }, [])
 
-  function getBackground() {
+  function displayBackgrounds() {
     let result = [];
-    for (let i=0; i < backgrounds.length; i++) {
-      result.push(<FormControlLabel value={backgrounds[i]} control={<Radio />} key={i} label={<Image style={{width: "200px"}} src={backgrounds[i]} rounded></Image>} />)
+    for (let i=0; i < postcards.length; i++) {
+      result.push(<FormControlLabel value={postcards[i]} control={<Radio />} key={i} label={<Image style={{width: "200px"}} src={postcards[i]} rounded></Image>} />)
     }
     return result
   }
@@ -171,26 +171,29 @@ export default function Edit() {
                             className="p-2 text-center"
                             style={{
                               width: "80%",
+                              height: "90vh",
+                              overflowY: "auto",
                             }}
                           >
-                            <h2>
-                              Choose Postcard {" "}
-                              <Tooltip title="Postcard For If You Fail Your Todo"><HelpIcon /></Tooltip>
-                            </h2>
-                            <Card
-                              style={{
-                                overflowY: "auto",
-                                maxHeight: "600px",
-                                height: "600px",
-                              }}
-                            >
-                              <Grid container direcion="row">
-                                <RadioGroup required value={imageUrl} onChange={(e) => {setImageUrl(e.target.value)}} onClick={onClose}>
-                                  <Grid item>{getBackground()}</Grid>
-                                </RadioGroup>
+                            <Grid container direction="column" justify="space-between" style={{height: "100%"}}>
+                              <h2>Change Postcard {" "}<Tooltip title="Postcard For If You Fail Your Todo"><HelpIcon /></Tooltip></h2>
+                              <Grid container alignItems="stretch">
+                                <Card
+                                  style={{
+                                    overflowY: "auto",
+                                    height: "70vh",
+                                  }}
+                                  elevation={0}
+                                >
+                                  <Grid container direcion="row" justify="center">
+                                    <RadioGroup required value={imageUrl} onChange={(e) => {setImageUrl(e.target.value)}} onClick={onClose}>
+                                      <Grid item>{displayBackgrounds()}</Grid>
+                                    </RadioGroup>
+                                  </Grid>
+                                </Card>
                               </Grid>
-                            </Card>
-                            <Button className="mt-2" fullWidth onClick={onClose} variant="outlined">Close</Button>
+                              <Button className="mt-2" fullWidth onClick={onClose} variant="outlined">Close</Button>
+                            </Grid>
                           </Card>
                         )
                       }

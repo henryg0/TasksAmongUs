@@ -15,17 +15,10 @@ def updateUnlockedBadgesRoute(userId):
     return (jsonify({"msg": "Missing data"}), 400)
 
   unlockedBadges = data.get("unlockedBadges")
-
-  error_log = {
-    "unlockedBadges": unlockedBadges,
-  }
-
-  for key in error_log:
-    if not error_log.get(key):
-      return (jsonify({"error": "Missing {}".format(key)}), 400)
   
   fields = {"unlockedBadges." + item: True for item in unlockedBadges}
+  fields["unlockedBadges.NORMIE"] = True
 
   ref = db.collection("Users").document(userId).update(fields)
 
-  return ({"msg": "Unlocked Badges Updated"})
+  return ({"msg": unlockedBadges})
