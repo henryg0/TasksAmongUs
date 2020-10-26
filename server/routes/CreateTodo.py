@@ -47,6 +47,7 @@ def createTodoRoute(userId):
   data["status"] = status
   data["userId"] = userId
   data["dueDate"] = dueDate
+  data["completedDate"] = dueDate + 1
   
   db.collection("Todo").document(todoId).set(data)
   return data

@@ -1,4 +1,6 @@
 import React, { useState, useEffect } from 'react';
+import axios from 'axios';
+import { useSnackbar } from 'notistack';
 import Layout from '../../components/Layout';
 import Modal from '../../components/Modal';
 import authenticate from '../../utils/authenticate';
@@ -27,68 +29,15 @@ export default function Profile() {
   let badges = getBadges();
   let borders = getBorders();
   let celebrations = getCelebrations();
+  let { enqueueSnackbar } = useSnackbar();
+  let [greeting, setGreeting] = useState("");
 
-  function displayBadges() {
-    let result = [];
-    for (let badgeName in badges) {
-      if (badgeName in unlockedBadges) {
-        result.push(
-          <FormControlLabel value={badgeName} control={<Radio style={{color: "red"}} />} key={badgeName} label={
-            <Tooltip title={badges[badgeName][1]} placement="bottom-start">
-              {badges[badgeName][0]}
-            </Tooltip>
-          }/>
-        )
-      } else {
-        result.push(
-          <FormControlLabel value={badgeName} control={<Radio disabled style={{color: "secondary"}} />} key={badgeName} label={
-            <Tooltip title={"LOCKED: " + badges[badgeName][1]} placement="bottom-start">
-              {badges[badgeName][0]}
-            </Tooltip>
-          }/>
-        )
-      }
-
-    }
-    return result;
-  }
-
-  function displayBorders() {
-    let result = [];
-    for (let border in borders) {
-      result.push(
-        <FormControlLabel value={border} control={<Radio />} key={border} label={
-          <Tooltip title={borders[border][1]} placement="bottom-start">
-            <div className={borders[border][0].root}>
-              <Avatar src={user.imageUrl} style={{width: "50px", height: "50px"}} />
-            </div>
-          </Tooltip>
-        }/>
-      )
-    }
-    return result;
-  }
-
-  function displayCelebrations() {
-    let result = [];
-    for (let celebration in celebrations) {
-      result.push(
-        <FormControlLabel value={celebration} control={<Radio />} key={celebration} label={
-          <Tooltip title={celebrations[celebration][1]} placement="bottom-start">
-            <video autoPlay muted loop width="300px">
-              <source src={celebrations[celebration]} type="video/mp4" />
-            </video>
-          </Tooltip>
-        }/>
-      )
-    }
-    return result;
-  }
-
-  let [unlockedBadges, setUnlockedBadges] = useState({"normie": true, "halloweenie": true})
-  let [selectedBadge, setSelectedBadge] = useState("normie");
-  let [selectedBorder, setSelectedBorder] = useState("black");
+  let [selectedBadge, setSelectedBadge] = useState("none");
+  let [selectedBorder, setSelectedBorder] = useState("none");
   let [selectedCelebration, setSelectedCelebration] = useState("amongUsVictory");
+  let [unlockedBadges, setUnlockedBadges] = useState({})
+  let [unlockedBorders, setUnlockedBorders] = useState({})
+  let [unlockedCelebrations, setUnlockedCelebrations] = useState({})
 
   let [allTimeCompleted, setAllTimeCompleted] = useState(0);
   let [allTimeFailed, setAllTimeFailed] = useState(0);
@@ -101,24 +50,27 @@ export default function Profile() {
   let [daySix, setDaySix] = useState({date: "Tue", completed: 0, failed: 0});
   let [daySeven, setDaySeven] = useState({date: "Mon", completed: 0, failed: 0});
 
-  function renderInCompletedCount() {
-    setAllTimeCompleted(allTimeCompleted + 1);
-    setDayOne({date: dayOne.date, completed: dayOne.completed + 1, failed: dayOne.failed});
-  }
-
   useEffect(() => {
-    // axios.get(`/api/user/${user.id}/friend/pending`)
-    //   .then((res) => {
-    //       if (res.data.error) {
-    //         console.log(res.data.error);
-    //       } else {
-    //         // console.log(res.data.pending);
-    //         setPendingRequests(res.data.pending);
-    //       }
-    //   })
-    //   .catch((err) => {
-    //     console.log(err);
-    //   })
+    setGreeting(getGreeting(user));
+    axios.get(`/api/user/${user.id}`)
+      .then((res) => {
+          if (res.data.error) {
+            console.log(res.data.error);
+          } else {
+            if (res.data.user.selectedBadge) {
+              setSelectedBadge(res.data.user.selectedBadge);
+            }
+            if (res.data.user.selectedBorder) {
+              setSelectedBorder(res.data.user.selectedBorder);
+            }
+          }
+          setUnlockedBadges(res.data.user.unlockedBadges);
+          setUnlockedBorders(res.data.user.unlockedBorders);
+          setUnlockedCelebrations(res.data.user.unlockedCelebrations);
+      })
+      .catch((err) => {
+        console.log(err);
+      })
     setAllTimeCompleted(400);
     setAllTimeFailed(40);
     setDayOne({date: "Sun", completed: 2, failed: 1});
@@ -130,12 +82,148 @@ export default function Profile() {
     setDaySeven({date: "Mon", completed: 4, failed: 0});
   }, [])
 
+  function displayBadges() {
+    let result = [];
+    for (let badge in badges) {
+      if (badge in unlockedBadges) {
+        result.push(
+          <FormControlLabel value={badge} control={<Radio style={{color: "red"}} />} key={badge} label={
+            <Tooltip title={badges[badge][1]} placement="bottom-start">
+              {badges[badge][0]}
+            </Tooltip>
+          }/>
+        )
+      } else {
+        result.push(
+          <FormControlLabel value={badge} control={<Radio disabled style={{color: "secondary"}} />} key={badge} label={
+            <Tooltip title={"LOCKED: " + badges[badge][1]} placement="bottom-start">
+              {badges[badge][0]}
+            </Tooltip>
+          }/>
+        )
+      }
+    }
+    result = result.slice(0, -1);
+    return result;
+  }
+
+  function displayBorders() {
+    let result = [];
+    for (let border in borders) {
+      if (border in unlockedBorders) {
+        result.push(
+          <FormControlLabel value={border} control={<Radio style={{color: "red"}} />} key={border} label={
+            <Tooltip title={borders[border][1]} placement="bottom-start">
+              <div className={borders[border][0].root}>
+                <Avatar src={user.imageUrl} style={{width: "50px", height: "50px"}} />
+              </div>
+            </Tooltip>
+          }/>
+        )
+      } else {
+        result.push(
+          <FormControlLabel value={border} control={<Radio disabled style={{color: "secondary"}} />} key={border} label={
+            <Tooltip title={"LOCKED: " + borders[border][1]} placement="bottom-start">
+              <div className={borders[border][0].root}>
+                <Avatar src={user.imageUrl} style={{width: "50px", height: "50px"}} />
+              </div>
+            </Tooltip>
+          }/>
+        )
+      }
+    }
+    result = result.slice(0, -1);
+    return result;
+  }
+
+  function displayCelebrations() {
+    let result = [];
+    for (let celebration in celebrations) {
+      if (celebration in unlockedCelebrations) {
+        result.push(
+          <FormControlLabel value={celebration} control={<Radio style={{color: "red"}} />} key={celebration} label={
+            <Tooltip title={celebrations[celebration][1]} placement="bottom-start">
+              <video autoPlay muted loop width="300px">
+                <source src={celebrations[celebration]} type="video/mp4" />
+              </video>
+            </Tooltip>
+          }/>
+        )
+      } else {
+        result.push(
+          <FormControlLabel value={celebration} control={<Radio disabled style={{color: "secondary"}} />} key={celebration} label={
+            <Tooltip title={"LOCKED: " + celebrations[celebration][1]} placement="bottom-start">
+              <video autoPlay muted loop width="300px">
+                <source src={celebrations[celebration]} type="video/mp4" />
+              </video>
+            </Tooltip>
+          }/>
+        )
+      }
+    }
+    return result;
+  }
+
+  function updateSelectedBadge(selectedBadge) {
+    const data = {
+      "selectedBadge": selectedBadge
+    };
+
+    axios.put(`/api/user/${user.id}/selected/badge/update`, data)
+      .then((res) => {
+        console.log(res);
+        enqueueSnackbar("Badge Changed", {variant: "success"})
+      })
+      .catch((err) => {
+        console.log(err);
+        enqueueSnackbar("Badge Failed To Change", {variant: "error"})
+      })
+  }
+
+  function updateSelectedBorder(selectedBorder) {
+    const data = {
+      "selectedBorder": selectedBorder
+    };
+
+    axios.put(`/api/user/${user.id}/selected/border/update`, data)
+      .then((res) => {
+        console.log(res);
+        enqueueSnackbar("Border Changed", {variant: "success"})
+      })
+      .catch((err) => {
+        console.log(err);
+        enqueueSnackbar("Border Failed To Change", {variant: "error"})
+      })
+  }
+
+  function updateSelectedCelebration(selectedCelebration) {
+    const data = {
+      "selectedCelebration": selectedCelebration
+    };
+
+    axios.put(`/api/user/${user.id}/selected/celebration/update`, data)
+      .then((res) => {
+        console.log(res);
+        enqueueSnackbar("Celebration Changed", {variant: "success"})
+      })
+      .catch((err) => {
+        console.log(err);
+        enqueueSnackbar("Celebration Failed To Change", {variant: "error"})
+      })
+  }
+
+  function renderInCompletedCount() {
+    setAllTimeCompleted(allTimeCompleted + 1);
+    setDayOne({date: dayOne.date, completed: dayOne.completed + 1, failed: dayOne.failed});
+  }
+
+
   return (
     <Layout user={user}>
       <Container>
         <Grid container justify="center" spacing={3}>
           <Grid item xs={10} md={7}>
-            <h5 className="mt-2 text-secondary">{getGreeting(user)}</h5>
+            <h5 className="mt-2 text-secondary">{greeting}</h5>
             <Card
               className="p-2 mb-2 mt-2"
               variant="outlined"
@@ -178,8 +266,9 @@ export default function Profile() {
                                     <Grid container direcion="row" justify="center">
                                       <RadioGroup required value={selectedBadge} 
                                         onChange={(e) => {
-                                          setSelectedBadge(e.target.value)
-                                          onClose()
+                                          setSelectedBadge(e.target.value);
+                                          updateSelectedBadge(e.target.value);
+                                          onClose();
                                         }}
                                       >
                                         <Grid item>{displayBadges()}</Grid>
@@ -190,8 +279,9 @@ export default function Profile() {
                                     <Grid container direcion="row" justify="center">
                                       <RadioGroup required value={selectedBorder}
                                         onChange={(e) => {
-                                          setSelectedBorder(e.target.value)
-                                          onClose()
+                                          setSelectedBorder(e.target.value);
+                                          updateSelectedBorder(e.target.value);
+                                          onClose();
                                         }}
                                       >
                                         <Grid item>{displayBorders()}</Grid>
@@ -202,8 +292,9 @@ export default function Profile() {
                                     <Grid container direcion="row" justify="center">
                                       <RadioGroup required value={selectedCelebration} 
                                         onChange={(e) => {
-                                          setSelectedCelebration(e.target.value)
-                                          onClose()
+                                          setSelectedCelebration(e.target.value);
+                                          updateSelectedCelebration(e.target.value);
+                                          onClose();
                                         }}
                                       >
                                         <Grid item>{displayCelebrations()}</Grid>

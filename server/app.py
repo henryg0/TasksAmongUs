@@ -18,8 +18,14 @@ from .routes.GetTodo import getTodo
 from .routes.SearchUser import searchUser
 from .routes.GetFinishedTodo import getFinishedTodo
 from .routes.GetUpcomingTodo import getUpcomingTodo
+from .routes.GetWeeklyProgress import getWeeklyProgress
 from .routes.FinishTodo import finishTodo
-
+from .routes.UpdateSelectedBadge import updateSelectedBadge
+from .routes.UpdateSelectedBorder import updateSelectedBorder
+from .routes.UpdateSelectedCelebration import updateSelectedCelebration
+from .routes.UpdateUnlockedBadges import updateUnlockedBadges
+from .routes.UpdateUnlockedBorders import updateUnlockedBorders
+from .routes.UpdateUnlockedCelebrations import updateUnlockedCelebrations
 
 app = Flask(__name__)
 
@@ -42,7 +48,14 @@ app.register_blueprint(getTodo)
 app.register_blueprint(searchUser)
 app.register_blueprint(getFinishedTodo)
 app.register_blueprint(getUpcomingTodo)
+app.register_blueprint(getWeeklyProgress)
 app.register_blueprint(finishTodo)
+app.register_blueprint(updateSelectedBadge)
+app.register_blueprint(updateSelectedBorder)
+app.register_blueprint(updateSelectedCelebration)
+app.register_blueprint(updateUnlockedBadges)
+app.register_blueprint(updateUnlockedBorders)
+app.register_blueprint(updateUnlockedCelebrations)
 
 
 

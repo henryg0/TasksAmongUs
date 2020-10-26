@@ -50,5 +50,13 @@ export default function Border() {
         color: '#F4B26A',
       }), "Awarded for adding 3 friends"
     ],
+    "none": [
+      useGradientAvatarStyles({
+        gap: 2,
+        thickness: 3,
+        gapColor: 'white',
+        color: 'white',
+      }), ""
+    ],
   }
 }

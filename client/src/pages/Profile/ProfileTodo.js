@@ -105,24 +105,25 @@ export default function ProfileTodo(props) {
           </CardActions>
         }
         title={
-          <div>
-            {user.fullName}{" "}
-            {badges[selectedBadge][0]}
-            <br/>
-            {todoName}
-          </div>
-        }
-        subheader={
-          displayDate.toDateString()
+          <Grid container justify="space-between">
+            <Grid>
+              {user.fullName}{" "}
+              {badges[selectedBadge][0]}
+              <br/>
+              {todoName}
+            </Grid>
+            <Grid className="text-secondary">
+              {displayDate.toLocaleDateString()} <br/> {displayDate.toLocaleTimeString([], {timeStyle: 'short'})}
+            </Grid>
+          </Grid>
         }
       />
       <Collapse in={expanded} timeout="auto" unmountOnExit>
-        <CardContent>
+        <CardContent className="text-center">
           <Typography variant="body2" color="textSecondary">
             {description}
           </Typography>
-          <br />
-          <Grid container direction="row">
+          <Grid container direction="row" justify="center">
             <Modal icon={DoneIcon} component={
               ({onClose}) => {
                 return (
