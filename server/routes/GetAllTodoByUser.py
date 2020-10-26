@@ -1,5 +1,7 @@
-from flask import request, Blueprint
+from flask import request, Blueprint, jsonify
 from ..database.database import db
+from firebase_admin import firestore
+import datetime
 
 getAllTodoByUser = Blueprint("getAllTodoByUser", __name__)
 
@@ -7,10 +9,14 @@ getAllTodoByUser = Blueprint("getAllTodoByUser", __name__)
 def getAllTodoByUserRoute(userId):
   if not userId:
     return (jsonify({"error": "Missing userId"}), 400)
+  
+  docs = db.collection('Todo').where("userId", "==", userId).order_by(u'dueDate', direction=firestore.Query.ASCENDING).stream()
+  # results = docs.where("userId", "==", userId).order_by('dueDate').limit(3).stream()
+  
+  # res = [doc.to_dict() for doc in result]
 
-  docs = db.collection('Todo')
-  result = docs.where("userId", "==", userId).stream()
+  # print(res)
   
-  res = [doc.to_dict() for doc in result]
-  
-  return {"todos": res}
+  sorted_results = [doc.to_dict() for doc in docs]
+
+  return {"todos": sorted_results}
