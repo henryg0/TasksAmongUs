@@ -24,13 +24,12 @@ def createUserRoute():
     "firstName": firstName,
     "lastName": lastName,
     "email": email,
-    "imageUrl": imageUrl
+    "imageUrl": imageUrl,
   }
 
   for key in error_log:
     if not error_log.get(key):
       return (jsonify({"error": "Missing {}".format(key)}), 400)
-
 
   # IF SOMEONE ELSE HAS SAME ID, IT OVERRIDES
   db.collection("Users").document(userId).set(data)

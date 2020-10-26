@@ -16,8 +16,9 @@ from .routes.AcceptFriendRequest import acceptFriendRequest
 from .routes.GetAllFriends import getAllFriends
 from .routes.GetTodo import getTodo
 from .routes.SearchUser import searchUser
-
-
+from .routes.GetFinishedTodo import getFinishedTodo
+from .routes.GetUpcomingTodo import getUpcomingTodo
+from .routes.FinishTodo import finishTodo
 
 
 app = Flask(__name__)
@@ -39,7 +40,9 @@ app.register_blueprint(acceptFriendRequest)
 app.register_blueprint(getAllFriends)
 app.register_blueprint(getTodo)
 app.register_blueprint(searchUser)
-
+app.register_blueprint(getFinishedTodo)
+app.register_blueprint(getUpcomingTodo)
+app.register_blueprint(finishTodo)
 
 
 
