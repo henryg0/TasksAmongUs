@@ -43,7 +43,6 @@ def getWeeklyProgressRoute(userId):
     else:
       if currentTime > todo["completedDate"]:
         todoDates[day][1].append(todo)
-  print(todoDates)
   
   completed = [{int(datetime.datetime.strptime(dateCompleted, "%m/%d/%Y").timestamp()) : {"completed":len(todoDates[dateCompleted][0]), "failed":len(todoDates[dateCompleted][1])} for dateCompleted in todoDates}]
 
