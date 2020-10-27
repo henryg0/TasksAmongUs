@@ -38,11 +38,11 @@ export default function Landing() {
           TasksAmongUs
         </h1>
         <div id="login-button"></div>
-        {/* <div className="video-container"> */}
-          <video autoPlay loop muted playsInline>
-            <source src={AmongUs} type="video/mp4" webkit-playsinline playsinline />
+        <div className="video-container">
+          <video autoPlay loop muted playsInline width="100%">
+            <source src={"https://i.imgur.com/PEmyR5I.mp4"} type="video/mp4" webkit-playsinline playsinline/>
           </video>
-        {/* </div> */}
+        </div>
       </div>
       <div id="footer">
         <AppFooter />
