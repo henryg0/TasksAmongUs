@@ -18,7 +18,7 @@ def getWeeklyProgressRoute(userId):
   currentTime = int(time.time()*1000)
 
   docs = db.collection("Todo").order_by("completedDate", direction=firestore.Query.ASCENDING).start_at({u'completedDate' : lowerBound}).end_at({u'completedDate' : currentTime}).stream()
-  docDict = [docs.to_dict() for doc in docs]
+  docDict = [doc.to_dict() for doc in docs]
 
   weekdays = {
     0 : "Monday",
@@ -30,26 +30,21 @@ def getWeeklyProgressRoute(userId):
     6 : "Sunday"
   }
   
-  todoDates = {
-    "Monday": [[], []],
-    "Tuesday": [[], []],
-    "Wednesday": [[], []],
-    "Thursday": [[], []],
-    "Friday": [[], []],
-    "Saturday": [[], []],
-    "Sunday": [[], []]
-  }
+  todoDates = {datetime.datetime.fromtimestamp(todo["completedDate"]/1000).strftime("%m/%d/%Y") : [[], []] for todo in docDict}
+    
   
   for todo in docDict:
-    print(todo)
-    weekday = datetime.datetime(todo["completedDate"]).get_weekday()
-    print(datetime.datetime(todo["completedDate"]).strftime("%Y/%m/%d"))
+    # weekday = datetime.datetime(todo["completedDate"]).get_weekday()
+    day = datetime.datetime.fromtimestamp(todo["completedDate"]/1000).strftime("%m/%d/%Y")
 
-    day = weekdays[weekday]
+    # day = weekdays[weekday]
     if todo.get("status"):
       todoDates[day][0].append(todo)
     else:
       if currentTime > todo["completedDate"]:
         todoDates[day][1].append(todo)
+  print(todoDates)
   
-  return {"todos": todoDates}
+  completed = [{int(datetime.datetime.strptime(dateCompleted, "%m/%d/%Y").timestamp()) : {"completed":len(todoDates[dateCompleted][0]), "failed":len(todoDates[dateCompleted][1])} for dateCompleted in todoDates}]
+
+  return {"todos": completed}
