@@ -1,5 +1,6 @@
 from flask import request, Blueprint, jsonify
 from ..database.database import db
+import datetime
 
 updateTodo = Blueprint("updateTodo", __name__)
 
@@ -18,13 +19,14 @@ def updateTodoRoute(userId, todoId):
 
   todoName = data.get("todoName")
   description = data.get("description")
-  dueDate = data.get("dueDate")
+  dueDate = datetime.datetime.strptime(data.get("dueDate"), '%Y-%m-%dT%H:%M:%S.%fZ').timestamp() * 1000
   imageUrl = data.get("imageUrl")
 
   dataLog = {
     "todoName":todoName,
     "dueDate":dueDate,
-    "imageUrl":imageUrl
+    "imageUrl":imageUrl,
+    "description":description
   }
 
   for key in dataLog:

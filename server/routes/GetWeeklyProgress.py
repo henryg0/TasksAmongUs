@@ -16,9 +16,8 @@ def getWeeklyProgressRoute(userId):
   
   # each day: 86400000 ms
   currentTime = int(time.time()*1000)
-  today = datetime.datetime(currentTime).get_weekday()
 
-  docs = db.collection("Todo").orderBy("completedDate", firebase.Query.ASCENDING).start_at({u'completedDate' : lowerBound}).end_at({u'completedDate' : currentTime}).stream()
+  docs = db.collection("Todo").order_by("completedDate", direction=firestore.Query.ASCENDING).start_at({u'completedDate' : lowerBound}).end_at({u'completedDate' : currentTime}).stream()
   docDict = [docs.to_dict() for doc in docs]
 
   weekdays = {
@@ -42,7 +41,10 @@ def getWeeklyProgressRoute(userId):
   }
   
   for todo in docDict:
+    print(todo)
     weekday = datetime.datetime(todo["completedDate"]).get_weekday()
+    print(datetime.datetime(todo["completedDate"]).strftime("%Y/%m/%d"))
+
     day = weekdays[weekday]
     if todo.get("status"):
       todoDates[day][0].append(todo)
