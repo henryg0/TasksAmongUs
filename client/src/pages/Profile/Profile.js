@@ -38,14 +38,8 @@ export default function Profile() {
 
   let [allTimeCompleted, setAllTimeCompleted] = useState(0);
   let [allTimeFailed, setAllTimeFailed] = useState(0);
-
-  let [dayOne, setDayOne] = useState({date: "Sun", completed: 0, failed: 0});
-  let [dayTwo, setDayTwo] = useState({date: "Sat", completed: 0, failed: 0});
-  let [dayThree, setDayThree] = useState({date: "Fri", completed: 0, failed: 0});
-  let [dayFour, setDayFour] = useState({date: "Thur", completed: 0, failed: 0});
-  let [dayFive, setDayFive] = useState({date: "Wed", completed: 0, failed: 0});
-  let [daySix, setDaySix] = useState({date: "Tue", completed: 0, failed: 0});
-  let [daySeven, setDaySeven] = useState({date: "Mon", completed: 0, failed: 0});
+  let [weeklyProgress, setWeeklyProgress] = useState([{}, {}, {}, {}, {}, {}, {}]);
+  let [counter, setCounter] = useState(0);
 
   useEffect(() => {
     setGreeting(getGreeting(user));
@@ -54,45 +48,51 @@ export default function Profile() {
         if (res.data.error) {
           console.log(res.data.error);
         } else {
-          const customizations = res.data.user;
-          if (customizations.selectedBadge) {
-            setSelectedBadge(customizations.selectedBadge);
+          if (res.data.user.selectedBadge) {
+            setSelectedBadge(res.data.user.selectedBadge);
           } else {
             setSelectedBadge("NORMIE");
           }
-          if (customizations.selectedBorder) {
-            setSelectedBorder(customizations.selectedBorder);
+          if (res.data.user.selectedBorder) {
+            setSelectedBorder(res.data.user.selectedBorder);
           } else {
             setSelectedBorder("BLACK");
           }
-          if (customizations.selectedCelebration) {
-            setSelectedCelebration(customizations.selectedCelebration);
+          if (res.data.user.selectedCelebration) {
+            setSelectedCelebration(res.data.user.selectedCelebration);
           } else {
             setSelectedCelebration("AMONG US WIN")
           }
-          if (customizations.unlockedBadges) {
-            setUnlockedBadges(customizations.unlockedBadges);
-          }
-          if (customizations.unlockedBorders) {
-            setUnlockedBorders(customizations.unlockedBorders);
-          }
-          if (customizations.unlockedCelebrations) {
-            setUnlockedCelebrations(customizations.unlockedCelebrations);
-          }
+          // if (customizations.unlockedBadges) {
+          //   setUnlockedBadges(customizations.unlockedBadges);
+          // }
+          // if (customizations.unlockedBorders) {
+          //   setUnlockedBorders(customizations.unlockedBorders);
+          // }
+          // if (customizations.unlockedCelebrations) {
+          //   setUnlockedCelebrations(customizations.unlockedCelebrations);
+          // }
+          setAllTimeCompleted(res.data.user.finishedTodos);
+
         }
       })
       .catch((err) => {
         console.log(err);
       })
-    setAllTimeCompleted(400);
-    setAllTimeFailed(40);
-    setDayOne({date: "Sun", completed: 2, failed: 1});
-    setDayTwo({date: "Sat", completed: 6, failed: 0});
-    setDayThree({date: "Fri", completed: 2, failed: 0});
-    setDayFour({date: "Thu", completed: 5, failed: 2});
-    setDayFive({date: "Wed", completed: 1, failed: 0});
-    setDaySix({date: "Tue", completed: 0, failed: 1});
-    setDaySeven({date: "Mon", completed: 4, failed: 0});
+    setAllTimeFailed(1);
+
+    axios.get(`/api/user/${user.id}/weekly`)
+      .then((res) => {
+        if (res.data.err) {
+          console.log(res.data.err);
+        } else {
+          setWeeklyProgress(res.data.todos);
+          console.log(res.data.todos)
+        }
+      })
+      .catch((err) => {
+        console.log(err)
+      })
   }, [])
 
   function updateSelectedBadge(selectedBadge) {
@@ -143,9 +143,8 @@ export default function Profile() {
       })
   }
 
-  function renderInCompletedCount() {
-    setAllTimeCompleted(allTimeCompleted + 1);
-    setDayOne({date: dayOne.date, completed: dayOne.completed + 1, failed: dayOne.failed});
+  function renderInCounter() {
+    setCounter(counter + 1);
   }
 
   return (
@@ -245,19 +244,14 @@ export default function Profile() {
                   <h3 className="text-center">Weekly Progress</h3>
                   <div style={{height: "200px"}}>
                     <WeeklyChart 
-                      dayOne={dayOne}
-                      dayTwo={dayTwo}
-                      dayThree={dayThree}
-                      dayFour={dayFour}
-                      dayFive={dayFive}
-                      daySix={daySix}
-                      daySeven={daySeven}
+                      weeklyProgress={weeklyProgress}
+                      counter={counter}
                     />
                   </div>
                 </Grid>
                 <Grid item xs={12} md={3}>
                 <h3 className="text-center">All Time Progress</h3>
-                  <div style={{height: "150px"}}><AllTimeChart allTimeCompleted={allTimeCompleted} allTimeFailed={allTimeFailed} /></div>
+                  <div style={{height: "150px"}}><AllTimeChart allTimeCompleted={allTimeCompleted + counter} allTimeFailed={allTimeFailed} /></div>
                 </Grid>
               </Grid>
             </Card>
@@ -270,7 +264,7 @@ export default function Profile() {
               </Fab>
             </h2>
             <TodoList user={user} 
-              renderInCompletedCount={renderInCompletedCount} 
+              renderInCounter={renderInCounter}
               selectedBadge={selectedBadge}
               selectedBorder={selectedBorder}
               selectedCelebration={selectedCelebration} 

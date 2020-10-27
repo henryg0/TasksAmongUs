@@ -42,7 +42,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export default function ProfileTodo(props) {
-  const { user, todoId, todoName, dueDate, description, imageUrl, handleDelete, idx, renderInCompletedCount, selectedBadge, selectedBorder, selectedCelebration } = props;
+  const { user, todoId, todoName, dueDate, description, imageUrl, handleDelete, idx, renderInCounter, selectedBadge, selectedBorder, selectedCelebration } = props;
   const { enqueueSnackbar, closeSnackbar } = useSnackbar();
   const classes = useStyles();
   let displayDate = new Date(dueDate);
@@ -69,16 +69,27 @@ export default function ProfileTodo(props) {
   }
 
   function completeTodo() {
-    enqueueSnackbar(
-      <Grid container direction="column">
-        {renderInCompletedCount()}
-        <h3 className="text-center">Todo Completed!</h3>
-        <video autoPlay loop muted width="300px">
-          <source src={celebrations[selectedCelebration]} type="video/mp4" />
-        </video>
-        <Button className="text-white" onClick={() => closeSnackbar()}>Close</Button>
-      </Grid>
-    ) 
+    axios.patch(`/api/user/${user.id}/todo/${todoId}/status/complete`)
+      .then((res) => {
+        if (res.data.err) {
+          enqueueSnackbar("Todo Didn't Complete", {variant: "error"});
+        } else {
+          handleDelete(idx);
+          enqueueSnackbar(
+            <Grid container direction="column">
+              {renderInCounter()}
+              <h3 className="text-center">Todo Completed!</h3>
+              <video autoPlay loop muted width="300px">
+                <source src={celebrations[selectedCelebration]} type="video/mp4" />
+              </video>
+              <Button className="text-white" onClick={() => closeSnackbar()}>Close</Button>
+            </Grid>
+          );
+        }
+      })
+      .catch((err) => {
+        console.log(err)
+      })
   }
 
   return (
