@@ -1,4 +1,4 @@
-export default function getBackgrounds() {
+export default function getPostcards() {
   return [
     "https://i.imgur.com/HLkruVA.jpg",
     "https://i.imgur.com/8gFwiaK.jpg",

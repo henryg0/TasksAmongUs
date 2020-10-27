@@ -187,9 +187,7 @@ export default function Create() {
                       }
                     }/>
                   </Grid>
-                  <Grid container item>
-                    <Image style={{width: "100%"}} src={imageUrl} rounded></Image>
-                  </Grid>
+                  <Image style={{width: "100%"}} src={imageUrl} rounded/>
                   <Grid container item>
                     <Button type="submit" className="mb-2" variant="contained" color="primary" fullWidth>Create</Button>
                   </Grid>
