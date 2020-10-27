@@ -70,7 +70,7 @@ export default function TodoList(props) {
         height: "450px",
         width: "100%"
       }}
-      className="mb-2"
+      className="mb-2 scrolling"
     >
       {getTodos()}
     </Card>

@@ -158,7 +158,7 @@ export default function Create() {
                           <Card 
                             className="p-2 text-center"
                             style={{
-                              width: "80%",
+                              width: "90%",
                               height: "85vh",
                               overflowY: "auto",
                             }}

@@ -58,7 +58,7 @@ export default function AppNavbar(props) {
                   </>
                 } id="nav-profile">
                   {/* <NavDropdown.Item href="#action/3.1">Settings</NavDropdown.Item> */}
-                  <NavDropdown.Item href="/" onClick={user.signOut}>Sign out</NavDropdown.Item>
+                  <NavDropdown.Item href="/" onClick={user.signOut}>SIGN OUT</NavDropdown.Item>
                 </NavDropdown>
               </Nav>
             }

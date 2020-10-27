@@ -175,7 +175,7 @@ export default function Profile() {
                           <Card
                             className="p-2 text-center"
                             style={{
-                              width: "80%",
+                              width: "90%",
                               height: "85vh",
                               overflowY: "auto",
                             }}
@@ -189,7 +189,6 @@ export default function Profile() {
                                     height: "65vh",
                                   }}
                                   elevation={0}
-                                  
                                 >
                                   <h5>Badges</h5>
                                   <Grid container direcion="row" justify="center">

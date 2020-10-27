@@ -7,9 +7,9 @@ export default function Unfinished() {
   return (
     <Card 
       variant="outlined"
+      className="scrolling"
       style={{
         overflowY: "auto",
-        maxHeight: "450px",
         height: "450px",
         width: "100%",
       }}

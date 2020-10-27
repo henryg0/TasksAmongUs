@@ -19,19 +19,19 @@ export default function Home() {
           <Grid item xs={10} md={9}>
             {homeToggle ?
               <div>
-                <Button className="mt-2 mb-2 mr-2 lg-btn" variant="contained" color="primary" size="large">
-                  Ongoing Todos
+                <Button className="mt-2 mb-2 mr-2" variant="contained" color="primary" size="large">
+                  Ongoing
                 </Button>
-                <Button className="mt-2 mb-2 lg-btn" variant="outlined" color="primary" size="large" onClick={() => setHomeToggle(0)}>
+                <Button className="mt-2 mb-2" variant="outlined" color="primary" size="large" onClick={() => setHomeToggle(0)}>
                   Completed/Failed
                 </Button>
                 <Ongoing />
               </div> :
               <div>
-                <Button className="mt-2 mb-2 mr-2 lg-btn" variant="outlined" color="primary" size="large" onClick={() => setHomeToggle(1)}>
-                  Ongoing Todos
+                <Button className="mt-2 mb-2 mr-2" variant="outlined" color="primary" size="large" onClick={() => setHomeToggle(1)}>
+                  Ongoing
                 </Button>
-                <Button className="mt-2 mb-2 lg-btn" variant="contained" color="primary" size="large">
+                <Button className="mt-2 mb-2" variant="contained" color="primary" size="large">
                   Completed/Failed
                 </Button>
                 <Finished />

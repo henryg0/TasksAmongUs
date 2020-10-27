@@ -82,4 +82,13 @@ hr {
   width: 165px;
 }
 
+.scrolling {
+  -webkit-overflow-scrolling: touch;
+}
+
+.scrolling > * {
+  -webkit-transform: translateZ(0px);
+}
+
+
 /* --- --- Global --- --- */

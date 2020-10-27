@@ -3,7 +3,7 @@ import Container from 'react-bootstrap/Container';
 
 export default function AppFooter() {
   return (
-    <Container className="text-center pt-0 pb-0 mt-3">
+    <Container className="text-center pt-0 pb-0 pt-3">
       <p>
         <a href="/about" className="nav-item">ABOUT</a>
         {" "}•{" "}
