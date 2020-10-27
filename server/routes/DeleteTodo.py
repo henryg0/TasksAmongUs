@@ -1,7 +1,6 @@
 from flask import request, Blueprint, jsonify
 from ..database.database import db
 
-
 deleteTodo = Blueprint("deleteTodo", __name__)
 
 @deleteTodo.route("/api/todo/<todoId>/delete", methods = ["DELETE"])

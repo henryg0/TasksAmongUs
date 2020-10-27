@@ -18,7 +18,7 @@ def getFinishedTodoRoute(userId):
 
   currentTime = time.time() * 1000
 
-  docs = db.collection('Todo').where('dueDate', '<', currentTime).order_by(u'dueDate', direction=firestore.Query.ASCENDING).stream()
+  docs = db.collection('Todo').where('completedDate', '<', currentTime).order_by(u'completedDate', direction=firestore.Query.ASCENDING).stream()
   
   sortedResults = [doc.to_dict() for doc in docs]
   

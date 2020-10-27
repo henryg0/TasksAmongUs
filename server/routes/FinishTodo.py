@@ -20,7 +20,6 @@ def finishTodoRoute(userId, todoId):
     return (jsonify({"error": "Todo does not exist"}), 404)
 
   docDict = doc.to_dict()
-  
 
   if not (docDict.get("userId") and docDict["userId"] == userId):
     return (jsonify({"error": "User is not allowed to update this field"}), 403)
