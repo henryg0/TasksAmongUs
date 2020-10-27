@@ -8,6 +8,11 @@ createUser = Blueprint("createUser", __name__)
 def createUserRoute():
   data = request.get_json()
 
+  existing_user = db.collections('User').document(data.get("userId"))
+
+  if existing_user:
+    return {"msg":"user already exists"}
+    
   if not data:
     return (jsonify({"msg": "Missing data"}), 400)
 

@@ -57,8 +57,6 @@ app.register_blueprint(updateUnlockedBadges)
 app.register_blueprint(updateUnlockedBorders)
 app.register_blueprint(updateUnlockedCelebrations)
 
-
-
 @app.route('/')
 def hello_world():
   return 'Hello, World!'
