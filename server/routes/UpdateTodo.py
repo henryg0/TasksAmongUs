@@ -8,7 +8,7 @@ updateTodo = Blueprint("updateTodo", __name__)
 def updateTodoRoute(userId, todoId):
   if not userId:
     return (jsonify({"error": "Missing userId"}), 400)
-    
+      
   if not todoId:
     return (jsonify({"error": "Missing todoId"}), 400)    
   
@@ -22,6 +22,7 @@ def updateTodoRoute(userId, todoId):
   dueDate = datetime.datetime.strptime(data.get("dueDate"), '%Y-%m-%dT%H:%M:%S.%fZ').timestamp() * 1000
   imageUrl = data.get("imageUrl")
 
+  # add completed date!
   dataLog = {
     "todoName":todoName,
     "dueDate":dueDate,
