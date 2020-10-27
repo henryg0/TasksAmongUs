@@ -25,6 +25,7 @@ def updateUnlockedCelebrationsRoute(userId):
       return (jsonify({"error": "Missing {}".format(key)}), 400)
   
   fields = {"unlockedCelebrations." + item: True for item in unlockedCelebrations}
+  fields["unlockedCelebrations.AMONG US WIN"] = True
 
   ref = db.collection("Users").document(userId).update(fields)
 

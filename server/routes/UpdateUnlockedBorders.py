@@ -27,5 +27,6 @@ def updateUnlockedBordersRoute(userId):
   fields = {"unlockedBorders." + item: True for item in unlockedBorders}
 
   ref = db.collection("Users").document(userId).update(fields)
+  fields["unlockedBorders.BLACK"] = True
 
   return ({"msg": "Unlocked Borders Updated"})

@@ -6,6 +6,7 @@ export default function Highlights() {
   return (
     <Card 
       variant="outlined"
+      className="scrolling"
       style={{
         overflowY: "auto",
         maxHeight: "450px",

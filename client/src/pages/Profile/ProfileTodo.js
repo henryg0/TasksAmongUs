@@ -85,7 +85,7 @@ export default function ProfileTodo(props) {
     <Card className={classes.root}>
       <CardHeader
         avatar={
-          <div className={borders[selectedBorder][0].root}>
+          <div className={borders[selectedBorder].root}>
             <Avatar src={user.imageUrl} style={{width: "50px", height: "50px"}} />
           </div>
         }
@@ -108,7 +108,7 @@ export default function ProfileTodo(props) {
           <Grid container justify="space-between">
             <Grid>
               {user.fullName}{" "}
-              {badges[selectedBadge][0]}
+              {badges[selectedBadge]}
               <br/>
               {todoName}
             </Grid>

@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 import Layout from '../components/Layout';
-import getBackgrounds from '../utils/get.backgrounds';
+import getPostcards from '../utils/get.postcards';
 import authenticate from '../utils/authenticate';
+import checkAchievements from '../utils/check.achievements';
 import Form from 'react-bootstrap/Form';
 import Container from '@material-ui/core/Container';
 import Image from 'react-bootstrap/Image';
@@ -30,16 +31,16 @@ import Tooltip from '@material-ui/core/Tooltip';
 export default function Create() {
   let user = authenticate();
   const { enqueueSnackbar } = useSnackbar();
-  const backgrounds = getBackgrounds();
+  const postcards = getPostcards();
   const [todoName, setTodoName] = useState("");
   const [dueDate, setDueDate] = useState(new Date());
   const [description, setDesciption] = useState("");
-  const [imageUrl, setImageUrl] = useState(backgrounds[0]);
+  const [imageUrl, setImageUrl] = useState(postcards[0]);
 
-  function displayBackGrounds() {
+  function displayBackgrounds() {
     let result = [];
-    for (let i=0; i < backgrounds.length; i++) {
-      result.push(<FormControlLabel value={backgrounds[i]} control={<Radio />} key={i} label={<Image style={{width: "200px"}} src={backgrounds[i]} rounded></Image>} />)
+    for (let i=0; i < postcards.length; i++) {
+      result.push(<FormControlLabel value={postcards[i]} control={<Radio />} key={i} label={<Image style={{width: "200px"}} src={postcards[i]} rounded></Image>} />)
     }
     return result;
   }
@@ -59,20 +60,24 @@ export default function Create() {
       description: description,
       imageUrl: imageUrl
     }
-        
+    
+    axios.post(`/api/user/${user.id}/todo/create`, data)
+    .then((res) => {
+      console.log(res);
+      checkAchievements(user.id, enqueueSnackbar, {
+        todoDescription: todoName + " " + description,
+        todoImageUrl: imageUrl,
+      });
+      enqueueSnackbar("Todo Created", {variant: "success"})
+    })
+    .catch((err) => {
+      console.log(err);
+    })
+
     setTodoName("");
     setDueDate(new Date());
     setDesciption("");
-    setImageUrl(backgrounds[0]);
-
-    axios.post(`/api/user/${user.id}/todo/create`, data)
-      .then((res) => {
-        console.log(res);
-        enqueueSnackbar("Todo Created", {variant: "success"})
-      })
-      .catch((err) => {
-        console.log(err);
-      })
+    setImageUrl(postcards[0]);
   }
 
   return (
@@ -153,36 +158,36 @@ export default function Create() {
                           <Card 
                             className="p-2 text-center"
                             style={{
-                              width: "80%",
-                              height: "90vh",
+                              width: "90%",
+                              height: "85vh",
                               overflowY: "auto",
                             }}
                           >
-                            <h2>
-                              Change Postcard {" "}
-                              <Tooltip title="Postcard For If You Fail Your Todo"><HelpIcon /></Tooltip>
-                            </h2>
-                            <Card
-                              style={{
-                                overflowY: "auto",
-                                height: "70vh",
-                              }}
-                            >
-                              <Grid container direcion="row">
-                                <RadioGroup required value={imageUrl} onChange={(e) => {setImageUrl(e.target.value)}} onClick={onClose}>
-                                  <Grid item>{displayBackGrounds()}</Grid>
-                                </RadioGroup>
+                            <Grid container direction="column" justify="space-between" style={{height: "100%"}}>
+                              <h3>Change Postcard {" "}<Tooltip title="Postcard For If You Fail Your Todo"><HelpIcon /></Tooltip></h3>
+                              <Grid container alignItems="stretch">
+                                <Card
+                                  style={{
+                                    overflowY: "auto",
+                                    height: "65vh",
+                                  }}
+                                  elevation={0}
+                                >
+                                  <Grid container direcion="row" justify="center">
+                                    <RadioGroup required value={imageUrl} onChange={(e) => {setImageUrl(e.target.value)}} onClick={onClose}>
+                                      <Grid item>{displayBackgrounds()}</Grid>
+                                    </RadioGroup>
+                                  </Grid>
+                                </Card>
                               </Grid>
-                            </Card>
-                            <Button className="mt-2" fullWidth onClick={onClose} variant="outlined">Close</Button>
+                              <Button className="mt-2" fullWidth onClick={onClose} variant="outlined">Close</Button>
+                            </Grid>
                           </Card>
                         )
                       }
                     }/>
                   </Grid>
-                  <Grid container item>
-                    <Image style={{width: "100%"}} src={imageUrl} rounded></Image>
-                  </Grid>
+                  <Image style={{width: "100%"}} src={imageUrl} rounded/>
                   <Grid container item>
                     <Button type="submit" className="mb-2" variant="contained" color="primary" fullWidth>Create</Button>
                   </Grid>

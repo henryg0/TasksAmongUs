@@ -1,5 +1,4 @@
 import React, { useEffect } from 'react';
-import AmongUs from '../images/splash.mp4'; 
 import AppFooter from '../components/AppFooter';
 import axios from 'axios';
 import authenticate from '../utils/authenticate';
@@ -35,18 +34,24 @@ export default function Landing() {
     <div>
       <div className="section">
         <h1 className="landing-brand text-center">
+          <br/>
           TasksAmongUs
         </h1>
         <div id="login-button"></div>
-        
-        <div className="video-container">
-            <div className="color-overlay"></div>
-            <video autoPlay loop muted>
-                <source src={AmongUs} type="video/mp4" />
-            </video>
+        <div className="video-container text-center">
+          <video autoPlay loop muted playsInline style={{width:"100%", minWidth: "600px"}}>
+            <source src={"https://i.imgur.com/FZvvSgG.mp4"} type="video/mp4" webkit-playsinline playsinline/>
+          </video>
         </div>
       </div>
-      <div id="footer">
+      <div style={{backgroundColor:"black", height:"300px", width:"100%"}}>
+      </div>
+      <div style={{
+        backgroundColor: "#F6C5C5",
+        bottom: "0",
+        width: "100%",
+        height: "110px"
+      }}>
         <AppFooter />
       </div>
     </div>

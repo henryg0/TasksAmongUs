@@ -10,7 +10,7 @@ export default function Profile() {
     <Layout user={user}>
       <Container>
         <h1>Social</h1>
-        <p>This is the social page where you can chat and meet others!</p>
+        <p>Coming Soon!</p>
       </Container>
     </Layout>
   )

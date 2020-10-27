@@ -2,61 +2,47 @@ import { useGradientAvatarStyles } from '@mui-treasury/styles/avatar/gradient';
 
 export default function Border() {
   return {
-    "black": [
-      useGradientAvatarStyles({
+    "BLACK": useGradientAvatarStyles({
         gap: 2,
         thickness: 3,
         gapColor: 'white',
         color: 'black',
-      }), "Awarded for making an account"
-    ],
-    "greenBlue": [
-      useGradientAvatarStyles({
+      }),
+    "SEAWEED GREEN": useGradientAvatarStyles({
         gap: 2,
         thickness: 3,
         gapColor: 'white',
         color: '#03B2A2',
-      }), "Awarded for completing 1 todo"
-    ],
-    "oceanBlue": [
-      useGradientAvatarStyles({
+      }),
+    "OCEAN BLUE": useGradientAvatarStyles({
         gap: 2,
         thickness: 3,
         gapColor: 'white',
         color: '#04A0D3',
-      }), "Awarded for completing 3 todos"
-    ],
-    "darkOrange": [
-      useGradientAvatarStyles({
+      }),
+    "PUMPKIN ORANGE": useGradientAvatarStyles({
         gap: 2,
         thickness: 3,
         gapColor: 'white',
         color: '#DF665A',
-      }), "Awarded for completing 20 todos"
-    ],
-    "rainbowViolet": [
-      useGradientAvatarStyles({
+      }),
+    "VIOLET FADE": useGradientAvatarStyles({
         gap: 2,
         thickness: 3,
         gapColor: 'white',
         color: 'linear-gradient(to bottom right, #feac5e, #c779d0, #4bc0c8)',
-      }), "Awarded for adding a friend"
-    ],
-    "lightOrange": [
-      useGradientAvatarStyles({
+      }),
+    "SUNFLOWER ORANGE": useGradientAvatarStyles({
         gap: 2,
         thickness: 3,
         gapColor: 'white',
         color: '#F4B26A',
-      }), "Awarded for adding 3 friends"
-    ],
-    "none": [
-      useGradientAvatarStyles({
+      }),
+    "none": useGradientAvatarStyles({
         gap: 2,
         thickness: 3,
         gapColor: 'white',
         color: 'white',
-      }), ""
-    ],
+      }),
   }
 }

@@ -12,7 +12,7 @@ import Typography from '@material-ui/core/Typography';
 import { red } from '@material-ui/core/colors';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import Divider from '@material-ui/core/Divider';
-import getBackgrounds from '../utils/get.backgrounds';
+import getPostcards from '../utils/get.postcards';
 import Badge from 'react-bootstrap/Badge';
 import Border from './Border';
 import Blur from 'react-blur';
@@ -37,7 +37,7 @@ const useStyles = makeStyles((theme) => ({
 export default function Todo() {
   const classes = useStyles();
   const [expanded, setExpanded] = React.useState(false);
-  const backgrounds = getBackgrounds();
+  const backgrounds = getPostcards();
   const { enqueueSnackbar } = useSnackbar();
 
   const handleExpandClick = () => {
