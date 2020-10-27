@@ -30,7 +30,7 @@ def createTodoRoute(userId):
     "dueDate":dueDate,
     "imageUrl":imageUrl,
   }
-
+  
   for key in error_log:
     if not error_log[key]:
       return (jsonify({"error": "Missing {}".format(key)}), 400)
