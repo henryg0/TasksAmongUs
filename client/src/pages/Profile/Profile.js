@@ -188,7 +188,7 @@ export default function Profile() {
                                     overflowY: "auto",
                                     height: "65vh",
                                   }}
-                                  elevation={0}
+                                  elevation={0} 
                                 >
                                   <h5>Badges</h5>
                                   <Grid container direcion="row" justify="center">
