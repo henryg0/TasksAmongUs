@@ -8,9 +8,10 @@ createUser = Blueprint("createUser", __name__)
 def createUserRoute():
   data = request.get_json()
 
-  existing_user = db.collections('User').document(data.get("userId"))
+  existing_user = db.collections('User').document(data.get("userId")).stream()
+  users = [user.to_dict() for user in existing_user]
 
-  if existing_user:
+  if users:
     return {"msg":"user already exists"}
     
   if not data:
