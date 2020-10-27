@@ -21,13 +21,14 @@ def updateTodoRoute(userId, todoId):
   description = data.get("description")
   dueDate = datetime.datetime.strptime(data.get("dueDate"), '%Y-%m-%dT%H:%M:%S.%fZ').timestamp() * 1000
   imageUrl = data.get("imageUrl")
+  completedDate = dueDate + 1
 
-  # add completed date!
   dataLog = {
     "todoName":todoName,
     "dueDate":dueDate,
     "imageUrl":imageUrl,
-    "description":description
+    "description":description,
+    "completedDate":completedDate
   }
 
   for key in dataLog:

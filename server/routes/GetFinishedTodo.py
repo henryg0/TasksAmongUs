@@ -13,14 +13,14 @@ def getFinishedTodoRoute(userId):
   
   friends = db.collection("Friends").where("userId", "==", userId).stream()
 
-  idDict = {doc.to_dict["friendId"]:True for doc in friends}
+  idDict = {doc.to_dict()["friendId"]:True for doc in friends}
   idDict[userId] = True
 
   currentTime = time.time() * 1000
 
   docs = db.collection('Todo').where('completedDate', '<', currentTime).order_by(u'completedDate', direction=firestore.Query.ASCENDING).stream()
   
-  sortedResults = [doc.to_dict() for doc in docs]
+  sortedResults = [doc.to_dict() for doc in docs] #if idDict[doc.to_dict("userId")]]
   
   res = []
 
