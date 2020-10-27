@@ -35,5 +35,5 @@ def getWeeklyProgressRoute(userId):
         todoDates[day][1].append(todo)
   
   completed = [{"name": int(datetime.datetime.strptime(dateCompleted, "%m/%d/%Y").timestamp()), "completed":len(todoDates[dateCompleted][0]), "failed":len(todoDates[dateCompleted][1])} for dateCompleted in todoDates]
-
+  completed = [{"completed":0, "failed":0}]*(7-len(completed)) + completed
   return {"todos": completed}

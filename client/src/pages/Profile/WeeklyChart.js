@@ -4,32 +4,19 @@ import {
 } from 'recharts';
 
 export default function WeeklyChart(props) {
-  let { dayOne, dayTwo, dayThree, dayFour, dayFive, daySix, daySeven } = props;
-
-  let data = [
-    {
-      name: daySeven.date, completed: daySeven.completed, failed: daySeven.failed,
-    },
-    {
-      name: daySix.date, completed: daySix.completed, failed: daySix.failed,
-    },
-    {
-      name: dayFive.date, completed: dayFive.completed, failed: dayFive.failed,
-    },
-    {
-      name: dayFour.date, completed: dayFour.completed, failed: dayFour.failed,
-    }, 
-    {
-      name: dayThree.date, completed: dayThree.completed, failed: dayThree.failed,
-    },
-    {
-      name: dayTwo.date, completed: dayTwo.completed, failed: dayTwo.failed,
-    },
-    {
-      name: dayOne.date, completed: dayOne.completed, failed: dayOne.failed,
-    },
-  ];
-
+  let { weeklyProgress, counter} = props;
+  let data = weeklyProgress;
+  let days = ['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];
+  for (const i in data) {
+    if (data[i]["name"]) {
+      data[i]["name"] = new Date(data[i]["name"] * 1000)
+      data[i]["name"] = days[data[i]["name"].getDay()]
+      if (data[i]["name"]) {
+        data[i]["name"] = (data[i]["name"]).substring(0,3)
+      }
+    }
+  }
+  data[6]["completed"] += counter;
   return (
     <ResponsiveContainer>
       <LineChart

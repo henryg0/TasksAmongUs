@@ -4,7 +4,7 @@ import ProfileTodo from './ProfileTodo';
 import axios from 'axios';
 
 export default function TodoList(props) {
-  let { user, renderInCompletedCount, selectedBadge, selectedBorder, selectedCelebration} = props;
+  let { user, renderInCounter, selectedBadge, selectedBorder, selectedCelebration} = props;
   const [todos, setTodos] = useState([]);
   console.log(todos);
   useEffect(() => {
@@ -33,7 +33,7 @@ export default function TodoList(props) {
           handleDelete={handleDelete}
           idx={idx}
           key={idx}
-          renderInCompletedCount={renderInCompletedCount}
+          renderInCounter={renderInCounter}
           selectedBadge={selectedBadge}
           selectedBorder={selectedBorder}
           selectedCelebration={selectedCelebration}
