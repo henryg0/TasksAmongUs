@@ -10,9 +10,7 @@ import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Tooltip from '@material-ui/core/Tooltip';
 
 const description = getCustomDesc();
-const secretDescriptions = getSecretCustomDesc(); 
-
-console.log(secretDescriptions);
+const secretDescriptions = getSecretCustomDesc();
 
 export function displayBadges(unlockedBadges) {
   let badges = getBadges();
