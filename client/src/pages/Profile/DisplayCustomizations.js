@@ -79,7 +79,7 @@ export function displayCelebrations(unlockedCelebrations) {
       result.push(
         <FormControlLabel value={celebration} control={<Radio style={{color: "red"}} />} key={celebration} label={
           <Tooltip title={description[celebration]} placement="bottom-start">
-            <video autoPlay muted loop width="300px">
+            <video autoPlay muted loop playsInline width="260px">
               <source src={celebrations[celebration]} type="video/mp4" />
             </video>
           </Tooltip>
@@ -89,7 +89,7 @@ export function displayCelebrations(unlockedCelebrations) {
       result.push(
         <FormControlLabel value={celebration} control={<Radio disabled style={{color: "secondary"}} />} key={celebration} label={
           <Tooltip title={"LOCKED: " + secretDescriptions[celebration]} placement="bottom-start">
-            <video autoPlay muted loop width="300px">
+            <video autoPlay muted loop playsInline width="260px">
               <source src={celebrations[celebration]} type="video/mp4" />
             </video>
           </Tooltip>

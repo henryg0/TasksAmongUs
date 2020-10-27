@@ -159,17 +159,17 @@ export default function Create() {
                             className="p-2 text-center"
                             style={{
                               width: "80%",
-                              height: "90vh",
+                              height: "85vh",
                               overflowY: "auto",
                             }}
                           >
                             <Grid container direction="column" justify="space-between" style={{height: "100%"}}>
-                              <h2>Change Postcard {" "}<Tooltip title="Postcard For If You Fail Your Todo"><HelpIcon /></Tooltip></h2>
+                              <h3>Change Postcard {" "}<Tooltip title="Postcard For If You Fail Your Todo"><HelpIcon /></Tooltip></h3>
                               <Grid container alignItems="stretch">
                                 <Card
                                   style={{
                                     overflowY: "auto",
-                                    height: "70vh",
+                                    height: "65vh",
                                   }}
                                   elevation={0}
                                 >

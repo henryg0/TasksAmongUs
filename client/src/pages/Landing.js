@@ -41,7 +41,7 @@ export default function Landing() {
         
         <div className="video-container">
             <div className="color-overlay"></div>
-            <video autoPlay loop muted>
+            <video autoPlay loop muted playsInline>
                 <source src={AmongUs} type="video/mp4" webkit-playsinline playsinline />
             </video>
         </div>

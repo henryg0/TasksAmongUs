@@ -176,7 +176,7 @@ export default function Profile() {
                             className="p-2 text-center"
                             style={{
                               width: "80%",
-                              height: "90vh",
+                              height: "85vh",
                               overflowY: "auto",
                             }}
                           >
@@ -186,7 +186,7 @@ export default function Profile() {
                                 <Card
                                   style={{
                                     overflowY: "auto",
-                                    height: "70vh",
+                                    height: "65vh",
                                   }}
                                   elevation={0}
                                 >
