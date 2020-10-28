@@ -14,7 +14,6 @@ import IconButton from '@material-ui/core/IconButton';
 import Typography from '@material-ui/core/Typography';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import Divider from '@material-ui/core/Divider';
-import Border from '../../components/Border';
 import Image from 'react-bootstrap/Image';
 import Grid from '@material-ui/core/Grid';
 import FiberManualRecordIcon from '@material-ui/icons/FiberManualRecord';

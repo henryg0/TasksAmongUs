@@ -5,7 +5,7 @@ import OngoingTodo from './OngoingTodo';
 
 export default function Ongoing(props) {
   const  { user } = props;
-  const [ongoingTodos, setOngoingTodos] = useState([]);
+  const [ongoingTodos, setOngoingTodos] = useState([{selectedBorder: "BLACK"}]);
 
   useEffect(() => {
     axios.get(`/api/user/${user.id}/todo/upcoming`)
@@ -36,6 +36,31 @@ export default function Ongoing(props) {
           imageUrl={ongoingTodos[i].imageUrl}
           idx={i}
           key={i}
+        />
+      )
+    }
+    if (ongoingTodos.length === 0) {
+      render.push(
+        <OngoingTodo 
+          fullName={"Obviously Not An Imposter"}
+          profileUrl={"https://i.imgur.com/dAkx8RC.png"}
+          selectedBadge={"GAMER"}
+          selectedBorder={"SEAWEED_GREEN"}
+          dueDate={new Date()}
+          description={
+            <div>
+              Howdy! This section shows the ongoing todos of you and your friends.
+              When they are completed or past the todo deadline, they are automatically
+              moved into the completed/fail tab.
+              Add some friends to see what they're up to!
+              <br/>
+              <br/>
+              <video autoPlay loop playsInline muted style={{width: "100%", maxWidth:"300px"}}>
+                <source src={"https://i.imgur.com/pDfJHys.mp4"} type="video/mp4" />
+              </video>
+            </div>
+          }
+          key={-1}
         />
       )
     }

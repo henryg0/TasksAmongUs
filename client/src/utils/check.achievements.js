@@ -3,10 +3,12 @@ import axios from 'axios';
 export default function checkAchievements(userId, enqueueSnackbar, args) {
   let todoDescription = args["todoDescription"];
   let todoImageUrl = args["todoImageUrl"];
+  let todoDate = args["todoDate"];
+  let todosCompleted = args["todosCompleted"];
 
-  let unlockedBadges = {};
-  let unlockedBorders = {};
-  let unlockedCelebrations = {};
+  let unlockedBadges = [];
+  let unlockedBorders = [];
+  let unlockedCelebrations = [];
 
   // todo description keywords achievements
   if (todoDescription) {
@@ -40,7 +42,7 @@ export default function checkAchievements(userId, enqueueSnackbar, args) {
     }
     for (const word in words) {
       if (word in keywords) {
-        unlockedBadges[keywords[word]] = true;
+        unlockedBadges.push(keywords[word]);
       }
     }
   }
@@ -48,7 +50,7 @@ export default function checkAchievements(userId, enqueueSnackbar, args) {
   // todo imageUrl achievements
   if (todoImageUrl) {
     const keywords = {
-      "https://i.imgur.com/epElcfL.jpg": "CHOSEN ONE",
+      "https://i.imgur.com/epElcfL.jpg": "CHOSEN_ONE",
       "https://i.imgur.com/5i0dn43.jpg": "WOOD",
       "https://i.imgur.com/n3PLKQz.jpg": "DONUT",
       "https://i.imgur.com/vs5wsaE.jpg": "PICKLE",
@@ -56,18 +58,61 @@ export default function checkAchievements(userId, enqueueSnackbar, args) {
     }
 
     if (todoImageUrl in keywords) {
-      unlockedBadges[keywords[todoImageUrl]] = true;
+      unlockedBadges.push(keywords[todoImageUrl]);
     }
   }
 
+  // date related achievments
+  if (todoDate) {
+    const keywords = {
+      9: "HALLOWEENIE",
+      10: "THANKFUL",
+      11: "SANTA",
+    }
+    unlockedBadges.push(keywords[new Date().getMonth()]);
+  }
 
+  // total todosCompleted
+
+  if (todosCompleted) {
+    if (todosCompleted >= 1) {
+      unlockedBorders.push("SEAWEED_GREEN");
+    }
+    if (todosCompleted >= 3) {
+      unlockedBorders.push("OCEAN_BLUE");
+    }
+    if (todosCompleted >= 5) {
+      unlockedCelebrations.push("FALL_GUYS_CROWN");
+    }
+    if (todosCompleted >= 7) {
+      unlockedBadges.push("007");
+    }
+    if (todosCompleted >= 10) {
+      unlockedCelebrations.push("SUPER_SAIYAN");
+    }
+    if (todosCompleted >= 20) {
+      unlockedBorders.push("PUMPKIN_ORANGE");
+    }
+    if (todosCompleted >= 30) {
+      unlockedCelebrations.push("WAKANDA");
+    }
+    if (todosCompleted >= 50) {
+      unlockedBadges.push("EPIC");
+    }
+    if (todosCompleted >= 75) {
+      unlockedBadges.push("TRYHARD");
+    }
+  }
 
   // done checking
 
   if (Object.keys(unlockedBadges).length > 0) {
     axios.put(`/api/user/${userId}/unlocked/badges/update`, {"unlockedBadges": unlockedBadges})
       .then((res) => {
-        console.log(res);
+        for (let i = 0; i < res.data.msg.length; i++) {
+          const msg = res.data.msg[i].replace(/_/g, ' ');
+          enqueueSnackbar(msg + " Customization Unlocked!!", {variant: "info"});
+        }
       })
       .catch((err) => {
         console.log(err);
@@ -77,7 +122,10 @@ export default function checkAchievements(userId, enqueueSnackbar, args) {
   if (Object.keys(unlockedBorders).length > 0) {
     axios.put(`/api/user/${userId}/unlocked/borders/update`, {"unlockedBorders": unlockedBorders})
       .then((res) => {
-        console.log(res);
+        for (let i=0; i < res.data.msg.length; i++) {
+          const msg = res.data.msg[i].replace(/_/g, ' ');
+          enqueueSnackbar(msg + " Customization Unlocked!!", {variant: "info"});
+        }
       })
       .catch((err) => {
         console.log(err);
@@ -87,10 +135,17 @@ export default function checkAchievements(userId, enqueueSnackbar, args) {
   if (Object.keys(unlockedCelebrations).length > 0) {
     axios.put(`/api/user/${userId}/unlocked/celebrations/update`, {"unlockedCelebrations": unlockedCelebrations})
       .then((res) => {
-        console.log(res);
+        for (let i=0; i < res.data.msg.length; i++) {
+          const msg = res.data.msg[i].replace(/_/g, ' ');
+          enqueueSnackbar(msg + " Customization Unlocked!!", {variant: "info"});
+        }
       })
       .catch((err) => {
         console.log(err);
       })
   }
+
+return (
+    [unlockedBadges, unlockedBorders, unlockedCelebrations]
+  )
 }

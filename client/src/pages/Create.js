@@ -67,6 +67,7 @@ export default function Create() {
       checkAchievements(user.id, enqueueSnackbar, {
         todoDescription: todoName + " " + description,
         todoImageUrl: imageUrl,
+        todoDate: new Date(),
       });
       enqueueSnackbar("Todo Created", {variant: "success"})
     })

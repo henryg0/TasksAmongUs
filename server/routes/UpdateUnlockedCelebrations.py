@@ -20,13 +20,17 @@ def updateUnlockedCelebrationsRoute(userId):
     "unlockedCelebrations": unlockedCelebrations,
   }
 
-  for key in error_log:
-    if not error_log.get(key):
-      return (jsonify({"error": "Missing {}".format(key)}), 400)
-  
-  fields = {"unlockedCelebrations." + item: True for item in unlockedCelebrations}
-  fields["unlockedCelebrations.AMONG US WIN"] = True
+  newUnlockedCelebrations = data.get("unlockedCelebrations")
+  user = db.collection('Users').where("userId", "==", userId).stream()
+  oldUnlockedCelebrations = [doc.to_dict() for doc in user][0]["unlockedCelebrations"]
+
+  fields = {"unlockedCelebrations." + "AMONG_US_WIN": True}
+  arr = []
+  for newCelebration in newUnlockedCelebrations:
+    if newCelebration not in oldUnlockedCelebrations:
+      fields["unlockedCelebrations." + newCelebration] = True 
+      arr.append(newCelebration)
 
   ref = db.collection("Users").document(userId).update(fields)
 
-  return ({"msg": "Unlocked Celebrations Updated"})
+  return ({"msg": arr})

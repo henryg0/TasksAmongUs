@@ -7,7 +7,7 @@ export default function getBadges() {
     
     "007": <Badge variant="danger">007</Badge>,
     "EPIC": <Badge variant="dark">EPIC</Badge>,
-    "FLEXER": <Badge variant="light">FLEXER</Badge>,
+    "TRYHARD": <Badge variant="secondary">TRYHARD</Badge>,
     "FRIENDINATOR": <Badge variant="light">FRIENDINATOR</Badge>,
     
     
@@ -17,7 +17,7 @@ export default function getBadges() {
     "GAMER": <Badge variant="primary">GAMER</Badge>,
     "SHINOBI": <Badge variant="dark">SHINOBI</Badge>,
     "BALLER": <Badge variant="danger">BALLER</Badge>,
-    "CHOSEN ONE": <Badge variant="primary">CHOSEN ONE</Badge>,
+    "CHOSEN_ONE": <Badge variant="primary">CHOSEN ONE</Badge>,
     "WOOD": <Badge variant="warning">WOOD</Badge>,
     "DONUT": <Badge variant="info">DONUT</Badge>,
     "PICKLE": <Badge variant="success">PICKLE</Badge>,

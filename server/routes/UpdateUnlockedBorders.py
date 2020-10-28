@@ -24,9 +24,17 @@ def updateUnlockedBordersRoute(userId):
     if not error_log.get(key):
       return (jsonify({"error": "Missing {}".format(key)}), 400)
   
-  fields = {"unlockedBorders." + item: True for item in unlockedBorders}
+  newUnlockedBorders = data.get("unlockedBorders")
+  user = db.collection('Users').where("userId", "==", userId).stream()
+  oldUnlockedBorders = [doc.to_dict() for doc in user][0]["unlockedBorders"]
+
+  fields = {"unlockedBorders.BLACK": True}
+  arr = []
+  for newBorder in newUnlockedBorders:
+    if newBorder not in oldUnlockedBorders:
+      fields["unlockedBorders." + newBorder] = True 
+      arr.append(newBorder)
 
   ref = db.collection("Users").document(userId).update(fields)
-  fields["unlockedBorders.BLACK"] = True
 
-  return ({"msg": "Unlocked Borders Updated"})
+  return ({"msg": arr})

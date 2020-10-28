@@ -5,7 +5,7 @@ import FinishedTodo from './FinishedTodo';
 
 export default function Unfinished(props) {
   const  { user } = props;
-  const [finishedTodos, setFinishedTodos] = useState([]);
+  const [finishedTodos, setFinishedTodos] = useState([{selectedBorder: "BLACK"}]);
 
   useEffect(() => {
     axios.get(`/api/user/${user.id}/todo/finish`)
@@ -38,6 +38,29 @@ export default function Unfinished(props) {
           status={finishedTodos[i].status}
           // idx={i}
           key={i}
+        />
+      )
+    }
+
+    if (finishedTodos.length === 0) {
+      render.push(
+        <FinishedTodo 
+          fullName={"Obviously Not An Imposter"}
+          profileUrl={"https://i.imgur.com/dAkx8RC.png"}
+          selectedBadge={"GAMER"}
+          selectedBorder={"SEAWEED_GREEN"}
+          completedDate={new Date()}
+          description={
+            <div>
+              Howdy! This section shows the completed/failed todos of you and your friends.
+              Whenever a todo is completed, it'll go here with your awesome "celebration" GIF.
+              HOWEVER, should you fail a todo, your failure postcard will be posted instead.
+
+              Add some friends to see what they're up to!
+            </div>
+          }
+          imageUrl={"https://i.imgur.com/QSNjCbk.jpg"}
+          key={-1}
         />
       )
     }

@@ -14,7 +14,6 @@ import Typography from '@material-ui/core/Typography';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import Divider from '@material-ui/core/Divider';
 import Badge from 'react-bootstrap/Badge';
-import Border from '../../components/Border';
 import Grid from '@material-ui/core/Grid';
 import FiberManualRecordIcon from '@material-ui/icons/FiberManualRecord';
 import { blue } from '@material-ui/core/colors';
@@ -32,10 +31,10 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function FinishedTodo(props) {
+export default function OngoingTodo(props) {
   const { 
     fullName, profileUrl, selectedBadge, selectedBorder,
-    todoName, dueDate, description, imageUrl 
+    todoName, dueDate, description
   } = props;
   const badges = getBadges();
   const borders = getBorders(); 

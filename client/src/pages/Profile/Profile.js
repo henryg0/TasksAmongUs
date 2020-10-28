@@ -9,6 +9,7 @@ import authenticate from '../../utils/authenticate';
 import getGreeting from '../../utils/get.greeting';
 import getBadges from '../../utils/get.badges';
 import getBorders from '../../utils/get.borders';
+import checkAchievements from '../../utils/check.achievements';
 
 import WeeklyChart from './WeeklyChart';
 import AllTimeChart from './AllTimeChart';
@@ -31,10 +32,10 @@ export default function Profile() {
 
   let [selectedBadge, setSelectedBadge] = useState("none");
   let [selectedBorder, setSelectedBorder] = useState("none");
-  let [selectedCelebration, setSelectedCelebration] = useState("AMONG US WIN");
+  let [selectedCelebration, setSelectedCelebration] = useState("AMONG_US_WIN");
   let [unlockedBadges, setUnlockedBadges] = useState({"NORMIE": true})
   let [unlockedBorders, setUnlockedBorders] = useState({"BLACK": true})
-  let [unlockedCelebrations, setUnlockedCelebrations] = useState({"AMONG US WIN": true})
+  let [unlockedCelebrations, setUnlockedCelebrations] = useState({"AMONG_US_WIN": true})
 
   let [allTimeCompleted, setAllTimeCompleted] = useState(0);
   let [allTimeFailed, setAllTimeFailed] = useState(0);
@@ -49,7 +50,6 @@ export default function Profile() {
           console.log(res.data.error);
         } else {
           setSelectedBadge(res.data.user.selectedBadge);
-          setSelectedBadge("NORMIE");
           setSelectedBorder(res.data.user.selectedBorder);
           setSelectedCelebration(res.data.user.selectedCelebration);
           setUnlockedBadges(res.data.user.unlockedBadges);
@@ -126,13 +126,29 @@ export default function Profile() {
 
   function renderInCounter() {
     setCounter(counter + 1);
+    let table = checkAchievements(user.id, enqueueSnackbar, {"todosCompleted": allTimeCompleted + counter})
+    let newUnlockedBorders = unlockedBorders;
+    for (const i in table[1]) {
+      newUnlockedBorders[table[1][i]] = true;
+    }
+    setUnlockedBorders(newUnlockedBorders);
+    let newUnlockedCelebrations = unlockedCelebrations;
+    for (const i in table[2]) {
+      newUnlockedCelebrations[table[2][i]] = true;
+    }
+    setUnlockedBadges(newUnlockedCelebrations);
+    let newUnlockedBadges = unlockedBadges;
+    for (const i in table[0]) {
+      newUnlockedBadges[table[0][i]] = true;
+    }
+    setUnlockedBadges(newUnlockedBadges);
   }
 
   return (
     <Layout user={user}>
       <Container>
         <Grid container justify="center" spacing={3} className="mb-2">
-          <Grid item xs={11} md={7}>
+          <Grid item xs={10} md={7}>
             <h5 className="mt-2 text-secondary">{greeting}</h5>
             <Card
               className="p-2 mt-2"
@@ -239,7 +255,7 @@ export default function Profile() {
               </Grid>
             </Card>
           </Grid>
-          <Grid container item xs={11} md={5} direction="column" justify="flex-start">
+          <Grid container item xs={10} md={5} direction="column" justify="flex-start">
             <h2>
               TodoList {" "}
               <Fab color="primary" aria-label="edit" href="/create" className="mb-1 mt-1" size="small">

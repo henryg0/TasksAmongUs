@@ -42,10 +42,10 @@ def createUserRoute():
   data["failedTodos"] = 0
   data["selectedBadge"] = "NORMIE"
   data["selectedBorder"] = "BLACK"
-  data["selectedCelebration"] = "AMONG US WIN"
+  data["selectedCelebration"] = "AMONG_US_WIN"
   data["unlockedBadges"] = {"NORMIE": True}
   data["unlockedBorders"] = {"BLACK": True}
-  data["unlockedCelebrations"] = {"AMONG US WIN": True}
+  data["unlockedCelebrations"] = {"AMONG_US_WIN": True}
   db.collection("Users").document(userId).set(data)
 
   return ({"msg": "User created"})

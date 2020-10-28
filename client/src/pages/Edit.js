@@ -85,7 +85,12 @@ export default function Edit() {
           if (res.data.error) {
             console.log(res.data.error);
           } else {
-            console.log(res.data.todo);
+            // console.log(res.data.todo);
+            checkAchievements(user.id, enqueueSnackbar, {
+              todoDescription: todoName + " " + description,
+              todoImageUrl: imageUrl,
+              todoDate: new Date(),
+            });
             enqueueSnackbar("Todo Edited", {variant: "success"})
           }
       })
@@ -183,7 +188,7 @@ export default function Edit() {
                                 <Card
                                   style={{
                                     overflowY: "auto",
-                                    height: "65vh",
+                                    height: "70vh",
                                   }}
                                   variant="outlined"
                                   className="p-2 bg-light"
