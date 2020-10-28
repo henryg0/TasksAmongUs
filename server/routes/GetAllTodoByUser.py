@@ -17,6 +17,6 @@ def getAllTodoByUserRoute(userId):
 
   # print(res)
   
-  sorted_results = [doc.to_dict() for doc in docs if doc.to_dict()["dueDate"] <= doc.to_dict().get("completedDate") and not doc.to_dict().get("status") and if doc.to_dict()["dueDate"] > time.time() * 1000] 
+  sorted_results = [doc.to_dict() for doc in docs if doc.to_dict()["dueDate"] <= doc.to_dict().get("completedDate") and not doc.to_dict().get("status") and doc.to_dict()["dueDate"] > time.time() * 1000] 
   
   return {"todos": sorted_results}
