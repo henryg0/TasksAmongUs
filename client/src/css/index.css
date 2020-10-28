@@ -90,6 +90,8 @@ hr {
   -webkit-transform: translateZ(0px);
 }
 
+button:focus {outline:0;}
+
 video, img {
   border-radius: 10px; 
   overflow: hidden; 
