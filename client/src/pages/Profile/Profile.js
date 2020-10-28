@@ -63,15 +63,15 @@ export default function Profile() {
           } else {
             setSelectedCelebration("AMONG US WIN")
           }
-          // if (customizations.unlockedBadges) {
-          //   setUnlockedBadges(customizations.unlockedBadges);
-          // }
-          // if (customizations.unlockedBorders) {
-          //   setUnlockedBorders(customizations.unlockedBorders);
-          // }
-          // if (customizations.unlockedCelebrations) {
-          //   setUnlockedCelebrations(customizations.unlockedCelebrations);
-          // }
+          if (res.data.user.unlockedBadges) {
+            setUnlockedBadges(res.data.user.unlockedBadges);
+          }
+          if (res.data.user.unlockedBorders) {
+            setUnlockedBorders(res.data.user.unlockedBorders);
+          }
+          if (res.data.user.unlockedCelebrations) {
+            setUnlockedCelebrations(res.data.user.unlockedCelebrations);
+          }
           setAllTimeCompleted(res.data.user.finishedTodos);
 
         }
@@ -87,7 +87,7 @@ export default function Profile() {
           console.log(res.data.err);
         } else {
           setWeeklyProgress(res.data.todos);
-          console.log(res.data.todos)
+          // console.log(res.data.todos)
         }
       })
       .catch((err) => {

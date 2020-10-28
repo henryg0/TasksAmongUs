@@ -25,7 +25,7 @@ export default function Home() {
                 <Button className="mt-2 mb-2" variant="outlined" color="primary" size="large" onClick={() => setHomeToggle(0)}>
                   Completed/Failed
                 </Button>
-                <Ongoing />
+                <Ongoing user={user} />
               </div> :
               <div>
                 <Button className="mt-2 mb-2 mr-2" variant="outlined" color="primary" size="large" onClick={() => setHomeToggle(1)}>
@@ -34,7 +34,7 @@ export default function Home() {
                 <Button className="mt-2 mb-2" variant="contained" color="primary" size="large">
                   Completed/Failed
                 </Button>
-                <Finished />
+                <Finished user={user} />
               </div>
             }
           </Grid>

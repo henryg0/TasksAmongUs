@@ -90,5 +90,8 @@ hr {
   -webkit-transform: translateZ(0px);
 }
 
+button:focus {outline:0;}
+
+/* .modal:focus {outline:0;} */
 
 /* --- --- Global --- --- */

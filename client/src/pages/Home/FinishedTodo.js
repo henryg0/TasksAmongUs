@@ -13,9 +13,9 @@ import { red } from '@material-ui/core/colors';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import Divider from '@material-ui/core/Divider';
 import Badge from 'react-bootstrap/Badge';
-import Border from './Border';
+import Border from '../../components/Border';
+import Image from 'react-bootstrap/Image';
 import Blur from 'react-blur';
-import { useSnackbar } from 'notistack';
 
 const useStyles = makeStyles((theme) => ({
   expand: {
@@ -33,18 +33,20 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function Todo() {
+export default function FinishedTodo(props) {
+  const { userId, /*todoId,*/ todoName, completedDate, description, imageUrl, /*idx*/ status } = props;
+  let displayDate = new Date(completedDate);
   const classes = useStyles();
   const [expanded, setExpanded] = React.useState(false);
-  const { enqueueSnackbar } = useSnackbar();
+  // const { enqueueSnackbar } = useSnackbar();
 
   const handleExpandClick = () => {
     setExpanded(!expanded);
   };
 
-  function deleteTodo() {
-    enqueueSnackbar("Todo Deleted", {variant: "success"}) 
-  }
+  // function deleteTodo() {
+  //   enqueueSnackbar("Todo Deleted", {variant: "success"}) 
+  // }
 
   return (
     <Card className={classes.root}>
@@ -73,29 +75,38 @@ export default function Todo() {
         }
         title={
           <div>
-            Ali Conners{" "}
+            {userId}{" "}
             <Badge variant="info">NORMIE</Badge>
             <br/>
-            Brunch this weekend
+            {todoName}
           </div>
         }
-        subheader="Sep 14, 2016, 5 PM"
+        subheader={
+          <div>
+            {displayDate.toLocaleDateString() + ", " + displayDate.toLocaleTimeString([], {timeStyle: 'short'})}
+            {" "}
+            {
+              status ? 
+              <div>{"COMPLETED"}</div> :
+              <div>{"FAILED"}</div>
+            }
+          </div>
+        }
       />
       <Collapse in={expanded} timeout="auto" unmountOnExit>
         <CardContent>
           <Typography variant="body2" color="textSecondary">
-            I'll be in your neighborhood doing errands this weekend
-            and I was thinking about trolling your garden…
-
-            Trolling trolling trolling :)
+            {description}
           </Typography>
           <br/>
-          <Blur img="https://i.imgur.com/HLkruVA.jpg" style={{maxWidth:"400px"}} blurRadius={40}/>
-          {/* <Image
+          { status ?
+          <Blur img="https://i.imgur.com/HLkruVA.jpg" style={{maxWidth:"400px"}} blurRadius={40}/> :
+          <Image
             style={{maxWidth:"400px"}}
             width="100%"
-            src="https://i.imgur.com/HLkruVA.jpg"
-          /> */}
+            src={imageUrl}
+          />
+          }
         </CardContent>
       </Collapse>
       <Divider />

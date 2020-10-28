@@ -12,6 +12,7 @@ const useStyles = makeStyles((theme) => ({
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
+    outline: "none",
   },
   paper: {
     backgroundColor: theme.palette.background.paper,
@@ -35,7 +36,7 @@ export default function TransitionsModal(props) {
   };
 
   return (
-    <div>
+    <div className={{outline: "none"}}>
       {Icon ?
       <IconButton color="primary" onClick={handleOpen}>
         <Icon />
@@ -55,6 +56,7 @@ export default function TransitionsModal(props) {
         BackdropProps={{
           timeout: 500,
         }}
+        disableAutoFocus
       >
         <Fade in={open}>
           <Grid container justify="center">

@@ -17,6 +17,7 @@ export default function WeeklyChart(props) {
     }
   }
   data[6]["completed"] += counter;
+  
   return (
     <ResponsiveContainer>
       <LineChart

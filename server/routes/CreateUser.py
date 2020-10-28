@@ -7,12 +7,6 @@ createUser = Blueprint("createUser", __name__)
 @createUser.route("/api/user/create", methods = ["POST"])
 def createUserRoute():
   data = request.get_json()
-
-  existing_user = db.collections('User').document(data.get("userId")).stream()
-  users = [user.to_dict() for user in existing_user]
-
-  if users:
-    return {"msg":"user already exists"}
     
   if not data:
     return (jsonify({"msg": "Missing data"}), 400)
@@ -36,6 +30,12 @@ def createUserRoute():
   for key in error_log:
     if not error_log.get(key):
       return (jsonify({"error": "Missing {}".format(key)}), 400)
+
+  docs = db.collection('Users')
+  result = docs.where("userId", "==", userId).stream()
+
+  for doc in result:
+    return ({"msg": "User already exists"})
 
   # IF SOMEONE ELSE HAS SAME ID, IT OVERRIDES
   data["finishedTodos"] = 0

@@ -40,7 +40,7 @@ export default function Landing() {
         <div id="login-button"></div>
         <div className="video-container text-center">
           <video autoPlay loop muted playsInline style={{width:"100%", minWidth: "600px"}}>
-            <source src={"https://i.imgur.com/FZvvSgG.mp4"} type="video/mp4" webkit-playsinline playsinline/>
+            <source src={"https://i.imgur.com/FZvvSgG.mp4"} type="video/mp4"/>
           </video>
         </div>
       </div>
