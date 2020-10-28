@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { useSnackbar } from 'notistack';
 import axios from 'axios';
+import checkAchievements from '../../utils/check.achievements';
 import TextField from '@material-ui/core/TextField';
 import Grid from '@material-ui/core/Grid';
 import Button from '@material-ui/core/Button';
@@ -173,9 +174,36 @@ export default function FriendsSection(props) {
         if (res.data.error) {
           console.log(res.data.error);
         } else {
+          console.log(res.data.friend)
           renderInFriend(res.data.friend);
           renderOutFriendRequest(idx);
           enqueueSnackbar("Friend Request Accepted", {variant: "success"});
+
+          axios.get(`/api/user/${res.data.friend.userId}`)
+            .then((res) => {
+              if (res.data.error) {
+                console.log(res.data.error);
+              } else {
+                console.log(res);
+                checkAchievements(res.data.user.id, enqueueSnackbar, {"friendCount": res.data.user.friendCount});
+              }
+            })
+            .catch((err) => {
+              console.log(err);
+            })
+
+          axios.get(`/api/user/${res.data.friend.friendId}`)
+            .then((res) => {
+              if (res.data.error) {
+                console.log(res.data.error);
+              } else {
+                console.log(res);
+                checkAchievements(res.data.user.id, enqueueSnackbar, {"otherFriendCount": res.data.user.friendCount});
+              }
+            })
+            .catch((err) => {
+              console.log(err);
+            })
         }
       })
       .catch((err) => {

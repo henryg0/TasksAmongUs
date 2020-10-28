@@ -40,6 +40,7 @@ def createUserRoute():
   # IF SOMEONE ELSE HAS SAME ID, IT OVERRIDES
   data["completedTodos"] = 0
   data["failedTodos"] = 0
+  data["friendCount"] = 0
   data["selectedBadge"] = "NORMIE"
   data["selectedBorder"] = "BLACK"
   data["selectedCelebration"] = "AMONG_US_WIN"

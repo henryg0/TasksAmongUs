@@ -250,7 +250,12 @@ export default function Profile() {
                 </Grid>
                 <Grid item xs={12} md={3}>
                 <h3 className="text-center">All Time Progress</h3>
-                  <div style={{height: "150px"}}><AllTimeChart allTimeCompleted={allTimeCompleted + counter} allTimeFailed={allTimeFailed} /></div>
+                  <div style={{height: "150px"}}>
+                    {
+                      allTimeCompleted === 0 && allTimeFailed === 0 ? <h3 className="text-center text-secondary"><br/>NOTHING!</h3> : 
+                      <AllTimeChart allTimeCompleted={allTimeCompleted + counter} allTimeFailed={allTimeFailed} />
+                    }
+                  </div>
                 </Grid>
               </Grid>
             </Card>

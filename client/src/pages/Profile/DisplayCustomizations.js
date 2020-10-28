@@ -15,11 +15,13 @@ const secretDescriptions = getSecretCustomDesc();
 export function displayBadges(unlockedBadges) {
   let badges = getBadges();
   let result = [];
+  let displayName;
   for (let badge in badges) {
     if (badge in unlockedBadges) {
+      displayName = badge.replace(/_/g, ' ');
       result.push(
         <FormControlLabel value={badge} control={<Radio style={{color: "red"}} />} key={badge} label={
-          <Tooltip title={description[badge]} placement="bottom-start">
+          <Tooltip title={displayName + ": " + description[badge]} placement="bottom-start">
             {badges[badge]}
           </Tooltip>
         }/>
@@ -42,11 +44,13 @@ export function displayBorders(unlockedBorders) {
   let user = authenticate();
   let borders = getBorders();
   let result = [];
+  let displayName;
   for (let border in borders) {
     if (border in unlockedBorders) {
+      displayName = border.replace(/_/g, ' ');
       result.push(
         <FormControlLabel value={border} control={<Radio style={{color: "red"}} />} key={border} label={
-          <Tooltip title={description[border]} placement="bottom-start">
+          <Tooltip title={displayName + ": " + description[border]} placement="bottom-start">
             <div className={borders[border].root}>
               <Avatar src={user.imageUrl} style={{width: "50px", height: "50px"}} />
             </div>
@@ -72,11 +76,13 @@ export function displayBorders(unlockedBorders) {
 export function displayCelebrations(unlockedCelebrations) {
   let celebrations = getCelebrations();
   let result = [];
+  let displayName;
   for (let celebration in celebrations) {
     if (celebration in unlockedCelebrations) {
+      displayName = celebration.replace(/_/g, ' ');
       result.push(
         <FormControlLabel value={celebration} control={<Radio style={{color: "red"}} />} key={celebration} label={
-          <Tooltip title={description[celebration]} placement="bottom-start">
+          <Tooltip title={displayName + ": " + description[celebration]} placement="bottom-start">
             <video autoPlay muted loop playsInline width="260px">
               <source src={celebrations[celebration]} type="video/mp4" />
             </video>

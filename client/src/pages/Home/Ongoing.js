@@ -13,7 +13,7 @@ export default function Ongoing(props) {
         if (res.data.err) {
           console.log(res.data.error);
         } else {
-          console.log(res.data.todos);
+          // console.log(res.data.todos);
           setOngoingTodos(res.data.todos);
         }
       }) 
@@ -42,16 +42,22 @@ export default function Ongoing(props) {
     if (ongoingTodos.length === 0) {
       render.push(
         <OngoingTodo 
-          fullName={"Obviously Not An Imposter"}
-          profileUrl={"https://i.imgur.com/dAkx8RC.png"}
+          fullName={"Not Sus"}
+          profileUrl={"https://i.imgur.com/rVBs09J.jpg"}
           selectedBadge={"GAMER"}
           selectedBorder={"SEAWEED_GREEN"}
+          todoName={"DISCUSS!"}
           dueDate={new Date()}
           description={
             <div>
-              Howdy! This section shows the ongoing todos of you and your friends.
-              When they are completed or past the todo deadline, they are automatically
-              moved into the completed/fail tab.
+              Welcome to TasksAmongUs!!! A todo app for friends
+              to keep each other accountable.
+              <br/>
+              <br/>
+              You're looking at the "ongoing" section of the home page
+              which shows the ongoing todos of you and your friends.
+              When todos are completed/failed, they are automatically
+              move into the "completed/failed" tab.
               Add some friends to see what they're up to!
               <br/>
               <br/>

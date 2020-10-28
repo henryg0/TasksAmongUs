@@ -5,6 +5,8 @@ export default function checkAchievements(userId, enqueueSnackbar, args) {
   let todoImageUrl = args["todoImageUrl"];
   let todoDate = args["todoDate"];
   let todosCompleted = args["todosCompleted"];
+  let friendCount = args["friendCount"];
+  let otherFriendCount = args["otherFriendCount"];
 
   let unlockedBadges = [];
   let unlockedBorders = [];
@@ -103,6 +105,72 @@ export default function checkAchievements(userId, enqueueSnackbar, args) {
       unlockedBadges.push("TRYHARD");
     }
   }
+
+  // friend count achievements
+  if (friendCount) {
+    if (friendCount >= 1) {
+      unlockedBorders.push("VIOLET_FADE");
+    }
+    if (friendCount >= 3) {
+      unlockedBorders.push("SUNFLOWER_ORANGE");
+    }
+    if (friendCount >= 5) {
+      unlockedCelebrations.push("STEVE_ULT");
+    }
+    if (friendCount >= 8) {
+      unlockedCelebrations.push("FALL_GUYS_DANCE");
+    }
+    if (friendCount >= 10) {
+      unlockedBadges.push("FRIENDINATOR");
+    }
+  }
+
+  if (otherFriendCount) {
+    if (otherFriendCount >= 1) {
+      unlockedBorders.push("VIOLET_FADE");
+    }
+    if (otherFriendCount >= 3) {
+      unlockedBorders.push("SUNFLOWER_ORANGE");
+    }
+    if (otherFriendCount >= 5) {
+      unlockedCelebrations.push("STEVE_ULT");
+    }
+    if (otherFriendCount >= 8) {
+      unlockedCelebrations.push("FALL_GUYS_DANCE");
+    }
+    if (otherFriendCount >= 10) {
+      unlockedBadges.push("FRIENDINATOR");
+    }
+
+    if (Object.keys(unlockedBadges).length > 0) {
+      axios.put(`/api/user/${userId}/unlocked/badges/update`, {"unlockedBadges": unlockedBadges})
+        .then((res) => {
+        })
+        .catch((err) => {
+          console.log(err);
+        })
+    }  
+    
+    if (Object.keys(unlockedBorders).length > 0) {
+      axios.put(`/api/user/${userId}/unlocked/borders/update`, {"unlockedBorders": unlockedBorders})
+        .then((res) => {
+        })
+        .catch((err) => {
+          console.log(err);
+        })
+    }
+  
+    if (Object.keys(unlockedCelebrations).length > 0) {
+      axios.put(`/api/user/${userId}/unlocked/celebrations/update`, {"unlockedCelebrations": unlockedCelebrations})
+        .then((res) => {
+        })
+        .catch((err) => {
+          console.log(err);
+        })
+    }
+    return;
+  }
+
 
   // done checking
 

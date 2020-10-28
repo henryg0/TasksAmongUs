@@ -46,20 +46,22 @@ export default function Unfinished(props) {
       render.push(
         <FinishedTodo 
           fullName={"Obviously Not An Imposter"}
-          profileUrl={"https://i.imgur.com/dAkx8RC.png"}
+          profileUrl={"https://i.imgur.com/rVBs09J.jpg"}
           selectedBadge={"GAMER"}
           selectedBorder={"SEAWEED_GREEN"}
           completedDate={new Date()}
+          todoName={"DISCUSS!"}
           description={
             <div>
-              Howdy! This section shows the completed/failed todos of you and your friends.
+              Howdy! You're looking at is the "completed/failed" section of the home page which
+              shows the completed/failed todos of you and your friends.
               Whenever a todo is completed, it'll go here with your awesome "celebration" GIF.
               HOWEVER, should you fail a todo, your failure postcard will be posted instead.
 
               Add some friends to see what they're up to!
             </div>
           }
-          imageUrl={"https://i.imgur.com/QSNjCbk.jpg"}
+          imageUrl={"https://i.imgur.com/n3PLKQz.jpg"}
           key={-1}
         />
       )
