@@ -169,7 +169,8 @@ export default function Profile() {
                                     overflowY: "auto",
                                     height: "65vh",
                                   }}
-                                  elevation={0}
+                                  className="bg-light p-2"
+                                  variant="outlined"
                                 >
                                   <h5>Badges</h5>
                                   <Grid container direcion="row" justify="center">

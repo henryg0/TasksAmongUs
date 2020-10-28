@@ -1,10 +1,11 @@
 export default function getPostcards() {
   return [
     "https://i.imgur.com/HLkruVA.jpg",
-    "https://i.imgur.com/8gFwiaK.jpg",
+    "https://i.imgur.com/BUUI7qI.jpg",
     "https://i.imgur.com/kDOm49z.jpg",
     "https://i.imgur.com/lrLk6vG.jpg",
     "https://i.imgur.com/epElcfL.jpg",
+    "https://i.imgur.com/QSNjCbk.jpg",
     "https://i.imgur.com/CZQiarQ.jpg",
     "https://i.imgur.com/wXcxrKl.png",
     "https://i.imgur.com/1nPGu3t.jpg",
@@ -15,6 +16,7 @@ export default function getPostcards() {
     "https://i.imgur.com/00jEYKH.jpg",
     "https://i.imgur.com/n3PLKQz.jpg",
     "https://i.imgur.com/dBxmIm3.jpg",
+    "https://i.imgur.com/lTTxLGM.jpg",
     "https://i.imgur.com/VE5hvmW.jpg",
     "https://i.imgur.com/2ccfSc9.jpg",
     "https://i.imgur.com/5i0dn43.jpg",

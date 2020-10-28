@@ -12,7 +12,11 @@ const useStyles = makeStyles((theme) => ({
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
-    outline: "none",
+    outline: "0",
+    
+    ":focus": {
+      outline: "0",
+    }
   },
   paper: {
     backgroundColor: theme.palette.background.paper,
@@ -36,7 +40,7 @@ export default function TransitionsModal(props) {
   };
 
   return (
-    <div className={{outline: "none"}}>
+    <div>
       {Icon ?
       <IconButton color="primary" onClick={handleOpen}>
         <Icon />
