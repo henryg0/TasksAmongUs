@@ -17,7 +17,7 @@ def getWeeklyProgressRoute(userId):
   # each day: 86400000 ms
   currentTime = int(time.time()*1000)
 
-  docs = db.collection("Todo").order_by("completedDate", direction=firestore.Query.ASCENDING).start_at({u'completedDate' : lowerBound}).end_at({u'completedDate' : currentTime}).stream()
+  docs = db.collection("Todo").where("userId", "==", userId).order_by("completedDate", direction=firestore.Query.ASCENDING).start_at({u'completedDate' : lowerBound}).end_at({u'completedDate' : currentTime}).stream()
   docDict = [doc.to_dict() for doc in docs]
   
   todoDates = {datetime.datetime.fromtimestamp(todo["completedDate"]/1000).strftime("%m/%d/%Y") : [[], []] for todo in docDict}

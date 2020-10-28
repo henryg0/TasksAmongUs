@@ -13,7 +13,7 @@ def getUpcomingTodoRoute(userId):
   
   friends = db.collection("Friends").where("userId", "==", userId).stream()
 
-  idDict = {doc.to_dict["friendId"]:True for doc in friends}
+  idDict = {doc.to_dict()["friendId"]:True for doc in friends}
   idDict[userId] = True
 
   currentTime = time.time() * 1000
@@ -25,7 +25,7 @@ def getUpcomingTodoRoute(userId):
   res = []
   
   for todo in sortedResults:
-    if idDict.get(todo["userId"]):
+    if idDict.get(todo["userId"]) and not todo.get("status"):
       res.append(todo)
 
   return {"todos": res}
