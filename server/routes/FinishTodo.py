@@ -25,14 +25,14 @@ def finishTodoRoute(userId, todoId):
     return (jsonify({"error": "User is not allowed to update this field"}), 403)
 
   currentTime = int(time.time() * 1000)
-    
-  if not docDict.get("status"):
+  
+  if docDict["dueDate"] < currentTime:
+    return {"msg": "You have failed to complete the assignment in time :("}
+  
+  elif not docDict.get("status"):
     docDict["status"] = True
     docDict["completedDate"] = currentTime
     db.collection("Users").document(userId).update({'finishedTodos': Increment(1)})
-  
-  elif docDict["dueDate"] < currentTime:
-    return {"msg": "You have failed to complete the assignment in time :("}
   
   db.collection("Todo").document(todoId).set(docDict)
   
