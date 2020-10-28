@@ -32,7 +32,7 @@ def finishTodoRoute(userId, todoId):
   elif not docDict.get("status"):
     docDict["status"] = True
     docDict["completedDate"] = currentTime
-    db.collection("Users").document(userId).update({'finishedTodos': Increment(1)})
+    db.collection("Users").document(userId).update({'completedTodos': Increment(1)})
   
   db.collection("Todo").document(todoId).set(docDict)
   

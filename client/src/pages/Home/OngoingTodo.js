@@ -1,5 +1,7 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
+import getBadges from '../../utils/get.badges';
+import getBorders from '../../utils/get.borders';
 import clsx from 'clsx';
 import Card from '@material-ui/core/Card';
 import CardHeader from '@material-ui/core/CardHeader';
@@ -9,13 +11,13 @@ import Collapse from '@material-ui/core/Collapse';
 import Avatar from '@material-ui/core/Avatar';
 import IconButton from '@material-ui/core/IconButton';
 import Typography from '@material-ui/core/Typography';
-import { red } from '@material-ui/core/colors';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import Divider from '@material-ui/core/Divider';
 import Badge from 'react-bootstrap/Badge';
 import Border from '../../components/Border';
-import Image from 'react-bootstrap/Image';
-// import { useSnackbar } from 'notistack';
+import Grid from '@material-ui/core/Grid';
+import FiberManualRecordIcon from '@material-ui/icons/FiberManualRecord';
+import { blue } from '@material-ui/core/colors';
 
 const useStyles = makeStyles((theme) => ({
   expand: {
@@ -28,35 +30,30 @@ const useStyles = makeStyles((theme) => ({
   expandOpen: {
     transform: 'rotate(180deg)',
   },
-  avatar: {
-    backgroundColor: red[500],
-  },
 }));
 
 export default function FinishedTodo(props) {
-  const { userId, /*todoId,*/ todoName, completedDate, description, imageUrl, /*idx*/ } = props;
-  let displayDate = new Date(completedDate);
+  const { 
+    fullName, profileUrl, selectedBadge, selectedBorder,
+    todoName, dueDate, description, imageUrl 
+  } = props;
+  const badges = getBadges();
+  const borders = getBorders(); 
+  const displayDate = new Date(dueDate);
   const classes = useStyles();
   const [expanded, setExpanded] = React.useState(false);
-  // const { enqueueSnackbar } = useSnackbar();
 
   const handleExpandClick = () => {
     setExpanded(!expanded);
   };
 
-  // function deleteTodo() {
-  //   enqueueSnackbar("Todo Deleted", {variant: "success"}) 
-  // }
-
   return (
     <Card className={classes.root}>
       <CardHeader
         avatar={
-          <Border borderColor="black">
-            <Avatar className={classes.avatar}>
-              A
-            </Avatar>
-          </Border>
+          <div className={borders[selectedBorder].root}>
+            <Avatar src={profileUrl} style={{width: "50px", height: "50px"}} />
+          </div>
         }
         action={
           <CardActions>
@@ -74,29 +71,30 @@ export default function FinishedTodo(props) {
           </CardActions>
         }
         title={
-          <div>
-            {userId}{" "}
-            <Badge variant="info">NORMIE</Badge>
-            <br/>
-            {todoName}
-          </div>
-        }
-        subheader={
-          <div>{displayDate.toLocaleDateString() + ", " + displayDate.toLocaleTimeString([], {timeStyle: 'short'})}</div>
+          <Grid container justify="space-between">
+            <Grid item xs={6} lg={3}>
+              {fullName}{" "}
+              {badges[selectedBadge]}
+              <br/>
+              {todoName}
+            </Grid>
+            <Grid item xs={6} className="text-secondary text-right">
+              {displayDate.toLocaleDateString()}
+              <br/>
+              {displayDate.toLocaleTimeString([], {timeStyle: 'short'})}
+              <br/>
+              <FiberManualRecordIcon style={{ color: blue[500], fontSize:"12"}} className="mb-1" /> 
+              {" "}
+              {"ONGOING"}
+            </Grid>
+          </Grid>
         }
       />
       <Collapse in={expanded} timeout="auto" unmountOnExit>
-        <CardContent>
+        <CardContent className="text-center">
           <Typography variant="body2" color="textSecondary">
-            {description}
+            {description ? description : "- empty description -"}
           </Typography>
-          <br/>
-          {/* <Blur img="https://i.imgur.com/HLkruVA.jpg" style={{maxWidth:"400px"}} blurRadius={40}/> */}
-          <Image
-            style={{maxWidth:"400px"}}
-            width="100%"
-            src={imageUrl}
-          />
         </CardContent>
       </Collapse>
       <Divider />

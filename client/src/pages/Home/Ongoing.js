@@ -7,27 +7,31 @@ export default function Ongoing(props) {
   const  { user } = props;
   const [ongoingTodos, setOngoingTodos] = useState([]);
 
-  // useEffect(() => {
-  //   axios.get(`/api/user/${user.id}/todo/upcoming`)
-  //     .then((res) => {
-  //       if (res.data.err) {
-  //         console.log(res.data.error);
-  //       } else {
-  //         console.log(res.data.todos);
-  //         setOngoingTodos(res.data.todos);
-  //       }
-  //     }) 
-  // }, [])
+  useEffect(() => {
+    axios.get(`/api/user/${user.id}/todo/upcoming`)
+      .then((res) => {
+        if (res.data.err) {
+          console.log(res.data.error);
+        } else {
+          console.log(res.data.todos);
+          setOngoingTodos(res.data.todos);
+        }
+      }) 
+  }, [])
 
   function getOngoingTodos() {
     let render = [];
     for (let i = 0; i < ongoingTodos.length; i++) {
       render.push(
         <OngoingTodo 
-          userId={ongoingTodos[i].userId}
+          // userId={ongoingTodos[i].userId}
+          fullName={ongoingTodos[i].fullName}
+          profileUrl={ongoingTodos[i].profileUrl}
+          selectedBadge={ongoingTodos[i].selectedBadge}
+          selectedBorder={ongoingTodos[i].selectedBorder}
           todoId={ongoingTodos[i].todoId}
           todoName={ongoingTodos[i].todoName}
-          completedDate={ongoingTodos[i].completedDate}
+          dueDate={ongoingTodos[i].dueDate}
           description={ongoingTodos[i].description}
           imageUrl={ongoingTodos[i].imageUrl}
           idx={i}
@@ -44,11 +48,11 @@ export default function Ongoing(props) {
       className="scrolling"
       style={{
         overflowY: "auto",
-        height: "450px",
+        height: "500px",
         width: "100%",
       }}
     >
-    {getOngoingTodos()}
+      {getOngoingTodos()}
     </Card>
   );
 }

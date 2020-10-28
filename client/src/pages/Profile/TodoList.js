@@ -66,8 +66,8 @@ export default function TodoList(props) {
       variant="outlined"
       style={{
         overflowY: "auto",
-        maxHeight: "450px",
-        height: "450px",
+        maxHeight: "500px",
+        height: "500px",
         width: "100%"
       }}
       className="mb-2 scrolling"

@@ -48,38 +48,20 @@ export default function Profile() {
         if (res.data.error) {
           console.log(res.data.error);
         } else {
-          if (res.data.user.selectedBadge) {
-            setSelectedBadge(res.data.user.selectedBadge);
-          } else {
-            setSelectedBadge("NORMIE");
-          }
-          if (res.data.user.selectedBorder) {
-            setSelectedBorder(res.data.user.selectedBorder);
-          } else {
-            setSelectedBorder("BLACK");
-          }
-          if (res.data.user.selectedCelebration) {
-            setSelectedCelebration(res.data.user.selectedCelebration);
-          } else {
-            setSelectedCelebration("AMONG US WIN")
-          }
-          if (res.data.user.unlockedBadges) {
-            setUnlockedBadges(res.data.user.unlockedBadges);
-          }
-          if (res.data.user.unlockedBorders) {
-            setUnlockedBorders(res.data.user.unlockedBorders);
-          }
-          if (res.data.user.unlockedCelebrations) {
-            setUnlockedCelebrations(res.data.user.unlockedCelebrations);
-          }
-          setAllTimeCompleted(res.data.user.finishedTodos);
-
+          setSelectedBadge(res.data.user.selectedBadge);
+          setSelectedBadge("NORMIE");
+          setSelectedBorder(res.data.user.selectedBorder);
+          setSelectedCelebration(res.data.user.selectedCelebration);
+          setUnlockedBadges(res.data.user.unlockedBadges);
+          setUnlockedBorders(res.data.user.unlockedBorders);
+          setUnlockedCelebrations(res.data.user.unlockedCelebrations);
+          setAllTimeCompleted(res.data.user.completedTodos);
+          setAllTimeFailed(res.data.user.failedTodos);
         }
       })
       .catch((err) => {
         console.log(err);
       })
-    setAllTimeFailed(1);
 
     axios.get(`/api/user/${user.id}/weekly`)
       .then((res) => {
@@ -87,7 +69,6 @@ export default function Profile() {
           console.log(res.data.err);
         } else {
           setWeeklyProgress(res.data.todos);
-          // console.log(res.data.todos)
         }
       })
       .catch((err) => {
@@ -150,12 +131,13 @@ export default function Profile() {
   return (
     <Layout user={user}>
       <Container>
-        <Grid container justify="center" spacing={3}>
+        <Grid container justify="center" spacing={3} className="mb-2">
           <Grid item xs={11} md={7}>
             <h5 className="mt-2 text-secondary">{greeting}</h5>
             <Card
-              className="p-2 mb-2 mt-2"
+              className="p-2 mt-2"
               variant="outlined"
+              style={{minHeight: "520px"}}
             >
               <Grid container direction="row" justify="center">
                 <Grid item xs="auto" lg={3} className="p-2">

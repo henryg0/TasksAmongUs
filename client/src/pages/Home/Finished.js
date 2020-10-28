@@ -25,13 +25,18 @@ export default function Unfinished(props) {
       render.push(
         <FinishedTodo 
           userId={finishedTodos[i].userId}
-          todoId={finishedTodos[i].todoId}
+          fullName={finishedTodos[i].fullName}
+          profileUrl={finishedTodos[i].profileUrl}
+          selectedBadge={finishedTodos[i].selectedBadge}
+          selectedBorder={finishedTodos[i].selectedBorder}
+          selectedCelebration={finishedTodos[i].selectedCelebration}
+          // todoId={finishedTodos[i].todoId}
           todoName={finishedTodos[i].todoName}
           completedDate={finishedTodos[i].completedDate}
           description={finishedTodos[i].description}
           imageUrl={finishedTodos[i].imageUrl}
           status={finishedTodos[i].status}
-          idx={i}
+          // idx={i}
           key={i}
         />
       )
@@ -45,11 +50,11 @@ export default function Unfinished(props) {
       className="scrolling"
       style={{
         overflowY: "auto",
-        height: "450px",
+        height: "500px",
         width: "100%",
       }}
     >
-    {getFinishedTodos()}
+      {getFinishedTodos()}
     </Card>
   );
 }

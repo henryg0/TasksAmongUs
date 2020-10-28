@@ -38,7 +38,8 @@ def createUserRoute():
     return ({"msg": "User already exists"})
 
   # IF SOMEONE ELSE HAS SAME ID, IT OVERRIDES
-  data["finishedTodos"] = 0
+  data["completedTodos"] = 0
+  data["failedTodos"] = 0
   data["selectedBadge"] = "NORMIE"
   data["selectedBorder"] = "BLACK"
   data["selectedCelebration"] = "AMONG US WIN"
