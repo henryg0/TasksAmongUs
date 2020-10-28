@@ -24,8 +24,19 @@ def getUpcomingTodoRoute(userId):
   
   res = []
   
+  users = db.collection('Users').stream()
+  user_dicts = [user.to_dict() for user in users]
+
   for todo in sortedResults:
     if idDict.get(todo["userId"]) and not todo.get("status"):
+      for user in user_dicts:
+        if todo["userId"] == user["userId"]:
+          todo["selectedBadge"] = user["selectedBadge"]
+          todo["selectedBorder"] = user["selectedBorder"]
+          todo["selectedCelebration"] = user["selectedCelebration"]
+          todo["profileUrl"] = user["imageUrl"]
+          todo["fullName"] = user["fullName"]
       res.append(todo)
-
+  
+  # custom items, full name, and imageUrl
   return {"todos": res}
