@@ -53,10 +53,14 @@ export default function Create() {
       enqueueSnackbar("Date/Time invalid", {variant: "error"})
       return;
     }
-    
+
+    const now = new Date()
+    const utcMilllisecondsSinceEpoch = dueDate.getTime() + (now.getTimezoneOffset() * 60 * 1000)  
+    const utcSecondsSinceEpoch = Math.round(utcMilllisecondsSinceEpoch) 
+    console.log(utcMilllisecondsSinceEpoch)
     let data = {
       todoName: todoName,
-      dueDate: Date.UTC(dueDate),
+      dueDate: utcSecondsSinceEpoch,
       description: description,
       imageUrl: imageUrl
     }
@@ -67,7 +71,7 @@ export default function Create() {
       checkAchievements(user.id, enqueueSnackbar, {
         todoDescription: todoName + " " + description,
         todoImageUrl: imageUrl,
-        todoDate: new Date(),
+        todoDate: utcSecondsSinceEpoch,
       });
       enqueueSnackbar("Todo Created", {variant: "success"})
     })

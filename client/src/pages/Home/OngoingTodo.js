@@ -38,7 +38,7 @@ export default function OngoingTodo(props) {
   } = props;
   const badges = getBadges();
   const borders = getBorders(); 
-  const displayDate = new Date(dueDate);
+  const displayDate = new Date(dueDate - new Date().getTimezoneOffset()*60*1000);
   const classes = useStyles();
   const [expanded, setExpanded] = React.useState(false);
 

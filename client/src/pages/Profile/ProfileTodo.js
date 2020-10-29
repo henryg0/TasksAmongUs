@@ -47,7 +47,7 @@ export default function ProfileTodo(props) {
   } = props;
   const { enqueueSnackbar, closeSnackbar } = useSnackbar();
   const classes = useStyles();
-  let displayDate = new Date(dueDate);
+  let displayDate = new Date(dueDate - new Date().getTimezoneOffset()*60*1000);
   const [expanded, setExpanded] = React.useState(false);
   const badges = getBadges();
   const borders = getBorders();
@@ -126,7 +126,7 @@ export default function ProfileTodo(props) {
               {todoName}
             </Grid>
             <Grid item xs={6} className="text-secondary text-right">
-              {displayDate.toLocaleDateString()} <br/> {displayDate.toLocaleTimeString()}
+              {displayDate.toLocaleDateString()} <br/> {displayDate.toLocaleTimeString([], {timeStyle: 'short'})}
             </Grid>
           </Grid>
         }
