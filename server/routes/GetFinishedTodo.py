@@ -28,7 +28,7 @@ def getFinishedTodoRoute(userId):
   user_dicts = [user.to_dict() for user in users]
 
   for todo in sortedResults:
-    if idDict.get(todo["userId"]) or todo.get("status"):
+    if idDict.get(todo["userId"]):
       for user in user_dicts:
         if todo["userId"] == user["userId"]:
           todo["selectedBadge"] = user["selectedBadge"]

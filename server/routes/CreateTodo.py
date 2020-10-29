@@ -23,7 +23,7 @@ def createTodoRoute(userId):
   dueDate = data.get("dueDate")
   
   # 2020-10-21T10:00:08.920Z
-  dueDate = datetime.datetime.strptime(dueDate, '%Y-%m-%dT%H:%M:%S.%fZ').timestamp() * 1000
+  dueDate = datetime.datetime.strptime(dueDate, '%Y-%m-%dT%H:%M:%S.%fZ').timestamp() * 1000 - 28800000
   
   error_log = {
     "todoName":todoName,

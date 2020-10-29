@@ -19,7 +19,7 @@ def updateTodoRoute(userId, todoId):
 
   todoName = data.get("todoName")
   description = data.get("description")
-  dueDate = datetime.datetime.strptime(data.get("dueDate"), '%Y-%m-%dT%H:%M:%S.%fZ').timestamp() * 1000
+  dueDate = datetime.datetime.strptime(data.get("dueDate"), '%Y-%m-%dT%H:%M:%S.%fZ').timestamp() * 1000 - 28800000
   imageUrl = data.get("imageUrl")
   completedDate = dueDate + 1
 
