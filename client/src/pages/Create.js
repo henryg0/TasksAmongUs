@@ -34,7 +34,7 @@ export default function Create() {
   const postcards = getPostcards();
   const [todoName, setTodoName] = useState("");
   const [dueDate, setDueDate] = useState(new Date());
-  const [description, setDesciption] = useState("");
+  const [description, setDescription] = useState("");
   const [imageUrl, setImageUrl] = useState(postcards[0]);
 
   function displayBackgrounds() {
@@ -67,6 +67,7 @@ export default function Create() {
       checkAchievements(user.id, enqueueSnackbar, {
         todoDescription: todoName + " " + description,
         todoImageUrl: imageUrl,
+        todoDate: new Date(),
       });
       enqueueSnackbar("Todo Created", {variant: "success"})
     })
@@ -76,7 +77,7 @@ export default function Create() {
 
     setTodoName("");
     setDueDate(new Date());
-    setDesciption("");
+    setDescription("");
     setImageUrl(postcards[0]);
   }
 
@@ -148,7 +149,7 @@ export default function Create() {
                       rowsMax={10}
                       value={description}
                       inputProps={{ maxLength: 1000 }}
-                      onChange={(e) => setDesciption(e.target.value)}
+                      onChange={(e) => setDescription(e.target.value)}
                     />
                   </Grid>
                   <Grid item>
@@ -164,14 +165,15 @@ export default function Create() {
                             }}
                           >
                             <Grid container direction="column" justify="space-between" style={{height: "100%"}}>
-                              <h3>Change Postcard {" "}<Tooltip title="Postcard For If You Fail Your Todo"><HelpIcon /></Tooltip></h3>
+                              <h3>Change Postcard {" "}<Tooltip title="Postcard for your friends if you fail the todo"><HelpIcon /></Tooltip></h3>
                               <Grid container alignItems="stretch">
                                 <Card
                                   style={{
                                     overflowY: "auto",
                                     height: "65vh",
                                   }}
-                                  elevation={0}
+                                  variant="outlined"
+                                  className="p-2 bg-light"
                                 >
                                   <Grid container direcion="row" justify="center">
                                     <RadioGroup required value={imageUrl} onChange={(e) => {setImageUrl(e.target.value)}} onClick={onClose}>

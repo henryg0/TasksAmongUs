@@ -42,7 +42,9 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export default function ProfileTodo(props) {
-  const { user, todoId, todoName, dueDate, description, imageUrl, handleDelete, idx, renderInCounter, selectedBadge, selectedBorder, selectedCelebration } = props;
+  const { user, todoId, todoName, dueDate, description, imageUrl, handleDelete, idx, renderInCounter, 
+    selectedBadge, selectedBorder, selectedCelebration,
+  } = props;
   const { enqueueSnackbar, closeSnackbar } = useSnackbar();
   const classes = useStyles();
   let displayDate = new Date(dueDate);
@@ -79,7 +81,7 @@ export default function ProfileTodo(props) {
             <Grid container direction="column">
               {renderInCounter()}
               <h3 className="text-center">Todo Completed!</h3>
-              <video autoPlay loop muted width="300px">
+              <video autoPlay loop playsInline muted width="300px">
                 <source src={celebrations[selectedCelebration]} type="video/mp4" />
               </video>
               <Button className="text-white" onClick={() => closeSnackbar()}>Close</Button>
@@ -117,13 +119,13 @@ export default function ProfileTodo(props) {
         }
         title={
           <Grid container justify="space-between">
-            <Grid>
+            <Grid item xs={6}>
               {user.fullName}{" "}
               {badges[selectedBadge]}
               <br/>
               {todoName}
             </Grid>
-            <Grid className="text-secondary">
+            <Grid item xs={6} className="text-secondary text-right">
               {displayDate.toLocaleDateString()} <br/> {displayDate.toLocaleTimeString([], {timeStyle: 'short'})}
             </Grid>
           </Grid>
@@ -132,7 +134,7 @@ export default function ProfileTodo(props) {
       <Collapse in={expanded} timeout="auto" unmountOnExit>
         <CardContent className="text-center">
           <Typography variant="body2" color="textSecondary">
-            {description}
+            {description ? description : "- empty description -"}
           </Typography>
           <Grid container direction="row" justify="center">
             <Modal icon={DoneIcon} component={
@@ -163,9 +165,8 @@ export default function ProfileTodo(props) {
               }
             }/>
           </Grid>
-          {/* <Blur img={imageUrl} style={{maxWidth:"400px"}} blurRadius={40}/> */}
           <Image
-            style={{maxWidth:"400px"}}
+            style={{maxWidth:"300px"}}
             width="100%"
             src={imageUrl}
           />

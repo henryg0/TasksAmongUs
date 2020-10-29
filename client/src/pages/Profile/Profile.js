@@ -9,9 +9,12 @@ import authenticate from '../../utils/authenticate';
 import getGreeting from '../../utils/get.greeting';
 import getBadges from '../../utils/get.badges';
 import getBorders from '../../utils/get.borders';
+import getCelebrations from '../../utils/get.celebrations';
+import checkAchievements from '../../utils/check.achievements';
 
 import WeeklyChart from './WeeklyChart';
 import AllTimeChart from './AllTimeChart';
+import NoTimeChart from './NoTimeChart';
 import Container from '@material-ui/core/Container';
 import Card from '@material-ui/core/Card';
 import Grid from '@material-ui/core/Grid';
@@ -21,20 +24,22 @@ import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
 import RadioGroup from '@material-ui/core/RadioGroup';
 import BuildIcon from '@material-ui/icons/Build';
+import ProgressBar from 'react-bootstrap/ProgressBar';
 
 export default function Profile() {
   let user = authenticate();
   let badges = getBadges();
   let borders = getBorders();
+  let celebrations = getCelebrations();
   const { enqueueSnackbar } = useSnackbar();
   let [greeting, setGreeting] = useState("");
 
   let [selectedBadge, setSelectedBadge] = useState("none");
   let [selectedBorder, setSelectedBorder] = useState("none");
-  let [selectedCelebration, setSelectedCelebration] = useState("AMONG US WIN");
+  let [selectedCelebration, setSelectedCelebration] = useState("AMONG_US_WIN");
   let [unlockedBadges, setUnlockedBadges] = useState({"NORMIE": true})
   let [unlockedBorders, setUnlockedBorders] = useState({"BLACK": true})
-  let [unlockedCelebrations, setUnlockedCelebrations] = useState({"AMONG US WIN": true})
+  let [unlockedCelebrations, setUnlockedCelebrations] = useState({"AMONG_US_WIN": true})
 
   let [allTimeCompleted, setAllTimeCompleted] = useState(0);
   let [allTimeFailed, setAllTimeFailed] = useState(0);
@@ -48,38 +53,19 @@ export default function Profile() {
         if (res.data.error) {
           console.log(res.data.error);
         } else {
-          if (res.data.user.selectedBadge) {
-            setSelectedBadge(res.data.user.selectedBadge);
-          } else {
-            setSelectedBadge("NORMIE");
-          }
-          if (res.data.user.selectedBorder) {
-            setSelectedBorder(res.data.user.selectedBorder);
-          } else {
-            setSelectedBorder("BLACK");
-          }
-          if (res.data.user.selectedCelebration) {
-            setSelectedCelebration(res.data.user.selectedCelebration);
-          } else {
-            setSelectedCelebration("AMONG US WIN")
-          }
-          if (res.data.user.unlockedBadges) {
-            setUnlockedBadges(res.data.user.unlockedBadges);
-          }
-          if (res.data.user.unlockedBorders) {
-            setUnlockedBorders(res.data.user.unlockedBorders);
-          }
-          if (res.data.user.unlockedCelebrations) {
-            setUnlockedCelebrations(res.data.user.unlockedCelebrations);
-          }
-          setAllTimeCompleted(res.data.user.finishedTodos);
-
+          setSelectedBadge(res.data.user.selectedBadge);
+          setSelectedBorder(res.data.user.selectedBorder);
+          setSelectedCelebration(res.data.user.selectedCelebration);
+          setUnlockedBadges(res.data.user.unlockedBadges);
+          setUnlockedBorders(res.data.user.unlockedBorders);
+          setUnlockedCelebrations(res.data.user.unlockedCelebrations);
+          setAllTimeCompleted(res.data.user.completedTodos);
+          setAllTimeFailed(res.data.user.failedTodos);
         }
       })
       .catch((err) => {
         console.log(err);
       })
-    setAllTimeFailed(1);
 
     axios.get(`/api/user/${user.id}/weekly`)
       .then((res) => {
@@ -87,7 +73,6 @@ export default function Profile() {
           console.log(res.data.err);
         } else {
           setWeeklyProgress(res.data.todos);
-          // console.log(res.data.todos)
         }
       })
       .catch((err) => {
@@ -145,17 +130,34 @@ export default function Profile() {
 
   function renderInCounter() {
     setCounter(counter + 1);
+    let table = checkAchievements(user.id, enqueueSnackbar, {"todosCompleted": allTimeCompleted + counter})
+    let newUnlockedBorders = unlockedBorders;
+    for (const i in table[1]) {
+      newUnlockedBorders[table[1][i]] = true;
+    }
+    setUnlockedBorders(newUnlockedBorders);
+    let newUnlockedCelebrations = unlockedCelebrations;
+    for (const i in table[2]) {
+      newUnlockedCelebrations[table[2][i]] = true;
+    }
+    setUnlockedBadges(newUnlockedCelebrations);
+    let newUnlockedBadges = unlockedBadges;
+    for (const i in table[0]) {
+      newUnlockedBadges[table[0][i]] = true;
+    }
+    setUnlockedBadges(newUnlockedBadges);
   }
 
   return (
     <Layout user={user}>
       <Container>
-        <Grid container justify="center" spacing={3}>
-          <Grid item xs={11} md={7}>
+        <Grid container justify="center" spacing={3} className="mb-2">
+          <Grid item xs={10} md={7}>
             <h5 className="mt-2 text-secondary">{greeting}</h5>
             <Card
-              className="p-2 mb-2 mt-2"
+              className="p-2 mt-2"
               variant="outlined"
+              style={{minHeight: "620px"}}
             >
               <Grid container direction="row" justify="center">
                 <Grid item xs="auto" lg={3} className="p-2">
@@ -187,7 +189,8 @@ export default function Profile() {
                                     overflowY: "auto",
                                     height: "65vh",
                                   }}
-                                  elevation={0}
+                                  className="bg-light p-2"
+                                  variant="outlined"
                                 >
                                   <h5>Badges</h5>
                                   <Grid container direcion="row" justify="center">
@@ -240,7 +243,7 @@ export default function Profile() {
               </Grid>
               <br />
               <Grid container>
-                <Grid item xs={12} md={9}>
+                <Grid item xs={12} md={9} className="mb-2">
                   <h3 className="text-center">Weekly Progress</h3>
                   <div style={{height: "200px"}}>
                     <WeeklyChart 
@@ -249,14 +252,31 @@ export default function Profile() {
                     />
                   </div>
                 </Grid>
-                <Grid item xs={12} md={3}>
+                <Grid item xs={12} md={3} className="mb-2">
                 <h3 className="text-center">All Time Progress</h3>
-                  <div style={{height: "150px"}}><AllTimeChart allTimeCompleted={allTimeCompleted + counter} allTimeFailed={allTimeFailed} /></div>
+                  <div style={{height: "150px"}}>
+                    {
+                      allTimeCompleted === 0 && allTimeFailed === 0 ? <NoTimeChart /> : 
+                      <AllTimeChart allTimeCompleted={allTimeCompleted + counter} allTimeFailed={allTimeFailed} />
+                    }
+                  </div>
+                </Grid>
+                <Grid container item xs={12} justify="center">
+                  <Grid item xs={10}>
+                    <br/>
+                    <h3>Additional Stats</h3>
+                    <ProgressBar animated now={Object.keys(unlockedBadges).length / (Object.keys(badges).length - 1) * 100}/>
+                    <div>{Object.keys(unlockedBadges).length + "/" + (Object.keys(badges).length - 1) + " Badges Unlocked!"}</div>
+                    <ProgressBar animated variant="success" now={Object.keys(unlockedBorders).length /(Object.keys(borders).length - 1) * 100}/>
+                    <div>{Object.keys(unlockedBorders).length + "/" + (Object.keys(borders).length - 1) + " Borders Unlocked!"}</div>
+                    <ProgressBar animated variant="danger" now={Object.keys(unlockedCelebrations).length / Object.keys(celebrations).length * 100}/>
+                    <div>{Object.keys(unlockedCelebrations).length + "/" + Object.keys(celebrations).length + " Celebrations Unlocked!"}</div>
+                  </Grid>
                 </Grid>
               </Grid>
             </Card>
           </Grid>
-          <Grid container item xs={11} md={5} direction="column" justify="flex-start">
+          <Grid container item xs={10} md={5} direction="column" justify="flex-start">
             <h2>
               TodoList {" "}
               <Fab color="primary" aria-label="edit" href="/create" className="mb-1 mt-1" size="small">

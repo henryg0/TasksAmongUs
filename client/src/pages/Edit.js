@@ -2,6 +2,8 @@ import React, { useState, useEffect } from 'react';
 import Layout from '../components/Layout';
 import getPostcards from '../utils/get.postcards';
 import authenticate from '../utils/authenticate';
+import checkAchievements from '../utils/check.achievements';
+import { useParams } from 'react-router';
 import Form from 'react-bootstrap/Form';
 import Container from '@material-ui/core/Container';
 import Image from 'react-bootstrap/Image';
@@ -24,7 +26,6 @@ import {
 } from '@material-ui/pickers';
 import axios from 'axios';
 import Modal from '../components/Modal';
-import { useParams } from 'react-router';
 import HelpIcon from '@material-ui/icons/Help';
 import Tooltip from '@material-ui/core/Tooltip';
 
@@ -60,31 +61,36 @@ export default function Edit() {
     for (let i=0; i < postcards.length; i++) {
       result.push(<FormControlLabel value={postcards[i]} control={<Radio />} key={i} label={<Image style={{width: "200px"}} src={postcards[i]} rounded></Image>} />)
     }
-    return result
+    return result;
   }
 
-  function submitEditTodo(e) {
+  function editTodo(e) {
     e.preventDefault();
     e.stopPropagation();
-    
+
     if (dueDate.getTime() < new Date().getTime()) {
       enqueueSnackbar("Date/Time invalid", {variant: "error"})
       return;
     }
-
+    
     let data = {
       todoName: todoName,
       dueDate: dueDate,
       description: description,
       imageUrl: imageUrl
     }
-
+    
     axios.patch(`/api/user/${user.id}/todo/${todoId}/update`, data)
       .then((res) => {
           if (res.data.error) {
             console.log(res.data.error);
           } else {
-            console.log(res.data.todo);
+            // console.log(res.data.todo);
+            checkAchievements(user.id, enqueueSnackbar, {
+              todoDescription: todoName + " " + description,
+              todoImageUrl: imageUrl,
+              todoDate: new Date(),
+            });
             enqueueSnackbar("Todo Edited", {variant: "success"})
           }
       })
@@ -108,19 +114,20 @@ export default function Edit() {
               className="p-2 mb-2"
               variant="outlined"
             >
-              <Form onSubmit={submitEditTodo}>
+              <Form onSubmit={editTodo}>
                 <Grid container spacing={1} direction="column">
                   <Grid container item spacing={1}>
                     <Grid item xs={12} md={6}>
                       <TextField
                         required
-                        label="Event Name" 
+                        label="Todo Name"
                         size="small"
                         fullWidth
                         variant="outlined"
-                        inputProps={{ maxLength: 50 }}
                         value={todoName}
                         onChange={(e) => setTodoName(e.target.value)}
+                        fullWidth
+                        inputProps={{ maxLength: 50 }}
                       />
                     </Grid>
                     <Grid item xs={12} md={3}>
@@ -170,20 +177,21 @@ export default function Edit() {
                           <Card 
                             className="p-2 text-center"
                             style={{
-                              width: "80%",
-                              height: "90vh",
+                              width: "90%",
+                              height: "85vh",
                               overflowY: "auto",
                             }}
                           >
                             <Grid container direction="column" justify="space-between" style={{height: "100%"}}>
-                              <h2>Change Postcard {" "}<Tooltip title="Postcard For If You Fail Your Todo"><HelpIcon /></Tooltip></h2>
+                              <h3>Change Postcard {" "}<Tooltip title="Postcard for your friends if you fail the todo"><HelpIcon /></Tooltip></h3>
                               <Grid container alignItems="stretch">
                                 <Card
                                   style={{
                                     overflowY: "auto",
                                     height: "70vh",
                                   }}
-                                  elevation={0}
+                                  variant="outlined"
+                                  className="p-2 bg-light"
                                 >
                                   <Grid container direcion="row" justify="center">
                                     <RadioGroup required value={imageUrl} onChange={(e) => {setImageUrl(e.target.value)}} onClick={onClose}>
@@ -199,9 +207,7 @@ export default function Edit() {
                       }
                     }/>
                   </Grid>
-                  <Grid container item>
-                    <Image style={{width: "100%"}} src={imageUrl} rounded></Image>
-                  </Grid>
+                  <Image style={{width: "100%"}} src={imageUrl} rounded/>
                   <Grid container item>
                     <Button type="submit" className="mb-2" variant="contained" color="primary" fullWidth>Finish Editing</Button>
                   </Grid>

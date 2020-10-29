@@ -14,11 +14,17 @@ def updateUnlockedBadgesRoute(userId):
   if not data:
     return (jsonify({"msg": "Missing data"}), 400)
 
-  unlockedBadges = data.get("unlockedBadges")
-  
-  fields = {"unlockedBadges." + item: True for item in unlockedBadges}
-  fields["unlockedBadges.NORMIE"] = True
+  newUnlockedBadges = data.get("unlockedBadges")
+  user = db.collection('Users').where("userId", "==", userId).stream()
+  oldUnlockedBadges = [doc.to_dict() for doc in user][0]["unlockedBadges"]
+
+  fields = {"unlockedBadges.NORMIE": True}
+  arr = []
+  for newBadge in newUnlockedBadges:
+    if newBadge not in oldUnlockedBadges:
+      fields["unlockedBadges." + newBadge] = True 
+      arr.append(newBadge)
 
   ref = db.collection("Users").document(userId).update(fields)
 
-  return ({"msg": unlockedBadges})
+  return ({"msg": arr})

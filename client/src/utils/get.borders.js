@@ -8,31 +8,31 @@ export default function Border() {
         gapColor: 'white',
         color: 'black',
       }),
-    "SEAWEED GREEN": useGradientAvatarStyles({
+    "SEAWEED_GREEN": useGradientAvatarStyles({
         gap: 2,
         thickness: 3,
         gapColor: 'white',
         color: '#03B2A2',
       }),
-    "OCEAN BLUE": useGradientAvatarStyles({
+    "OCEAN_BLUE": useGradientAvatarStyles({
         gap: 2,
         thickness: 3,
         gapColor: 'white',
         color: '#04A0D3',
       }),
-    "PUMPKIN ORANGE": useGradientAvatarStyles({
+    "PUMPKIN_ORANGE": useGradientAvatarStyles({
         gap: 2,
         thickness: 3,
         gapColor: 'white',
         color: '#DF665A',
       }),
-    "VIOLET FADE": useGradientAvatarStyles({
+    "VIOLET_FADE": useGradientAvatarStyles({
         gap: 2,
         thickness: 3,
         gapColor: 'white',
         color: 'linear-gradient(to bottom right, #feac5e, #c779d0, #4bc0c8)',
       }),
-    "SUNFLOWER ORANGE": useGradientAvatarStyles({
+    "SUNFLOWER_ORANGE": useGradientAvatarStyles({
         gap: 2,
         thickness: 3,
         gapColor: 'white',

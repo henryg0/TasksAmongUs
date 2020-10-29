@@ -1,6 +1,7 @@
 from flask import request, Blueprint, jsonify
 from ..database.database import db
 import uuid
+from google.cloud.firestore_v1 import Increment
 
 
 acceptFriendRequest = Blueprint("acceptFriendRequest", __name__)
@@ -30,6 +31,7 @@ def acceptFriendRequestRoute(requestId):
   }
 
   db.collection("Friends").document(userFriendIdOne).set(userData)
+  db.collection("Users").document(requestInfo["userId"]).update({'friendCount': Increment(1)})
 
   friendData = {
     "userId": requestInfo["friendId"],
@@ -42,6 +44,7 @@ def acceptFriendRequestRoute(requestId):
     "userFriendIdOne": userFriendIdTwo
   }
   db.collection("Friends").document(userFriendIdTwo).set(friendData)
+  db.collection("Users").document(requestInfo["friendId"]).update({'friendCount': Increment(1)})
   db.collection('Request').document(requestId).delete()
   
   return ({"friend": friendData})

@@ -38,7 +38,7 @@ export default class App extends React.Component {
 
   render() {  
     return (
-      <SnackbarProvider maxSnack={3}>
+      <SnackbarProvider maxSnack={5}>
         <BrowserRouter basename="localhost:3000">
           <Switch>
             <PrivateRoute path="/" exact component={Home} />

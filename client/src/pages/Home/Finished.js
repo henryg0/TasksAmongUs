@@ -5,7 +5,7 @@ import FinishedTodo from './FinishedTodo';
 
 export default function Unfinished(props) {
   const  { user } = props;
-  const [finishedTodos, setFinishedTodos] = useState([]);
+  const [finishedTodos, setFinishedTodos] = useState([{selectedBorder: "BLACK"}]);
 
   useEffect(() => {
     axios.get(`/api/user/${user.id}/todo/finish`)
@@ -25,14 +25,44 @@ export default function Unfinished(props) {
       render.push(
         <FinishedTodo 
           userId={finishedTodos[i].userId}
-          todoId={finishedTodos[i].todoId}
+          fullName={finishedTodos[i].fullName}
+          profileUrl={finishedTodos[i].profileUrl}
+          selectedBadge={finishedTodos[i].selectedBadge}
+          selectedBorder={finishedTodos[i].selectedBorder}
+          selectedCelebration={finishedTodos[i].selectedCelebration}
+          // todoId={finishedTodos[i].todoId}
           todoName={finishedTodos[i].todoName}
           completedDate={finishedTodos[i].completedDate}
           description={finishedTodos[i].description}
           imageUrl={finishedTodos[i].imageUrl}
           status={finishedTodos[i].status}
-          idx={i}
+          // idx={i}
           key={i}
+        />
+      )
+    }
+
+    if (finishedTodos.length === 0) {
+      render.push(
+        <FinishedTodo 
+          fullName={"Obviously Not An Imposter"}
+          profileUrl={"https://i.imgur.com/rVBs09J.jpg"}
+          selectedBadge={"GAMER"}
+          selectedBorder={"SEAWEED_GREEN"}
+          completedDate={new Date()}
+          todoName={"DISCUSS!"}
+          description={
+            <div>
+              Howdy! You're looking at is the "completed/failed" section of the home page which
+              shows the completed/failed todos of you and your friends.
+              Whenever a todo is completed, it'll go here with your awesome "celebration" GIF.
+              HOWEVER, should you fail a todo, your failure postcard will be posted instead.
+
+              Add some friends to see what they're up to!
+            </div>
+          }
+          imageUrl={"https://i.imgur.com/n3PLKQz.jpg"}
+          key={-1}
         />
       )
     }
@@ -45,11 +75,11 @@ export default function Unfinished(props) {
       className="scrolling"
       style={{
         overflowY: "auto",
-        height: "450px",
+        height: "600px",
         width: "100%",
       }}
     >
-    {getFinishedTodos()}
+      {getFinishedTodos()}
     </Card>
   );
 }

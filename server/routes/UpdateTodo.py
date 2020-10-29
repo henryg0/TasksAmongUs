@@ -27,7 +27,6 @@ def updateTodoRoute(userId, todoId):
     "todoName":todoName,
     "dueDate":dueDate,
     "imageUrl":imageUrl,
-    "description":description,
     "completedDate":completedDate
   }
 
@@ -46,6 +45,7 @@ def updateTodoRoute(userId, todoId):
 
   for key in dataLog:
     docDict[key] = dataLog[key]
+  docDict["description"] = description
 
   db.collection("Todo").document(todoId).set(docDict)
       
