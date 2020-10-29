@@ -2,6 +2,9 @@ import React, { useEffect } from 'react';
 import AppFooter from '../components/AppFooter';
 import axios from 'axios';
 import authenticate from '../utils/authenticate';
+import Grid from '@material-ui/core/Grid';
+import Card from '@material-ui/core/Card';
+import Container from '@material-ui/core/Container';
 
 export default function Landing() {
   useEffect(() => {
@@ -44,8 +47,51 @@ export default function Landing() {
           </video>
         </div>
       </div>
-      <div style={{backgroundColor:"black", height:"300px", width:"100%"}}>
-      </div>
+      <Card style={{backgroundColor:"black", width:"100%"}}>
+        <br/>
+        <br/>
+        <br/>
+        <br/>
+        <Container>
+          <Grid container className="white-text p-2 text-center" justify="center">
+            <Grid item xs={10} md={4} justify="center">
+              <h4>A Productivity App for You and Your Friends</h4>
+              <div>Productivity Log! Customizations! Achievements!</div>
+              <br/>
+              <div id="landing-text">
+                TasksAmongUs is a productivity app where you can create and <i>SHARE</i> todos
+                with your friends. The home screen features a feed of your progress.
+                Depending on if you complete or fail a todo, you'll see a celebratory
+                GIF or a dispointing and humilating meme.
+                <br/>
+                <br/>
+                Add friends and see what todos they're up to. Celebrate with them when
+                they finish their todos. Tease them them if they don't! But most
+                importantly, keep you and your friends accountable over their responsibilities.
+                <br/>
+                <br/>
+                Expansive library of celebrations GIFs and failure memes that we'll be
+                updating every few weeks! Give the production team suggestions on what you'd
+                like to see.
+                <br/>
+                <br/>
+                Achievements are a huge way to motivate yourself. When you make progress on
+                your responsibilities, we celebrate too. You'll earn customizations that 
+                you can use to decorate your profile and your todos!
+              </div>
+              <br/>
+              <br/>
+              <br/>
+              <br/>
+            </Grid>
+            <Grid item xs={10} md={6}>
+
+            </Grid>
+            
+
+          </Grid>
+        </Container>
+      </Card>
       <div style={{
         backgroundColor: "#F6C5C5",
         bottom: "0",

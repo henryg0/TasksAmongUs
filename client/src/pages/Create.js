@@ -56,7 +56,7 @@ export default function Create() {
     
     let data = {
       todoName: todoName,
-      dueDate: dueDate,
+      dueDate: Date.UTC(dueDate),
       description: description,
       imageUrl: imageUrl
     }

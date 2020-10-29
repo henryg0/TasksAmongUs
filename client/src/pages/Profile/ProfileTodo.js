@@ -126,7 +126,7 @@ export default function ProfileTodo(props) {
               {todoName}
             </Grid>
             <Grid item xs={6} className="text-secondary text-right">
-              {displayDate.toLocaleDateString()} <br/> {displayDate.toLocaleTimeString([], {timeStyle: 'short'})}
+              {displayDate.toLocaleDateString()} <br/> {displayDate.toLocaleTimeString()}
             </Grid>
           </Grid>
         }

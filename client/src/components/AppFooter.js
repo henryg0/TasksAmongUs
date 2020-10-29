@@ -7,8 +7,8 @@ export default function AppFooter() {
       <p>
         <a href="/about" className="nav-item">ABOUT</a>
         {" "}•{" "}
-        <a href="/#contact" className="nav-item">CONTACT</a>
-        {" "}•{" "}
+        {/* <a href="/#contact" className="nav-item">CONTACT</a> */}
+        {/* {" "}•{" "} */}
         <a href="https://github.com/vincentktieu-ucsb/MakeTodo" className="nav-item">GITHUB</a>
       </p>
       @TasksAmongUs 2020

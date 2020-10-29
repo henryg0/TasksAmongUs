@@ -59,7 +59,7 @@ export default function Profile() {
           setUnlockedBadges(res.data.user.unlockedBadges);
           setUnlockedBorders(res.data.user.unlockedBorders);
           setUnlockedCelebrations(res.data.user.unlockedCelebrations);
-          setAllTimeCompleted(res.data.user.completedTodos);
+          setAllTimeCompleted(res.data.user.finishedTodos);
           setAllTimeFailed(res.data.user.failedTodos);
         }
       })
@@ -256,21 +256,23 @@ export default function Profile() {
                 <h3 className="text-center">All Time Progress</h3>
                   <div style={{height: "150px"}}>
                     {
-                      allTimeCompleted === 0 && allTimeFailed === 0 ? <NoTimeChart /> : 
+                      (allTimeCompleted + counter === 0 && allTimeFailed === 0) ? <NoTimeChart /> : 
                       <AllTimeChart allTimeCompleted={allTimeCompleted + counter} allTimeFailed={allTimeFailed} />
                     }
                   </div>
                 </Grid>
-                <Grid container item xs={12} justify="center">
+                <Grid container item xs={12} justify="center" className="mb-2">
                   <Grid item xs={10}>
                     <br/>
                     <h3>Additional Stats</h3>
-                    <ProgressBar animated now={Object.keys(unlockedBadges).length / (Object.keys(badges).length - 1) * 100}/>
                     <div>{Object.keys(unlockedBadges).length + "/" + (Object.keys(badges).length - 1) + " Badges Unlocked!"}</div>
-                    <ProgressBar animated variant="success" now={Object.keys(unlockedBorders).length /(Object.keys(borders).length - 1) * 100}/>
+                    <ProgressBar animated now={Object.keys(unlockedBadges).length / (Object.keys(badges).length - 1) * 100}/>
+                    <br/>
                     <div>{Object.keys(unlockedBorders).length + "/" + (Object.keys(borders).length - 1) + " Borders Unlocked!"}</div>
-                    <ProgressBar animated variant="danger" now={Object.keys(unlockedCelebrations).length / Object.keys(celebrations).length * 100}/>
+                    <ProgressBar animated variant="success" now={Object.keys(unlockedBorders).length /(Object.keys(borders).length - 1) * 100}/>
+                    <br/>
                     <div>{Object.keys(unlockedCelebrations).length + "/" + Object.keys(celebrations).length + " Celebrations Unlocked!"}</div>
+                    <ProgressBar animated variant="danger" now={Object.keys(unlockedCelebrations).length / Object.keys(celebrations).length * 100}/>
                   </Grid>
                 </Grid>
               </Grid>
