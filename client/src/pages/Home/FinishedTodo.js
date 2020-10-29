@@ -35,7 +35,7 @@ const useStyles = makeStyles((theme) => ({
 export default function FinishedTodo(props) {
   const { /*userId,*/ 
     fullName, profileUrl, selectedBadge, selectedBorder, selectedCelebration, 
-    todoName, completedDate, description, imageUrl, status 
+    todoName, completedDate, description, imageUrl, status,
   } = props;
   const badges = getBadges();
   const borders = getBorders();

@@ -34,7 +34,7 @@ const useStyles = makeStyles((theme) => ({
 export default function OngoingTodo(props) {
   const { 
     fullName, profileUrl, selectedBadge, selectedBorder,
-    todoName, dueDate, description
+    todoName, dueDate, description,
   } = props;
   const badges = getBadges();
   const borders = getBorders(); 

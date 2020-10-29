@@ -42,7 +42,9 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export default function ProfileTodo(props) {
-  const { user, todoId, todoName, dueDate, description, imageUrl, handleDelete, idx, renderInCounter, selectedBadge, selectedBorder, selectedCelebration } = props;
+  const { user, todoId, todoName, dueDate, description, imageUrl, handleDelete, idx, renderInCounter, 
+    selectedBadge, selectedBorder, selectedCelebration,
+  } = props;
   const { enqueueSnackbar, closeSnackbar } = useSnackbar();
   const classes = useStyles();
   let displayDate = new Date(dueDate);

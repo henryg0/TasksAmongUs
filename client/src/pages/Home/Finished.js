@@ -75,7 +75,7 @@ export default function Unfinished(props) {
       className="scrolling"
       style={{
         overflowY: "auto",
-        height: "500px",
+        height: "600px",
         width: "100%",
       }}
     >

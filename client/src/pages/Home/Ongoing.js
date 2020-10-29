@@ -50,10 +50,6 @@ export default function Ongoing(props) {
           dueDate={new Date()}
           description={
             <div>
-              Welcome to TasksAmongUs!!! A todo app for friends
-              to keep each other accountable.
-              <br/>
-              <br/>
               You're looking at the "ongoing" section of the home page
               which shows the ongoing todos of you and your friends.
               When todos are completed/failed, they are automatically
@@ -79,7 +75,7 @@ export default function Ongoing(props) {
       className="scrolling"
       style={{
         overflowY: "auto",
-        height: "500px",
+        height: "600px",
         width: "100%",
       }}
     >
