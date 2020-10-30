@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import authenticate from '../../utils/authenticate';
 import Layout from '../../components/Layout';
 import Ongoing from './Ongoing';
@@ -12,6 +12,17 @@ export default function Home() {
   let user = authenticate();
   const [homeToggle, setHomeToggle] = useState(1);
 
+  useEffect(
+    () => {
+      axios.get(`/`)
+        .then((res) => {
+          console.log(res);
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    }, []
+  )
   return (
     <Layout user={user}>
       <Container>
