@@ -52,25 +52,4 @@ def createUserRoute():
   data["unlockedCelebrations"] = {"AMONG_US_WIN": True}
   db.collection("Users").document(userId).set(data)
 
-  dueDate = "2025-10-10T10:00:08.920Z"
-  dueDate = datetime.datetime.strptime(dueDate, '%Y-%m-%dT%H:%M:%S.%fZ').timestamp() * 1000
-
-  addedDate = date.today()
-  addedDate.strftime('%y-%m-%d')
-  addedDate = str(addedDate)
-
-  todoId = str(uuid.uuid4())
-
-  db.collection("Todo").document(todoId).set({
-    "todoName": "Easiest Todo of Your Life!",
-    "dueDate": dueDate,
-    "imageUrl": "https://i.imgur.com/lTTxLGM.jpg",
-    "description": "Hey There! Welcome to TasksAmongUs, a great way to for you and your friends to keep each other accountable for your goals. Go to your profile page to click \"finish\" on this todo!",
-    "addedDate": addedDate,
-    "todoId": todoId,
-    "status": False,
-    "userId": userId,
-    "completedDate": dueDate + 1
-  })
-
   return ({"msg": "User created"})
