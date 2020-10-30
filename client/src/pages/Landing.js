@@ -52,6 +52,9 @@ export default function Landing() {
         <br/>
         <br/>
         <br/>
+        <br/>
+        <br/>
+        <br/>
         <Container>
           <Grid container className="white-text p-2 text-center" justify="center">
             <Grid item xs={10} md={4} justify="center">
@@ -83,12 +86,8 @@ export default function Landing() {
               <br/>
               <br/>
               <br/>
+              <br/>
             </Grid>
-            <Grid item xs={10} md={6}>
-
-            </Grid>
-            
-
           </Grid>
         </Container>
       </Card>
