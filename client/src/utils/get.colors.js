@@ -8,6 +8,7 @@ export default function getColors(num) {
     "#F0F8FF",
     "#FAEBD7",
   ]
+
   
   let arr = [];
   let j = 2;
