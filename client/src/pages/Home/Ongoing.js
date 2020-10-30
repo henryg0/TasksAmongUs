@@ -42,19 +42,17 @@ export default function Ongoing(props) {
     if (ongoingTodos.length === 0) {
       render.push(
         <OngoingTodo 
-          fullName={"Not Sus"}
+          fullName={"Tutorial Bot"}
           profileUrl={"https://i.imgur.com/rVBs09J.jpg"}
           selectedBadge={"GAMER"}
           selectedBorder={"SEAWEED_GREEN"}
-          todoName={"DISCUSS!"}
+          todoName={"DISCUSSION!"}
           dueDate={new Date()}
           description={
             <div>
               You're looking at the "ongoing" section of the home page
               which shows the ongoing todos of you and your friends.
-              When todos are completed/failed, they are automatically
-              move into the "completed/failed" tab.
-              Add some friends to see what they're up to!
+              It's looking empty right now. Add some todos!
               <br/>
               <br/>
               <video autoPlay loop playsInline muted style={{width: "100%", maxWidth:"300px"}}>
