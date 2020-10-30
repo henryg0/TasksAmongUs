@@ -16,7 +16,8 @@ import ErrorPage from './pages/ErrorPage';
 import Edit from './pages/Edit';
 
 if (process.env.NODE_ENV === "production") {
-  axios.defaults.baseURL = process.env.REACT_APP_SERVER_ADDRESS;
+  // axios.defaults.baseURL = process.env.REACT_APP_SERVER_ADDRESS;
+  axios.defaults.baseURL = "https://tasks-among-us.herokuapp.com/"
 }
 
 axios.defaults.validateStatus = function (status) {
